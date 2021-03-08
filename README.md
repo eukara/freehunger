@@ -1,4 +1,4 @@
-# FreeSci
+# FreeHunger
 Clean-room reimplementation of They Hunger in QuakeC.
 
 ![Preview 1](img/preview1.jpg)
