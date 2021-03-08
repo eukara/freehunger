@@ -1,0 +1,4 @@
+ammo_gas.pickup
+{
+	sample player/pl_slosh1.wav
+}
