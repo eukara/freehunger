@@ -67,7 +67,11 @@ w_medkit_pickup(int new, int startammo)
 	player pl = (player)self;
 
 	if (new) {
-		pl.ammo_medkit = 8;
+		if (cvar("th_shovelstyle") == 1) {
+			pl.ammo_medkit = 1;
+		} else {
+			pl.ammo_medkit = 8;
+		}
 	} else {
 		if (pl.ammo_medkit < MAX_A_MEDKIT) {
 			pl.ammo_medkit = bound(0, pl.ammo_medkit + 8, MAX_A_MEDKIT);

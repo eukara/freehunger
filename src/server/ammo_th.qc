@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2016-2020 Marco Hladik <marco@icculus.org>
- * Copyright (c) 2019 Gethyn ThomasQuail <xylemon@posteo.net>
+ * Copyright (c) 2019-2021 Gethyn ThomasQuail <xylemon@posteo.net>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -32,6 +32,7 @@ class ammo_egonclip:item_ammo
 void ammo_egonclip::ammo_egonclip(void)
 {
 	model = "models/w_gas.mdl";
+	Sound_Precache("ammo_gas.pickup");
 	item_ammo::item_ammo();
 }
 void ammo_egonclip::touch(void)
@@ -43,8 +44,8 @@ void ammo_egonclip::touch(void)
 		player pl = (player)other;
 		if (pl.ammo_gas < MAX_A_GAS) {
 			pl.ammo_gas = bound(0, pl.ammo_gas + 25, MAX_A_GAS);
-			Sound_Play(other, CHAN_ITEM, "ammo_gas.pickup");
 			item_ammo::touch();
+			Sound_Play(other, CHAN_ITEM, "ammo_gas.pickup");
 		}
 	}
 }

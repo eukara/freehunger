@@ -80,7 +80,88 @@ w_shovel_holster(void)
 void
 w_shovel_primary(void)
 {
-	w_crowbar_primary();
+	int anim = 0;
+	vector src;
+	player pl = (player)self;
+
+	if (pl.w_attack_next) {
+		return;
+	}
+
+	Weapons_MakeVectors();
+	src = pl.origin + pl.view_ofs;
+
+	/* make sure we can gib corpses */
+	int oldhitcontents = self.hitcontentsmaski;
+	self.hitcontentsmaski = CONTENTBITS_POINTSOLID | CONTENTBIT_CORPSE;
+	traceline(src, src + (v_forward * 32), FALSE, pl);
+	self.hitcontentsmaski = oldhitcontents;
+
+	/* Stock shovel is exactly like umbrella
+	 * this cvar will spice things up a bit */
+	if (serverkeyfloat("th_shovelstyle") == 1) {
+	
+		if (trace_fraction >= 1.0) {
+			Weapons_ViewPunchAngle([5,0,0]);
+			pl.w_attack_next = 0.85f;
+		} else {
+			Weapons_ViewPunchAngle([-20,0,0]);
+			pl.w_attack_next = 1.2f;
+		}
+	} else {
+		if (trace_fraction >= 1.0) {
+			pl.w_attack_next = 0.5f;
+		} else {
+			pl.w_attack_next = 0.25f;
+		}
+	}
+	pl.w_idle_next = 2.5f;
+
+	int r = (float)input_sequence % 3;
+	switch (r) {
+	case 0:
+		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK1MISS:CBAR_ATTACK1HIT);
+		break;
+	case 1:
+		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK2MISS:CBAR_ATTACK2HIT);
+		break;
+	default:
+		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK3MISS:CBAR_ATTACK3HIT);
+	}
+
+	if (pl.flags & FL_CROUCHING) {
+		Animation_PlayerTopTemp(ANIM_SHOOTCROWBAR, 0.5f);
+	} else {
+		Animation_PlayerTopTemp(ANIM_CR_SHOOTCROWBAR, 0.42f);
+	}
+
+#ifdef SERVER
+	Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.miss");
+
+	if (trace_fraction >= 1.0) {
+		return;
+	}
+
+	/* don't bother with decals, we got squibs */
+	if (trace_ent.iBleeds) {
+		FX_Blood(trace_endpos, [1,0,0]);
+	} else {
+		FX_Impact(IMPACT_MELEE, trace_endpos, trace_plane_normal);
+	}
+
+	if (trace_ent.takedamage) {
+		if (serverkeyfloat("th_shovelstyle") == 1) {
+			Damage_Apply(trace_ent, pl, Skill_GetValue("plr_crowbar", 10) * 2.0, WEAPON_CROWBAR, DMG_BLUNT);
+		} else {
+			Damage_Apply(trace_ent, pl, Skill_GetValue("plr_crowbar", 10), WEAPON_CROWBAR, DMG_BLUNT);
+		}
+		if (trace_ent.iBleeds) {
+			Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.hitbody");
+		}
+	} else {
+		Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.hit");
+	}
+#endif
 }
 
 void

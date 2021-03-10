@@ -60,7 +60,7 @@
 ../../../valve/src/server/items.qc
 ../../../valve/src/server/item_longjump.qc
 ../../../valve/src/server/item_suit.qc
-../../../valve/src/server/item_healthkit.qc
+item_healthkit.qc
 ../../../valve/src/server/item_battery.qc
 ../../../valve/src/server/item_weaponbox.qc
 ../../../valve/src/server/world_items.qc

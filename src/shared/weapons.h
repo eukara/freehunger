@@ -41,6 +41,7 @@ enum
 	WEAPON_MEDKIT
 };
 
+/* Medkit ammo is 12 in stock, changed for multiplayer */
 #define MAX_A_9MM		250
 #define MAX_A_357		36
 #define MAX_A_AP9		200
@@ -57,4 +58,4 @@ enum
 #define MAX_A_TRIPMINE		10
 #define MAX_A_SNARK		10
 #define MAX_A_HORNET		8
-#define MAX_A_MEDKIT		12
+#define MAX_A_MEDKIT		8
