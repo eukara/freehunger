@@ -17,10 +17,12 @@
 
 /*QUAKED item_healthkit (0 0 0.8) (-16 -16 0) (16 16 36)
 
-HALF-LIFE (1998) ENTITY
+THEY HUNGER (1999) ENTITY
 
-Healthkit item.
-Adds 20 of health to the player.
+Healthkit item/ammo.
+Adds 20 of health to the player, unless th_medkitstyle is set to 1,
+then it becomes ammo for the Medkit weapon which provides 15 health
+per shot.
 
 */
 class item_healthkit:CBaseEntity
@@ -77,9 +79,9 @@ void item_healthkit::Respawn(void)
 {
 	SetSolid(SOLID_TRIGGER);
 	SetMovetype(MOVETYPE_TOSS);
-	SetSize([-16,-16,0],[16,16,16]);
 	SetOrigin(m_oldOrigin);
 	SetModel(m_oldModel);
+	SetSize([-16,-16,0],[16,16,16]);
 	//botinfo = BOTINFO_HEALTH;
 
 	think = __NULL__;

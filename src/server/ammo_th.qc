@@ -15,7 +15,7 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*QUAKED ammo_th_ap9 (0 0 0.8) (-16 -16 0) (16 16 32)
+/*QUAKED ammo_egonclip (0 0 0.8) (-16 -16 0) (16 16 32)
 
 THEY HUNGER (1999) ENTITY
 
@@ -83,6 +83,38 @@ void ammo_th_ap9::touch(void)
 	}
 }
 
+/*QUAKED ammo_th_taurus (0 0 0.8) (-16 -16 0) (16 16 32)
+
+THEY HUNGER (1999) ENTITY
+
+Ammo for the Taurus Pistol.
+A single ammo_th_taurus will provide 10 bullets.
+
+*/
+class ammo_th_taurus:item_ammo
+{
+	void(void) ammo_th_taurus;
+	virtual void(void) touch;
+};
+
+void ammo_th_taurus::ammo_th_taurus(void)
+{
+	model = "models/w_taurusclip.mdl";
+	item_ammo::item_ammo();
+}
+void ammo_th_taurus::touch(void)
+{
+	if not (other.flags & FL_CLIENT) {
+		return;
+	}
+	if (other.classname == "player") {
+		player pl = (player)other;
+		if (pl.ammo_taurus < MAX_A_TAURUS) {
+			pl.ammo_taurus = bound(0, pl.ammo_taurus + 10, MAX_A_TAURUS);
+			item_ammo::touch();
+		}
+	}
+}
 
 /*QUAKED ammo_einar1 (0 0 0.8) (-16 -16 0) (16 16 32)
 

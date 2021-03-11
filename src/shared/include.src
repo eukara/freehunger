@@ -25,7 +25,7 @@ weapons.h
 ../../../valve/src/shared/w_handgrenade.qc
 ../../../valve/src/shared/w_mp5.qc
 ../../../valve/src/shared/w_python.qc
-../../../valve/src/shared/w_rpg.qc
+w_rpg.qc
 ../../../valve/src/shared/w_satchel.qc
 ../../../valve/src/shared/w_shotgun.qc
 ../../../valve/src/shared/w_snark.qc

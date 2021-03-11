@@ -16,6 +16,7 @@
 
 var int autocvar_th_medkitstyle = 0;
 var int autocvar_th_shovelstyle = 0;
+var int autocvar_th_rpgstyle = 0;
 
 void
 HLGameRules::LevelDecodeParms(base_player pp)

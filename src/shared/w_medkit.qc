@@ -67,7 +67,7 @@ w_medkit_pickup(int new, int startammo)
 	player pl = (player)self;
 
 	if (new) {
-		if (cvar("th_shovelstyle") == 1) {
+		if (cvar("th_medkitstyle") == 1) {
 			pl.ammo_medkit = 1;
 		} else {
 			pl.ammo_medkit = 8;
