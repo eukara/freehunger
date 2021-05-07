@@ -135,9 +135,9 @@ w_silencer_primary(void)
 	}
 
 	if (self.flags & FL_CROUCHING)
-		Animation_PlayerTopTemp(ANIM_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
-		Animation_PlayerTopTemp(ANIM_CR_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 #endif
 
 	/* Fires faster without silencer */

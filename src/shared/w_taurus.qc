@@ -132,9 +132,9 @@ w_taurus_primary(void)
 	Sound_Play(pl, CHAN_WEAPON, "weapon_taurus.fire");
 
 	if (self.flags & FL_CROUCHING)
-		Animation_PlayerTopTemp(ANIM_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
-		Animation_PlayerTopTemp(ANIM_CR_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 #endif
 
 	pl.w_attack_next = 0.25f;

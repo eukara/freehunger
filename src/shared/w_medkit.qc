@@ -117,9 +117,9 @@ w_medkit_primary(void)
 	Damage_Apply(pl, pl, -15, WEAPON_MEDKIT, DMG_GENERIC);
 
 	if (self.flags & FL_CROUCHING)
-		Animation_PlayerTopTemp(ANIM_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
-		Animation_PlayerTopTemp(ANIM_CR_SHOOT1HAND, 0.45f);
+		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 
 	Sound_Play(pl, CHAN_WEAPON, "weapon_medkit.heal");
 #endif
