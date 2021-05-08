@@ -37,7 +37,8 @@ enum
 	RPG_FIDGET_UL,
 };
 
-void w_rpg_precache(void)
+void
+w_rpg_precache(void)
 {
 #ifdef SERVER
 	Sound_Precache("weapon_rpg.shoot");
@@ -50,24 +51,32 @@ void w_rpg_precache(void)
 #endif
 }
 
-void w_rpg_updateammo(player pl)
+void
+w_rpg_updateammo(player pl)
 {
 	Weapons_UpdateAmmo(pl, pl.rpg_mag, pl.ammo_rocket, -1);
 }
-string w_rpg_wmodel(void)
+
+string
+w_rpg_wmodel(void)
 {
 	return "models/w_rpg.mdl";
 }
-string w_rpg_pmodel(void)
+
+string
+w_rpg_pmodel(void)
 {
 	return "models/p_rpg.mdl";
 }
-string w_rpg_deathmsg(void)
+
+string
+w_rpg_deathmsg(void)
 {
 	return "";
 }
 
-int w_rpg_pickup(int new, int startammo)
+int
+w_rpg_pickup(int new, int startammo)
 {
 #ifdef SERVER
 	player pl = (player)self;
@@ -85,20 +94,21 @@ int w_rpg_pickup(int new, int startammo)
 	return TRUE;
 }
 
-void w_rpg_draw(void)
+void
+w_rpg_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_rpg.mdl");
 	Weapons_ViewAnimation(RPG_DRAW1);
-#endif
 }
 
-void w_rpg_holster(void)
+void
+w_rpg_holster(void)
 {
 	
 }
 
-void w_rpg_primary(void)
+void
+w_rpg_primary(void)
 {
 	player pl = (player)self;
 	if (pl.w_attack_next > 0.0) {
@@ -112,10 +122,10 @@ void w_rpg_primary(void)
 
 	pl.rpg_mag--;
 
-#ifdef CLIENT
 	Weapons_ViewAnimation(RPG_FIRE2);
 	Weapons_ViewPunchAngle([-10,0,0]);
-#else
+
+#ifdef SERVER
 	static void Rocket_Touch(void) {
 		float dmg = Skill_GetValue("plr_rpg", 100);
 		FX_Explosion(self.origin);
@@ -166,7 +176,8 @@ void w_rpg_primary(void)
 	pl.w_idle_next = 2.5f;
 }
 
-void w_rpg_reload(void)
+void
+w_rpg_reload(void)
 {
 	player pl = (player)self;
 
@@ -182,10 +193,9 @@ void w_rpg_reload(void)
 		return;
 	}
 
-	/* Audio-Visual Bit */
-#ifdef CLIENT
 	Weapons_ViewAnimation(RPG_RELOAD);
-#else
+
+#ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::rpg_mag, player::ammo_rocket, 1);
 #endif
 
@@ -193,7 +203,8 @@ void w_rpg_reload(void)
 	pl.w_idle_next = 10.0f;
 }
 
-void w_rpg_release(void)
+void
+w_rpg_release(void)
 {
 	player pl = (player)self;
 
@@ -227,7 +238,8 @@ void w_rpg_release(void)
 	pl.w_idle_next = 6.0f;
 }
 
-void w_rpg_secondary(void)
+void
+w_rpg_secondary(void)
 {
 
 	/* Another change to spice things up */
@@ -246,12 +258,14 @@ void w_rpg_secondary(void)
 	}
 }
 
-float w_rpg_aimanim(void)
+float
+w_rpg_aimanim(void)
 {
 	return self.flags & FL_CROUCHING ? ANIM_CR_AIMRPG : ANIM_AIMRPG;
 }
 
-void w_rpg_hudpic(int selected, vector pos, float a)
+void
+w_rpg_hudpic(int selected, vector pos, float a)
 {
 #ifdef CLIENT
 	player pl = (player)self;
@@ -272,7 +286,8 @@ void w_rpg_hudpic(int selected, vector pos, float a)
 #endif
 }
 
-void w_rpg_hud(void)
+void
+w_rpg_hud(void)
 {
 #ifdef CLIENT
 	player pl = (player)self;
@@ -357,7 +372,9 @@ weapon_t w_rpg =
 };
 
 #ifdef SERVER
-void weapon_rpg(void) {
+void
+weapon_rpg(void)
+{
 	Weapons_InitItem(WEAPON_RPG);
 }
 #endif

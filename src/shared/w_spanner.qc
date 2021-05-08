@@ -96,19 +96,19 @@ w_spanner_primary(void)
 	}
 	pl.w_idle_next = 2.5f;
 
-#ifdef CLIENT
 	if (random() < 0.5) {
 		Weapons_ViewAnimation(CBAR_ATTACK1);
 	} else {
 		Weapons_ViewAnimation(CBAR_ATTACK2);
 	}
-#else
+
 	if (pl.flags & FL_CROUCHING) {
 		Animation_PlayerTop(pl, ANIM_SHOOTCROWBAR, 0.5f);
 	} else {
 		Animation_PlayerTop(pl, ANIM_CR_SHOOTCROWBAR, 0.42f);
 	}
 
+#ifdef SERVER
 	Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.miss");
 
 	if (trace_fraction >= 1.0) {

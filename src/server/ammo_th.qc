@@ -29,13 +29,15 @@ class ammo_egonclip:item_ammo
 	virtual void(void) touch;
 };
 
-void ammo_egonclip::ammo_egonclip(void)
+void
+ammo_egonclip::ammo_egonclip(void)
 {
 	model = "models/w_gas.mdl";
 	Sound_Precache("ammo_gas.pickup");
 	item_ammo::item_ammo();
 }
-void ammo_egonclip::touch(void)
+void
+ammo_egonclip::touch(void)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -64,12 +66,14 @@ class ammo_th_ap9:item_ammo
 	virtual void(void) touch;
 };
 
-void ammo_th_ap9::ammo_th_ap9(void)
+void
+ammo_th_ap9::ammo_th_ap9(void)
 {
 	model = "models/w_ap9clip.mdl";
 	item_ammo::item_ammo();
 }
-void ammo_th_ap9::touch(void)
+void
+ammo_th_ap9::touch(void)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -97,12 +101,14 @@ class ammo_th_taurus:item_ammo
 	virtual void(void) touch;
 };
 
-void ammo_th_taurus::ammo_th_taurus(void)
+void
+ammo_th_taurus::ammo_th_taurus(void)
 {
 	model = "models/w_taurusclip.mdl";
 	item_ammo::item_ammo();
 }
-void ammo_th_taurus::touch(void)
+void
+ammo_th_taurus::touch(void)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -143,12 +149,14 @@ class ammo_th_sniper:item_ammo
 	virtual void(void) touch;
 };
 
-void ammo_th_sniper::ammo_th_sniper(void)
+void
+ammo_th_sniper::ammo_th_sniper(void)
 {
 	model = "models/w_antidote.mdl";
 	item_ammo::item_ammo();
 }
-void ammo_th_sniper::touch(void)
+void
+ammo_th_sniper::touch(void)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;

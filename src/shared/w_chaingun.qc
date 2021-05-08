@@ -89,11 +89,8 @@ w_chaingun_draw(void)
 {
 	player pl = (player)self;
 	pl.mode_tempstate = 0;
-
-#ifdef CLIENT
 	Weapons_SetModel("models/v_tfac.mdl");
 	Weapons_ViewAnimation(CHAINGUN_DRAW);
-#endif
 }
 
 void
@@ -182,11 +179,11 @@ w_chaingun_primary(void)
 	}
 	pl.chaingun_mag--;
 
-	/* actual firing */
-#ifdef CLIENT
-	View_SetMuzzleflash(MUZZLE_RIFLE);
 	Weapons_ViewAnimation(CHAINGUN_FIRE);
 	Weapons_ViewPunchAngle([random(-2, 2),0,0]);
+
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_RIFLE);
 #else
 	TraceAttack_FireBullets(1, Weapons_GetCameraPos(), 8, [0.15,0.15], WEAPON_CHAINGUN);
 	Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.fire");
@@ -213,9 +210,9 @@ w_chaingun_reload(void)
 		return;
 	}
 
-#ifdef CLIENT
 	Weapons_ViewAnimation(CHAINGUN_HOLSTER);
-#else
+
+#ifdef SERVER
 	Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.reload");
 	Weapons_ReloadWeapon(pl, player::chaingun_mag, player::ammo_9mm, 100);
 #endif

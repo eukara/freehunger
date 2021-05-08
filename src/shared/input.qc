@@ -21,7 +21,8 @@ Input_Handle
 Handles impulse and whatnot
 =================
 */
-void Game_Input(void)
+void
+Game_Input(void)
 {
 #ifdef SERVER
 	if (input_buttons & INPUT_BUTTON5) {

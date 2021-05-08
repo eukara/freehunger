@@ -86,18 +86,14 @@ w_sniper_draw(void)
 	player pl = (player)self;
 	pl.mode_tempstate = 0;
 
-#ifdef CLIENT
 	Weapons_SetModel("models/v_tfc_sniper.mdl");
 	Weapons_ViewAnimation(SNIPER_DRAW);
-#endif
 }
 
 void
 w_sniper_holster(void)
 {
-#ifdef CLIENT
 	Weapons_ViewAnimation(SNIPER_HOLSTER);
-#endif
 }
 
 void
@@ -155,11 +151,11 @@ w_sniper_primary(void)
 
 	pl.sniper_mag--;
 
-	/* Actual firing */
-#ifdef CLIENT
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-20,0,0]);
 	Weapons_ViewAnimation(SNIPER_FIRE1);
+
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.008, 0.008], WEAPON_SNIPER);
 	Sound_Play(pl, CHAN_WEAPON, "weapon_sniper.fire");
@@ -209,9 +205,9 @@ w_sniper_reload(void)
 		return;
 	}
 
-#ifdef CLIENT
 	Weapons_ViewAnimation(SNIPER_HOLSTER);
-#else
+
+#ifdef SERVER
 	Sound_Play(pl, CHAN_WEAPON, "weapon_sniper.reload");
 	Weapons_ReloadWeapon(pl, player::sniper_mag, player::ammo_sniper, 5);
 #endif

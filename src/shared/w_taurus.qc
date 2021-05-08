@@ -87,18 +87,14 @@ w_taurus_pickup(int new, int startammo)
 void
 w_taurus_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_taurus.mdl");
 	Weapons_ViewAnimation(TAURUS_DRAW);
-#endif
 }
 
 void
 w_taurus_holster(void)
 {
-#ifdef CLIENT
 	Weapons_ViewAnimation(TAURUS_HOLSTER);
-#endif
 }
 
 void
@@ -117,9 +113,6 @@ w_taurus_primary(void)
 
 	pl.taurus_mag--;
 
-	/* actual firing */
-#ifdef CLIENT
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-2,0,0]);
 
 	if (pl.taurus_mag) {
@@ -127,14 +120,18 @@ w_taurus_primary(void)
 	} else {
 		Weapons_ViewAnimation(TAURUS_SHOOT_EMPTY);
 	}
-#else
-	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 12, [0.01,0.01], WEAPON_TAURUS);
-	Sound_Play(pl, CHAN_WEAPON, "weapon_taurus.fire");
 
 	if (self.flags & FL_CROUCHING)
 		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
+
+	/* actual firing */
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_SMALL);
+#else
+	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 12, [0.01,0.01], WEAPON_TAURUS);
+	Sound_Play(pl, CHAN_WEAPON, "weapon_taurus.fire");
 #endif
 
 	pl.w_attack_next = 0.25f;
@@ -162,13 +159,13 @@ w_taurus_reload(void)
 		return;
 	}
 
-#ifdef CLIENT
 	if (pl.taurus_mag) {
 		Weapons_ViewAnimation(TAURUS_RELOAD);
 	} else {
 		Weapons_ViewAnimation(TAURUS_RELOAD2);
 	}
-#else
+
+#ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::taurus_mag, player::ammo_taurus, 10);
 #endif
 

@@ -184,7 +184,7 @@ w_flame_aimanim(void)
 	return w_egon_aimanim();
 }
 
-void 
+void
 w_flame_hudpic(int selected, vector pos, float a)
 {
 #ifdef CLIENT

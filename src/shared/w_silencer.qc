@@ -111,17 +111,22 @@ w_silencer_primary(void)
 	/* actual firing */
 	Weapons_ViewPunchAngle([-2,0,0]);
 
+	if (pl.glock_mag) {
+		Weapons_ViewAnimation(GLOCK_SHOOT);
+	} else {
+		Weapons_ViewAnimation(GLOCK_SHOOT_EMPTY);
+	}
+
+	if (self.flags & FL_CROUCHING)
+		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
+	else
+		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
+
 #ifdef CLIENT
 	if (pl.mode_silencer == 1) {
 		View_SetMuzzleflash(0);
 	} else {
 		View_SetMuzzleflash(MUZZLE_SMALL);
-	}
-
-	if (pl.glock_mag) {
-		Weapons_ViewAnimation(GLOCK_SHOOT);
-	} else {
-		Weapons_ViewAnimation(GLOCK_SHOOT_EMPTY);
 	}
 #else
 	/* Different sound & accuracy without silencer */
@@ -133,11 +138,6 @@ w_silencer_primary(void)
 		TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, Skill_GetValue("plr_9mm_bullet", 8),  [0.1,0.1], WEAPON_GLOCK);
 		Sound_Play(pl, CHAN_WEAPON, "weapon_glock.fire");
 	}
-
-	if (self.flags & FL_CROUCHING)
-		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
-	else
-		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 #endif
 
 	/* Fires faster without silencer */
@@ -162,8 +162,6 @@ w_silencer_secondary(void)
 	/* toggle silencer */
 	pl.mode_silencer = 1 - pl.mode_silencer;
 
-	/* the sub model isn't setting right, need the right values */
-#ifdef CLIENT
 	if (pl.mode_silencer) {
 		Weapons_SetGeomset("geomset 2 2\n");
 		Weapons_ViewAnimation(GLOCK_SILENCER);
@@ -171,7 +169,7 @@ w_silencer_secondary(void)
 		Weapons_SetGeomset("geomset 2 0\n");
 		Weapons_ViewAnimation(GLOCK_HOLSTER);
 	}
-#endif
+
 	if (pl.mode_silencer) {
 		pl.w_attack_next = 3.3f;
 		pl.w_idle_next = pl.w_attack_next;

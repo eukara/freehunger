@@ -112,15 +112,14 @@ w_medkit_primary(void)
 
 	pl.ammo_medkit--;
 
-#ifdef SERVER
-	/* We want to only give health to the player & skip armor */
-	Damage_Apply(pl, pl, -15, WEAPON_MEDKIT, DMG_GENERIC);
-
 	if (self.flags & FL_CROUCHING)
 		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 
+#ifdef SERVER
+	/* We want to only give health to the player & skip armor */
+	Damage_Apply(pl, pl, -15, WEAPON_MEDKIT, DMG_GENERIC);
 	Sound_Play(pl, CHAN_WEAPON, "weapon_medkit.heal");
 #endif
 

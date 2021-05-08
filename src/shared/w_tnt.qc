@@ -26,7 +26,8 @@ enum
 	HANDGRENADE_DRAW
 };
 
-void w_tnt_precache(void)
+void
+w_tnt_precache(void)
 {
 #ifdef SERVER
 	Sound_Precache("weapon_handgrenade.bounce");
@@ -37,33 +38,39 @@ void w_tnt_precache(void)
 	precache_model("models/p_tnt.mdl");
 }
 
-void w_tnt_updateammo(player pl)
+void
+w_tnt_updateammo(player pl)
 {
 	w_handgrenade_updateammo(pl);
 }
 
-string w_tnt_wmodel(void)
+string
+w_tnt_wmodel(void)
 {
 	return "models/w_tnt.mdl";
 }
 
-string w_tnt_pmodel(void)
+string
+w_tnt_pmodel(void)
 {
 	return "models/p_tnt.mdl";
 }
 
-string w_tnt_deathmsg(void)
+string
+w_tnt_deathmsg(void)
 {
 	return w_handgrenade_deathmsg();
 }
 
-int w_tnt_pickup(int new, int startammo)
+int
+w_tnt_pickup(int new, int startammo)
 {
 	return w_handgrenade_pickup(new, startammo);
 }
 
 #ifdef SERVER
-void w_tnt_throw(void)
+void
+w_tnt_throw(void)
 {
 	static void WeaponFrag_Throw_Explode(void)
 	{
@@ -117,27 +124,29 @@ void w_tnt_throw(void)
 }
 #endif
 
-void w_tnt_draw(void)
+void
+w_tnt_draw(void)
 {
 	player pl = (player)self;
 	pl.mode_tempstate = 0;
 
-#ifdef CLIENT
 	Weapons_SetModel("models/v_tnt.mdl");
 	Weapons_ViewAnimation(HANDGRENADE_DRAW);
-#endif
 }
 
-void w_tnt_holster(void)
+void
+w_tnt_holster(void)
 {
 	
 }
-void w_tnt_primary(void)
+void
+w_tnt_primary(void)
 {
 	w_handgrenade_primary();
 }
 
-void w_tnt_hud(void)
+void
+w_tnt_hud(void)
 {
 #ifdef CLIENT
 	HUD_DrawAmmo2();
@@ -147,7 +156,8 @@ void w_tnt_hud(void)
 }
 
 
-void w_tnt_release(void)
+void
+w_tnt_release(void)
 {
 	player pl = (player)self;
 	
@@ -156,20 +166,17 @@ void w_tnt_release(void)
 	}
 
 	if (pl.mode_tempstate == 1) {
-#ifdef CLIENT
 		pl.ammo_handgrenade--;
 		Weapons_ViewAnimation(HANDGRENADE_THROW1);
-#else
-		pl.ammo_handgrenade--;
+#ifdef SERVER
 		w_tnt_throw();
 #endif
 		pl.mode_tempstate = 2;
 		pl.w_attack_next = 1.0f;
 		pl.w_idle_next = 0.5f;
 	} else if (pl.mode_tempstate == 2) {
-#ifdef CLIENT
 		Weapons_ViewAnimation(HANDGRENADE_DRAW);
-#else
+#ifdef SERVER
 		if (!pl.ammo_handgrenade) {
 			Weapons_RemoveItem(pl, WEAPON_HANDGRENADE);
 		}
@@ -204,7 +211,7 @@ w_tnt_hudpic(int selected, vector pos, float a)
 weapon_t w_tnt =
 {
 	.name		= "tnt",
-	.id			= ITEM_HANDGRENADE,
+	.id		= ITEM_HANDGRENADE,
 	.slot		= 4,
 	.slot_pos	= 0,
 	.draw		= w_tnt_draw,

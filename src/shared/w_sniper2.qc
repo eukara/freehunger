@@ -80,10 +80,8 @@ w_sniper2_deathmsg(void)
 void
 w_sniper2_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_hkg36.mdl");
 	Weapons_ViewAnimation(SNIPER_DRAW);
-#endif
 }
 
 void
@@ -138,11 +136,11 @@ w_sniper2_primary(void)
 
 	pl.sniper_mag--;
 
-	/* Actual firing */
-#ifdef CLIENT
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-20,0,0]);
 	Weapons_ViewAnimation(SNIPER_FIRE);
+
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.008, 0.008], WEAPON_SNIPER);
 	Sound_Play(pl, CHAN_WEAPON, "weapon_sniper.fire");
@@ -179,9 +177,9 @@ w_sniper2_reload(void)
 		return;
 	}
 
-#ifdef CLIENT
 	Weapons_ViewAnimation(SNIPER_RELOAD);
-#else
+
+#ifdef SERVER
 	Weapons_ReloadWeapon(pl, player::sniper_mag, player::ammo_sniper, 5);
 #endif
 

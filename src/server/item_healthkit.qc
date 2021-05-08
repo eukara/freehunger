@@ -32,7 +32,8 @@ class item_healthkit:CBaseEntity
 	virtual void(void) touch;
 };
 
-void item_healthkit::touch(void)
+void
+item_healthkit::touch(void)
 {
 	if (other.classname != "player") {
 		return;
@@ -75,7 +76,8 @@ void item_healthkit::touch(void)
 	}
 }
 
-void item_healthkit::Respawn(void)
+void
+item_healthkit::Respawn(void)
 {
 	SetSolid(SOLID_TRIGGER);
 	SetMovetype(MOVETYPE_TOSS);
@@ -93,7 +95,8 @@ void item_healthkit::Respawn(void)
 	droptofloor();
 }
 
-void item_healthkit::item_healthkit(void)
+void
+item_healthkit::item_healthkit(void)
 {
 	Sound_Precache("ammo.pickup");
 	Sound_Precache("item.healthkit");

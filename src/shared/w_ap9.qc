@@ -85,10 +85,8 @@ w_ap9_pickup(int new, int startammo)
 void
 w_ap9_draw(void)
 {
-#ifdef CLIENT
 	Weapons_SetModel("models/v_ap9.mdl");
 	Weapons_ViewAnimation(AP9_DRAW);
-#endif
 }
 
 void
@@ -112,11 +110,6 @@ w_ap9_primary(void)
 	}
 
 	pl.ap9_mag--;
-
-	/* actual firing */
-#ifdef CLIENT
-	pl.ap9_mag--;
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-2,0,0]);
 
 	int r = (float)input_sequence % 3;
@@ -132,14 +125,16 @@ w_ap9_primary(void)
 		break;
 	}
 
-#else
-	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 8, [0.1,0.1], WEAPON_AP9);
-	Sound_Play(pl, CHAN_WEAPON, "weapon_ap9.fire");
-
 	if (self.flags & FL_CROUCHING)
 		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
+
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_SMALL);
+#else
+	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 8, [0.1,0.1], WEAPON_AP9);
+	Sound_Play(pl, CHAN_WEAPON, "weapon_ap9.fire");
 #endif
 
 	pl.w_attack_next = 0.15f;
@@ -161,8 +156,6 @@ w_ap9_secondary(void)
 	}
 	pl.ap9_mag -= 3;
 
-#ifdef CLIENT
-	View_SetMuzzleflash(MUZZLE_SMALL);
 	Weapons_ViewPunchAngle([-2,0,0]);
 
 	int r = floor(random(0,2));
@@ -177,14 +170,17 @@ w_ap9_secondary(void)
 		Weapons_ViewAnimation(AP9_SHOOT3);
 		break;
 	}
-#else
-	TraceAttack_FireBullets(3, pl.origin + pl.view_ofs, 8, [0.02,0.02], WEAPON_AP9);
-	Sound_Play(pl, CHAN_WEAPON, "weapon_ap9.fire");
 
 	if (self.flags & FL_CROUCHING)
 		Animation_PlayerTop(pl, ANIM_SHOOT1HAND, 0.45f);
 	else
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
+
+#ifdef CLIENT
+	View_SetMuzzleflash(MUZZLE_SMALL);
+#else
+	TraceAttack_FireBullets(3, pl.origin + pl.view_ofs, 8, [0.02,0.02], WEAPON_AP9);
+	Sound_Play(pl, CHAN_WEAPON, "weapon_ap9.fire");
 #endif
 
 	pl.w_attack_next = 1.0f;
