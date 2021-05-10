@@ -46,11 +46,11 @@ w_sniper2_pickup(int new, int startammo)
 		if (pl.ammo_sniper < MAX_A_SNIPER) {
 			pl.ammo_sniper = bound(0, pl.ammo_sniper + 5, MAX_A_SNIPER);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -101,9 +101,8 @@ w_sniper2_release(void)
 		return;
 	}
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	int r = floor(random(0,2));
 	switch (r) {
@@ -125,14 +124,12 @@ w_sniper2_primary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* Ammo check */
-	if (pl.sniper_mag <= 0) {
+	if (pl.sniper_mag <= 0)
 		return;
-	}
 
 	pl.sniper_mag--;
 
@@ -167,15 +164,12 @@ w_sniper2_reload(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-	if (pl.sniper_mag >= 5) {
+	if (pl.sniper_mag >= 5)
 		return;
-	}
-	if (pl.ammo_sniper <= 0) {
+	if (pl.ammo_sniper <= 0)
 		return;
-	}
 
 	Weapons_ViewAnimation(SNIPER_RELOAD);
 

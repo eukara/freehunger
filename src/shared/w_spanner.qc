@@ -81,9 +81,8 @@ w_spanner_primary(void)
 	vector src;
 	player pl = (player)self;
 
-	if (pl.w_attack_next) {
+	if (pl.w_attack_next)
 		return;
-	}
 
 	Weapons_MakeVectors();
 	src = pl.origin + pl.view_ofs;
@@ -111,9 +110,8 @@ w_spanner_primary(void)
 #ifdef SERVER
 	Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.miss");
 
-	if (trace_fraction >= 1.0) {
+	if (trace_fraction >= 1.0)
 		return;
-	}
 
 	/* don't bother with decals, we got squibs */
 	if (trace_ent.iBleeds) {
@@ -181,7 +179,7 @@ w_spanner_hudpic(int selected, vector pos, float a)
 weapon_t w_spanner =
 {
 	.name		= "spanner",
-	.id			= ITEM_SPANNER,
+	.id		= ITEM_SPANNER,
 	.slot		= 0,
 	.slot_pos	= 2,
 	.draw		= w_spanner_draw,

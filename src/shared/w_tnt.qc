@@ -72,8 +72,7 @@ w_tnt_pickup(int new, int startammo)
 void
 w_tnt_throw(void)
 {
-	static void WeaponFrag_Throw_Explode(void)
-	{
+	static void WeaponFrag_Throw_Explode(void) {
 		float dmg = Skill_GetValue("plr_hand_grenade", 100);
 		FX_Explosion(self.origin);
 		Damage_Radius(self.origin, self.owner, dmg, dmg * 2.5f, TRUE, WEAPON_HANDGRENADE);
@@ -81,28 +80,26 @@ w_tnt_throw(void)
 		remove(self);
 	}
 	
-	static void WeaponFrag_Throw_Touch(void)
-	{
-		if (other.takedamage == DAMAGE_YES) {
+	static void WeaponFrag_Throw_Touch(void) {
+		if (other.takedamage == DAMAGE_YES)
 			Damage_Apply(other, self.owner, 15, WEAPON_HANDGRENADE, DMG_BLUNT);
-		} else {
+		else
 			Sound_Play(self, CHAN_BODY, "weapon_handgrenade.bounce");
-		}
+
 		self.frame = 0;
 	}
 
 	player pl = (player)self;
 	vector vPLAngle = pl.v_angle;
-	if (vPLAngle[0] < 0) {
+
+	if (vPLAngle[0] < 0)
 		vPLAngle[0] = -10 + vPLAngle[0] * ((90 - 10) / 90.0);
-	} else {
+	else
 		vPLAngle[0] = -10 + vPLAngle[0] * ((90 + 10) / 90.0);
-	}
 
 	float flVel = (90 - vPLAngle[0]) * 5;
-	if (flVel > 1000) {
+	if (flVel > 1000)
 		flVel = 1000;
-	}
 
 	makevectors(vPLAngle);
 	vector vecSrc = pl.origin + pl.view_ofs + v_forward * 16;
@@ -161,26 +158,24 @@ w_tnt_release(void)
 {
 	player pl = (player)self;
 	
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	if (pl.mode_tempstate == 1) {
-		pl.ammo_handgrenade--;
-		Weapons_ViewAnimation(HANDGRENADE_THROW1);
 #ifdef SERVER
 		w_tnt_throw();
 #endif
+		Weapons_ViewAnimation(HANDGRENADE_THROW1);
+		pl.ammo_handgrenade--;
 		pl.mode_tempstate = 2;
 		pl.w_attack_next = 1.0f;
 		pl.w_idle_next = 0.5f;
 	} else if (pl.mode_tempstate == 2) {
-		Weapons_ViewAnimation(HANDGRENADE_DRAW);
 #ifdef SERVER
-		if (!pl.ammo_handgrenade) {
+		if (!pl.ammo_handgrenade)
 			Weapons_RemoveItem(pl, WEAPON_HANDGRENADE);
-		}
 #endif
+		Weapons_ViewAnimation(HANDGRENADE_DRAW);
 		pl.w_attack_next = 0.5f;
 		pl.w_idle_next = 0.5f;
 		pl.mode_tempstate = 0;

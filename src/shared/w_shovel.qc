@@ -84,9 +84,8 @@ w_shovel_primary(void)
 	vector src;
 	player pl = (player)self;
 
-	if (pl.w_attack_next) {
+	if (pl.w_attack_next)
 		return;
-	}
 
 	Weapons_MakeVectors();
 	src = pl.origin + pl.view_ofs;
@@ -138,9 +137,8 @@ w_shovel_primary(void)
 #ifdef SERVER
 	Sound_Play(self, CHAN_WEAPON, "weapon_crowbar.miss");
 
-	if (trace_fraction >= 1.0) {
+	if (trace_fraction >= 1.0)
 		return;
-	}
 
 	/* don't bother with decals, we got squibs */
 	if (trace_ent.iBleeds) {
@@ -209,7 +207,7 @@ w_shovel_hudpic(int selected, vector pos, float a)
 weapon_t w_shovel =
 {
 	.name		= "shovel",
-	.id			= ITEM_SHOVEL,
+	.id		= ITEM_SHOVEL,
 	.slot		= 0,
 	.slot_pos	= 1,
 	.draw		= w_shovel_draw,

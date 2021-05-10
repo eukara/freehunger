@@ -74,10 +74,10 @@ w_flame_pickup(int new, int startammo)
 	if (pl.ammo_gas < MAX_A_GAS) {
 		pl.ammo_gas = bound(0, pl.ammo_gas + 20, MAX_A_GAS);
 	} else {
-		return FALSE;
+		return (0);
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -113,14 +113,12 @@ void
 w_flame_primary(void)
 {
 	player pl = (player)self;
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* Ammo check */
-	if (pl.ammo_gas <= 0) {
+	if (pl.ammo_gas <= 0)
 		return;
-	}
 
 	pl.ammo_gas--;
 

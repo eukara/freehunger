@@ -30,13 +30,12 @@ w_ap9_precache(void)
 {
 #ifdef SERVER
 	Sound_Precache("weapon_ap9.fire");
-#endif
-	precache_model("models/v_ap9.mdl");
 	precache_model("models/w_ap9.mdl");
+#else
+	precache_model("models/v_ap9.mdl");
 	precache_model("models/p_ap9.mdl");
-	precache_sound("weapons/ap9_bolt.wav");
-	precache_sound("weapons/ap9_clipin.wav");
-	precache_sound("weapons/ap9_clipout.wav");
+	
+#endif
 }
 
 void
@@ -75,11 +74,11 @@ w_ap9_pickup(int new, int startammo)
 		if (pl.ammo_ap9 < MAX_A_AP9) {
 			pl.ammo_ap9 = bound(0, pl.ammo_ap9 + 40, MAX_A_AP9);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -100,14 +99,10 @@ w_ap9_primary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-
-	/* ammo check */
-	if (!pl.ap9_mag) {
+	if (!pl.ap9_mag)
 		return;
-	}
 
 	pl.ap9_mag--;
 	Weapons_ViewPunchAngle([-2,0,0]);
@@ -146,14 +141,11 @@ w_ap9_secondary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0) {
+	if (pl.w_attack_next > 0)
 		return;
-	}
+	if ((pl.ap9_mag - 3) < 0)
+		return;
 
-	/* ammo check */
-	if ((pl.ap9_mag - 3) < 0) {
-		return;
-	}
 	pl.ap9_mag -= 3;
 
 	Weapons_ViewPunchAngle([-2,0,0]);
@@ -192,15 +184,12 @@ w_ap9_reload(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-	if (pl.ap9_mag >= 40) {
+	if (pl.ap9_mag >= 40)
 		return;
-	}
-	if (pl.a_ammo2 <= 0) {
+	if (pl.a_ammo2 <= 0)
 		return;
-	}
 
 #ifdef CLIENT
 	Weapons_ViewAnimation(AP9_RELOAD);
@@ -224,9 +213,8 @@ w_ap9_release(void)
 		return;
 	}
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	Weapons_ViewAnimation(AP9_IDLE);
 }

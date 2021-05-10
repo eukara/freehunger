@@ -53,11 +53,11 @@ w_chaingun_pickup(int new, int startammo)
 		if (pl.ammo_9mm < MAX_A_9MM) {
 			pl.ammo_9mm = bound(0, pl.ammo_9mm + 100, MAX_A_9MM);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -111,9 +111,8 @@ w_chaingun_release(void)
 		return;
 	}
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	/* end firing */
 	if (pl.mode_tempstate == 1) {
@@ -157,14 +156,12 @@ w_chaingun_primary(void)
 		return;
 	}
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* ammo check */
-	if (pl.chaingun_mag <= 0) {
+	if (pl.chaingun_mag <= 0)
 		return;
-	}
 
 	/* spin up first */
 	if (pl.mode_tempstate == 0) {
@@ -203,12 +200,10 @@ w_chaingun_reload(void)
 	}
 
 	/* ammo check */
-	if (pl.chaingun_mag >= 100) {
+	if (pl.chaingun_mag >= 100)
 		return;
-	}
-	if (pl.ammo_9mm <= 0) {
+	if (pl.ammo_9mm <= 0)
 		return;
-	}
 
 	Weapons_ViewAnimation(CHAINGUN_HOLSTER);
 

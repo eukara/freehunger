@@ -76,11 +76,11 @@ w_medkit_pickup(int new, int startammo)
 		if (pl.ammo_medkit < MAX_A_MEDKIT) {
 			pl.ammo_medkit = bound(0, pl.ammo_medkit + 8, MAX_A_MEDKIT);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 
@@ -96,19 +96,16 @@ w_medkit_primary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-	if (!pl.ammo_medkit) {
+	if (!pl.ammo_medkit)
 		return;
-	}
 
 	/* Don't give the player more than 100 health */
-	if (pl.health >= 100) {
+	if (pl.health >= 100)
 		return;
-	} else {
+	else
 		Weapons_ViewAnimation(MEDKIT_USE);
-	}
 
 	pl.ammo_medkit--;
 
@@ -132,9 +129,8 @@ w_medkit_release(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	int r = (float)input_sequence % 2;
 	switch (r) {

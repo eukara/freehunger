@@ -77,11 +77,11 @@ w_taurus_pickup(int new, int startammo)
 		if (pl.ammo_taurus < MAX_A_TAURUS) {
 			pl.ammo_taurus = bound(0, pl.ammo_taurus + 10, MAX_A_TAURUS);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -102,14 +102,12 @@ w_taurus_primary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* ammo check */
-	if (!pl.taurus_mag) {
+	if (!pl.taurus_mag)
 		return;
-	}
 
 	pl.taurus_mag--;
 
@@ -149,15 +147,12 @@ w_taurus_reload(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
-	if (pl.taurus_mag >= 10) {
+	if (pl.taurus_mag >= 10)
 		return;
-	}
-	if (pl.ammo_taurus <= 0) {
+	if (pl.ammo_taurus <= 0)
 		return;
-	}
 
 	if (pl.taurus_mag) {
 		Weapons_ViewAnimation(TAURUS_RELOAD);
@@ -186,9 +181,8 @@ w_taurus_release(void)
 		return;
 	}
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	r = floor(random(0,3));
 	switch (r) {
@@ -228,7 +222,7 @@ w_taurus_hudpic(int selected, vector pos, float a)
 weapon_t w_taurus =
 {
 	.name		= "taurus",
-	.id			= ITEM_TAURUS,
+	.id		= ITEM_TAURUS,
 	.slot		= 1,
 	.slot_pos	= 3,
 	.draw		= w_taurus_draw,

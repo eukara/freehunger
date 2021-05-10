@@ -87,11 +87,11 @@ w_rpg_pickup(int new, int startammo)
 		if (pl.ammo_rocket < MAX_A_ROCKET) {
 			pl.ammo_rocket = bound(0, pl.ammo_rocket + 1, MAX_A_ROCKET);
 		} else {
-			return FALSE;
+			return (0);
 		}
 	}
 #endif
-	return TRUE;
+	return (1);
 }
 
 void
@@ -111,14 +111,12 @@ void
 w_rpg_primary(void)
 {
 	player pl = (player)self;
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* Ammo check */
-	if (pl.rpg_mag <= 0) {
+	if (pl.rpg_mag <= 0)
 		return;
-	}
 
 	pl.rpg_mag--;
 
@@ -181,17 +179,14 @@ w_rpg_reload(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0) {
+	if (pl.w_attack_next > 0)
 		return;
-	}
 
 	/* Ammo check */
-	if (pl.rpg_mag >= 1) {
+	if (pl.rpg_mag >= 1)
 		return;
-	}
-	if (pl.ammo_rocket <= 0) {
+	if (pl.ammo_rocket <= 0)
 		return;
-	}
 
 	Weapons_ViewAnimation(RPG_RELOAD);
 
@@ -215,9 +210,8 @@ w_rpg_release(void)
 		return;
 	}
 
-	if (pl.w_idle_next > 0.0) {
+	if (pl.w_idle_next > 0.0)
 		return;
-	}
 
 	int r = (float)input_sequence % 3;
 

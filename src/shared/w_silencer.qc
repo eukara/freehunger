@@ -97,14 +97,12 @@ w_silencer_primary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0.0) {
+	if (pl.w_attack_next > 0.0)
 		return;
-	}
 
 	/* ammo check */
-	if (!pl.glock_mag) {
+	if (!pl.glock_mag)
 		return;
-	}
 
 	pl.glock_mag--;
 
@@ -155,9 +153,8 @@ w_silencer_secondary(void)
 {
 	player pl = (player)self;
 
-	if (pl.w_attack_next > 0) {
+	if (pl.w_attack_next > 0)
 		return;
-	}
 
 	/* toggle silencer */
 	pl.mode_silencer = 1 - pl.mode_silencer;
