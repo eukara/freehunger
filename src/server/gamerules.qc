@@ -57,9 +57,9 @@ HLGameRules::LevelDecodeParms(base_player pp)
 	pl.satchel_chg = parm30;
 
 	if (pl.flags & FL_CROUCHING) {
-		setsize(pl, VEC_CHULL_MIN, VEC_CHULL_MAX);
+		setsize(pl, PHY_HULL_CROUCHED_MIN, PHY_HULL_CROUCHED_MAX);
 	} else {
-		setsize(pl, VEC_HULL_MIN, VEC_HULL_MAX);
+		setsize(pl, PHY_HULL_MIN, PHY_HULL_MAX);
 	}
 }
 
