@@ -176,12 +176,25 @@ w_spanner_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_spanner_isempty(void)
+{
+	return 0;
+}
+
+weapontype_t
+w_spanner_type(void)
+{
+	return WPNTYPE_CLOSE;
+}
+
 weapon_t w_spanner =
 {
 	.name		= "spanner",
-	.id		= ITEM_SPANNER,
+	.id			= ITEM_SPANNER,
 	.slot		= 0,
 	.slot_pos	= 2,
+	.weight		= WEIGHT_SPANNER,
 	.draw		= w_spanner_draw,
 	.holster	= w_spanner_holster,
 	.primary	= w_spanner_primary,
@@ -196,6 +209,8 @@ weapon_t w_spanner =
 	.pmodel		= w_spanner_pmodel,
 	.deathmsg	= w_spanner_deathmsg,
 	.aimanim	= w_spanner_aimanim,
+	.isempty	= w_spanner_isempty,
+	.type		= w_spanner_type,
 	.hudpic		= w_spanner_hudpic
 };
 

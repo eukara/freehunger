@@ -1,10 +1,12 @@
 weapon_ap9.fire
 {
+	alerts
 	sample weapons/ap9_fire.wav
 }
 
 weapon_chaingun.fire
 {
+	alerts
 	sample weapons/asscan2.wav
 }
 
@@ -23,13 +25,51 @@ weapon_chaingun.spinup
 	sample weapons/asscan1.wav
 }
 
+weapon_chainsaw.attack
+{
+	alerts
+	sample weapons/chainsaw_attack.wav
+}
+
+weapon_chainsaw.draw
+{
+	alerts
+	sample weapons/chainsaw_pullout.wav
+}
+
+weapon_chainsaw.hit
+{
+	alerts
+	sample weapons/chainsaw_cutinto.wav
+}
+
+weapon_chainsaw.hitflesh
+{
+	alerts
+	sample weapons/chainsaw_cutintoflesh.wav
+}
+
+weapon_chainsaw.idle
+{
+	alerts
+	sample weapons/chainsaw_idle.wav
+}
+
+weapon_chainsaw.startup
+{
+	alerts
+	sample weapons/chainsaw_startup.wav
+}
+
 weapon_medkit.heal
 {
+	alerts
 	sample items/smallmedkit1.wav
 }
 
 weapon_flame.fire
 {
+	alerts
 	sample weapons/flmfire2.wav
 }
 
@@ -41,6 +81,7 @@ weapon_silencer.fire
 
 weapon_sniper.fire
 {
+	alerts
 	sample weapons/sniper.wav
 }
 
@@ -51,5 +92,6 @@ weapon_sniper.reload
 
 weapon_taurus.fire
 {
+	alerts
 	sample weapons/tau_fire.wav
 }

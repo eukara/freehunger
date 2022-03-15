@@ -27,6 +27,38 @@ enum
 	CHAINGUN_HOLSTER
 };
 
+#ifdef CLIENT
+void w_chaingun_ejectshell(void)
+{
+	static void w_chaingun_ejectshell_death(void) {
+		remove(self);
+	}
+	static void w_chaingun_ejectshell_touch(void) {
+		if (other == world)
+			Sound_Play(self, CHAN_BODY, "modelevent_shell.land");
+	}
+	entity eShell = spawn();
+	setmodel(eShell, "models/shell.mdl");
+	eShell.solid = SOLID_BBOX;
+	eShell.movetype = MOVETYPE_BOUNCE;
+	eShell.drawmask = MASK_ENGINE;
+	eShell.angles = [pSeat->m_eViewModel.angles[0], pSeat->m_eViewModel.angles[1], 0];
+	eShell.velocity = pSeat->m_vecPredictedVelocity;
+
+	makevectors(pSeat->m_eViewModel.angles);
+	eShell.velocity += (v_forward * 0);
+	eShell.velocity += (v_right * -80);
+	eShell.velocity += (v_up * 100);
+	eShell.touch = w_chaingun_ejectshell_touch;
+
+	eShell.avelocity = [0,45,900];
+	eShell.think = w_chaingun_ejectshell_death;
+	eShell.nextthink = time + 2.5f;
+	setsize(eShell, [0,0,0], [0,0,0]);
+	setorigin(eShell, pSeat->m_eViewModel.origin + (v_forward * 26) + (v_up * -15));
+}
+#endif
+
 void
 w_chaingun_precache(void)
 {
@@ -49,12 +81,14 @@ w_chaingun_pickup(int new, int startammo)
 
 	if (new) {
 		pl.chaingun_mag = 100;
+		return (1);
+	}
+
+	if (pl.ammo_9mm < MAX_A_9MM) {
+		pl.ammo_9mm = bound(0, pl.ammo_9mm + 100, MAX_A_9MM);
 	} else {
-		if (pl.ammo_9mm < MAX_A_9MM) {
-			pl.ammo_9mm = bound(0, pl.ammo_9mm + 100, MAX_A_9MM);
-		} else {
+		if (!new)
 			return (0);
-		}
 	}
 #endif
 	return (1);
@@ -180,6 +214,7 @@ w_chaingun_primary(void)
 	Weapons_ViewPunchAngle([random(-2, 2),0,0]);
 
 #ifdef CLIENT
+	View_AddEvent(w_chaingun_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_RIFLE);
 #else
 	TraceAttack_FireBullets(1, Weapons_GetCameraPos(), 8, [0.15,0.15], WEAPON_CHAINGUN);
@@ -269,12 +304,30 @@ w_chaingun_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_chaingun_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.chaingun_mag <= 0 && pl.ammo_9mm <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_chaingun_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_chaingun =
 {
 	.name		= "chaingun",
-	.id		= ITEM_CHAINGUN,
+	.id			= ITEM_CHAINGUN,
 	.slot		= 3,
 	.slot_pos	= 3,
+	.weight		= WEIGHT_CHAINGUN,
 	.draw		= w_chaingun_draw,
 	.holster	= w_chaingun_holster,
 	.primary	= w_chaingun_primary,
@@ -289,6 +342,8 @@ weapon_t w_chaingun =
 	.pmodel		= w_chaingun_pmodel,
 	.deathmsg	= w_chaingun_deathmsg,
 	.aimanim	= w_chaingun_aimanim,
+	.isempty	= w_chaingun_isempty,
+	.type		= w_chaingun_type,
 	.hudpic		= w_chaingun_hudpic
 };
 

@@ -36,10 +36,10 @@ w_silencer_precache(void)
 	Sound_Precache("weapon_glock.fire");
 	Sound_Precache("weapon_silencer.fire");
 #endif
-
 	precache_model("models/v_9mmhandgun.mdl");
 	precache_model("models/w_9mmhandgun.mdl");
 	precache_model("models/p_9mmhandgun.mdl");
+	Sound_Precache("modelevent_shell.land");
 }
 
 void
@@ -121,6 +121,7 @@ w_silencer_primary(void)
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 
 #ifdef CLIENT
+	View_AddEvent(w_glock_ejectshell, 0.0f);
 	if (pl.mode_silencer == 1) {
 		View_SetMuzzleflash(0);
 	} else {
@@ -148,6 +149,23 @@ w_silencer_primary(void)
 	pl.w_idle_next = 5.0f;
 }
 
+#ifdef CLIENT
+
+void
+w_silencer_add(void)
+{
+	Weapons_SetGeomset("geomset 2 2\n");
+}
+
+void
+w_silencer_remove(void)
+{
+	Weapons_SetGeomset("geomset 2 0\n");
+}
+
+#endif
+
+
 void
 w_silencer_secondary(void)
 {
@@ -160,20 +178,20 @@ w_silencer_secondary(void)
 	pl.mode_silencer = 1 - pl.mode_silencer;
 
 	if (pl.mode_silencer) {
-		Weapons_SetGeomset("geomset 2 2\n");
-		Weapons_ViewAnimation(GLOCK_SILENCER);
-	} else {
-		Weapons_SetGeomset("geomset 2 0\n");
-		Weapons_ViewAnimation(GLOCK_HOLSTER);
-	}
-
-	if (pl.mode_silencer) {
 		pl.w_attack_next = 3.3f;
 		pl.w_idle_next = pl.w_attack_next;
+		Weapons_ViewAnimation(GLOCK_SILENCER);
+		#ifdef CLIENT
+		View_AddEvent(w_silencer_add, 1.0f);
+		#endif
 	} else {
-		
-		pl.w_attack_next = 0.94f;
-		pl.w_idle_next = pl.w_attack_next;
+		pl.w_attack_next = 2.0f;
+		pl.w_idle_next = 1.0f;
+		Weapons_ViewAnimation(GLOCK_HOLSTER);
+		pl.mode_tempstate = 1;
+		#ifdef CLIENT
+		View_AddEvent(w_silencer_remove, 0.9f);
+		#endif
 	}
 }
 
@@ -186,7 +204,44 @@ w_silencer_reload(void)
 void
 w_silencer_release(void)
 {
-	w_glock_release();
+	player pl = (player)self;
+	int r;
+
+	/* auto-reload if need be */
+	if (pl.w_attack_next <= 0.0)
+	if (pl.glock_mag == 0 && pl.ammo_9mm > 0) {
+		Weapons_Reload();
+		return;
+	}
+
+	if (pl.w_idle_next > 0.0) {
+		return;
+	}
+
+	if (pl.mode_tempstate == 1)
+	{
+		Weapons_ViewAnimation(GLOCK_DRAW);
+		pl.w_idle_next = 1.0f;
+		pl.w_attack_next = pl.w_idle_next;
+		pl.mode_tempstate = 0;
+		return;
+	}
+
+	r = floor(pseudorandom() * 3.0f);
+	switch (r) {
+	case 1:
+		Weapons_ViewAnimation(GLOCK_IDLE2);
+		pl.w_idle_next = 2.5f;
+		break;
+	case 2:
+		Weapons_ViewAnimation(GLOCK_IDLE3);
+		pl.w_idle_next = 3.5f;
+		break;
+	default:
+		Weapons_ViewAnimation(GLOCK_IDLE1);
+		pl.w_idle_next = 3.75f;
+		break;
+	}
 }
 
 float
@@ -241,12 +296,30 @@ w_silencer_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_silencer_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.glock_mag <= 0 && pl.ammo_9mm <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_silencer_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_silencer =
 {
 	.name		= "silencer",
-	.id		= ITEM_GLOCK,
+	.id			= ITEM_GLOCK,
 	.slot		= 1,
 	.slot_pos	= 0,
+	.weight		= WEIGHT_GLOCK,
 	.draw		= w_silencer_draw,
 	.holster	= w_silencer_holster,
 	.primary	= w_silencer_primary,
@@ -261,5 +334,7 @@ weapon_t w_silencer =
 	.pmodel		= w_silencer_pmodel,
 	.deathmsg	= w_silencer_deathmsg,
 	.aimanim	= w_silencer_aimanim,
+	.isempty	= w_silencer_isempty,
+	.type		= w_silencer_type,
 	.hudpic		= w_silencer_hudpic
 };

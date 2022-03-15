@@ -203,12 +203,30 @@ w_tnt_hudpic(int selected, vector pos, float a)
 	w_handgrenade_hudpic(selected, pos, a);
 }
 
+int
+w_tnt_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ammo_handgrenade <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_tnt_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_tnt =
 {
 	.name		= "tnt",
-	.id		= ITEM_HANDGRENADE,
+	.id			= ITEM_HANDGRENADE,
 	.slot		= 4,
 	.slot_pos	= 0,
+	.weight		= WEIGHT_HANDGRENADE,
 	.draw		= w_tnt_draw,
 	.holster	= w_tnt_holster,
 	.primary	= w_tnt_primary,
@@ -223,5 +241,7 @@ weapon_t w_tnt =
 	.pmodel		= w_tnt_pmodel,
 	.deathmsg	= w_tnt_deathmsg,
 	.aimanim	= w_tnt_aimanim,
+	.isempty	= w_snark_isempty,
+	.type		= w_snark_type,
 	.hudpic		= w_tnt_hudpic
 };

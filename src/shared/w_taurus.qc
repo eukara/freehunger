@@ -73,12 +73,14 @@ w_taurus_pickup(int new, int startammo)
 
 	if (new) {
 		pl.taurus_mag = 10;
+		return (1);
+	}
+
+	if (pl.ammo_taurus < MAX_A_TAURUS) {
+		pl.ammo_taurus = bound(0, pl.ammo_taurus + 10, MAX_A_TAURUS);
 	} else {
-		if (pl.ammo_taurus < MAX_A_TAURUS) {
-			pl.ammo_taurus = bound(0, pl.ammo_taurus + 10, MAX_A_TAURUS);
-		} else {
+		if (!new)
 			return (0);
-		}
 	}
 #endif
 	return (1);
@@ -126,6 +128,7 @@ w_taurus_primary(void)
 
 	/* actual firing */
 #ifdef CLIENT
+	View_AddEvent(w_pistol_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 12, [0.01,0.01], WEAPON_TAURUS);
@@ -219,12 +222,30 @@ w_taurus_hudpic(int selected, vector pos, float a)
 	w_glock_hudpic(selected, pos, a);
 }
 
+int
+w_taurus_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.taurus_mag <= 0 && pl.ammo_taurus <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_taurus_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_taurus =
 {
 	.name		= "taurus",
-	.id		= ITEM_TAURUS,
+	.id			= ITEM_TAURUS,
 	.slot		= 1,
 	.slot_pos	= 3,
+	.weight		= WEIGHT_TAURUS,
 	.draw		= w_taurus_draw,
 	.holster	= w_taurus_holster,
 	.primary	= w_taurus_primary,
@@ -239,6 +260,8 @@ weapon_t w_taurus =
 	.pmodel		= w_taurus_pmodel,
 	.deathmsg	= w_taurus_deathmsg,
 	.aimanim	= w_taurus_aimanim,
+	.isempty	= w_taurus_isempty,
+	.type		= w_taurus_type,
 	.hudpic		= w_taurus_hudpic
 };
 

@@ -1,4 +1,4 @@
-# FreeHunger
+# FreeHunger (AKA Still Hungry)
 Clean-room reimplementation of They Hunger in QuakeC.
 
 ![Preview 1](img/preview1.jpg)
@@ -16,6 +16,30 @@ then either run Nuclide's ./build_game.sh shell script, or issue 'make' inside
 
 Obviously make sure that Nuclide has fteqw and fteqcc set-up for building.
 
+## Status / Changes
+
+So far all the weapons are re-implemented, but SP hasn't been worked on yet, so
+no custom NPC skins or behavior.
+
+Multiplayer is functional, and now has some unique CVARs to give it more of a
+personality and make it fit in more with They Hunger's world:
+
+- Changed weapon placement for THDM
+  Included are .ent files that have changed the weapons placed in the default
+  DM maps for They Hunger. Replacing most Half-Life weapons with TH counter-parts.
+
+- th_medkitstyle 0/1 (default 0)
+  All medkit pickups turn into the medkit weapon from SP, and each pickup is one
+  ammo (or shot) that needs to be administered for health.
+
+- th_shovelstyle 0/1 (default 0)
+  Gives the shovel visual first person effects, and slows down its attack.
+
+- th_rpgstyle 0/1 (default 0)
+  Removes the homing secondary toggle making it similar to a real RPG.
+
+You can enable these new CVARs with "exec mp_enhanced.cfg" in console.
+
 ## Community
 
 ### Matrix
@@ -32,9 +56,9 @@ We've had people ask in the oddest of places for help, please don't do that.
 ## License
 ISC License
 
-Copyright (c) 2016-2021 Marco Hladik <marco@icculus.org>
+Copyright (c) 2016-2022 Marco Cawthorne <marco@icculus.org>
 
-Copyright (c) 2019-2020 Gethyn ThomasQuail <xylemon@posteo.net>
+Copyright (c) 2019-2022 Gethyn ThomasQuail <xylemon@posteo.net>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

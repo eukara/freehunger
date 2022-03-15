@@ -88,8 +88,8 @@ class player:base_player
 	PREDICTED_INT(ammo_ap9);
 	PREDICTED_INT(ammo_taurus);
 	PREDICTED_INT(ammo_sniper);
-	PREDICTED_INT(ammo_medkit);
 	PREDICTED_INT(ammo_gas);
+	PREDICTED_INT(ammo_medkit);
 	PREDICTED_INT(mode_silencer);
 
 #ifdef CLIENT
@@ -163,8 +163,8 @@ player::ReceiveEntity(float new, float fl)
 		ammo_ap9 = readbyte();
 		ammo_taurus = readbyte();
 		ammo_sniper = readbyte();
-		ammo_medkit = readbyte();
 		ammo_gas = readbyte();
+		ammo_medkit = readbyte();
 	}
 
 	if (fl & PLAYER_AMMO3) {
@@ -248,8 +248,8 @@ player::PredictPreFrame(void)
 	SAVE_STATE(ammo_ap9);
 	SAVE_STATE(ammo_taurus);
 	SAVE_STATE(ammo_sniper);
-	SAVE_STATE(ammo_medkit);
 	SAVE_STATE(ammo_gas);
+	SAVE_STATE(ammo_medkit);
 	SAVE_STATE(mode_silencer);
 }
 
@@ -306,8 +306,8 @@ player::PredictPostFrame(void)
 	ROLL_BACK(ammo_ap9);
 	ROLL_BACK(ammo_taurus);
 	ROLL_BACK(ammo_sniper);
-	ROLL_BACK(ammo_medkit);
 	ROLL_BACK(ammo_gas);
+	ROLL_BACK(ammo_medkit);
 	ROLL_BACK(mode_silencer);
 }
 
@@ -376,9 +376,9 @@ player::EvaluateEntity(void)
 		SendFlags |= PLAYER_AMMO2;
 	else if (ATTR_CHANGED(ammo_sniper))
 		SendFlags |= PLAYER_AMMO2;
-	else if (ATTR_CHANGED(ammo_medkit))
-		SendFlags |= PLAYER_AMMO2;
 	else if (ATTR_CHANGED(ammo_gas))
+		SendFlags |= PLAYER_AMMO2;
+	else if (ATTR_CHANGED(ammo_medkit))
 		SendFlags |= PLAYER_AMMO2;
 
 	if (ATTR_CHANGED(ammo_m203_grenade))
@@ -432,8 +432,8 @@ player::EvaluateEntity(void)
 	SAVE_STATE(ammo_ap9);
 	SAVE_STATE(ammo_taurus);
 	SAVE_STATE(ammo_sniper);
-	SAVE_STATE(ammo_medkit);
 	SAVE_STATE(ammo_gas);
+	SAVE_STATE(ammo_medkit);
 	SAVE_STATE(mode_silencer);
 }
 
@@ -511,8 +511,8 @@ player::SendEntity(entity ePEnt, float fChanged)
 		WriteByte(MSG_ENTITY, ammo_ap9);
 		WriteByte(MSG_ENTITY, ammo_taurus);
 		WriteByte(MSG_ENTITY, ammo_sniper);
-		WriteByte(MSG_ENTITY, ammo_medkit);
 		WriteByte(MSG_ENTITY, ammo_gas);
+		WriteByte(MSG_ENTITY, ammo_medkit);
 	}
 
 	if (fChanged & PLAYER_AMMO3) {

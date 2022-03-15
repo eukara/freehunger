@@ -204,12 +204,25 @@ w_shovel_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_shovel_isempty(void)
+{
+	return 0;
+}
+
+weapontype_t
+w_shovel_type(void)
+{
+	return WPNTYPE_CLOSE;
+}
+
 weapon_t w_shovel =
 {
 	.name		= "shovel",
-	.id		= ITEM_SHOVEL,
+	.id			= ITEM_SHOVEL,
 	.slot		= 0,
 	.slot_pos	= 1,
+	.weight		= WEIGHT_SHOVEL,
 	.draw		= w_shovel_draw,
 	.holster	= w_shovel_holster,
 	.primary	= w_shovel_primary,
@@ -224,6 +237,8 @@ weapon_t w_shovel =
 	.pmodel		= w_shovel_pmodel,
 	.deathmsg	= w_shovel_deathmsg,
 	.aimanim	= w_shovel_aimanim,
+	.isempty	= w_shovel_isempty,
+	.type		= w_shovel_type,
 	.hudpic		= w_shovel_hudpic
 };
 

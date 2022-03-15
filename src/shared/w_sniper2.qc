@@ -37,20 +37,7 @@ w_sniper2_precache(void)
 int
 w_sniper2_pickup(int new, int startammo)
 {
-#ifdef SERVER
-	player pl = (player)self;
-
-	if (new) {
-		pl.sniper_mag = 5;
-	} else {
-		if (pl.ammo_sniper < MAX_A_SNIPER) {
-			pl.ammo_sniper = bound(0, pl.ammo_sniper + 5, MAX_A_SNIPER);
-		} else {
-			return (0);
-		}
-	}
-#endif
-	return (1);
+	return w_sniper_pickup(new, startammo);
 }
 
 void
@@ -137,6 +124,7 @@ w_sniper2_primary(void)
 	Weapons_ViewAnimation(SNIPER_FIRE);
 
 #ifdef CLIENT
+	View_AddEvent(w_pistol_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.008, 0.008], WEAPON_SNIPER);
@@ -201,12 +189,25 @@ w_sniper2_hudpic(int selected, vector pos, float a)
 	w_sniper_hudpic(selected, pos, a);
 }
 
+int
+w_sniper2_isempty(void)
+{
+	w_sniper_isempty();
+}
+
+weapontype_t
+w_sniper2_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_sniper2 =
 {
 	.name		= "sniper2",
-	.id		= ITEM_SNIPER2,
+	.id			= ITEM_SNIPER2,
 	.slot		= 2,
 	.slot_pos	= 4,
+	.weight		= WEIGHT_SNIPER2,
 	.draw		= w_sniper2_draw,
 	.holster	= w_sniper2_holster,
 	.primary	= w_sniper2_primary,
@@ -221,6 +222,8 @@ weapon_t w_sniper2 =
 	.pmodel		= w_sniper2_pmodel,
 	.deathmsg	= w_sniper2_deathmsg,
 	.aimanim	= w_sniper2_aimanim,
+	.isempty	= w_sniper2_isempty,
+	.type		= w_sniper2_type,
 	.hudpic		= w_sniper2_hudpic
 };
 

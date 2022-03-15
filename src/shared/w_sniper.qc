@@ -45,12 +45,14 @@ w_sniper_pickup(int new, int startammo)
 
 	if (new) {
 		pl.sniper_mag = 5;
+		return (1);
+	}
+
+	if (pl.ammo_sniper < MAX_A_SNIPER) {
+		pl.ammo_sniper = bound(0, pl.ammo_sniper + 5, MAX_A_SNIPER);
 	} else {
-		if (pl.ammo_sniper < MAX_A_SNIPER) {
-			pl.ammo_sniper = bound(0, pl.ammo_sniper + 5, MAX_A_SNIPER);
-		} else {
+		if (!new)
 			return (0);
-		}
 	}
 #endif
 	return (1);
@@ -152,6 +154,7 @@ w_sniper_primary(void)
 	Weapons_ViewAnimation(SNIPER_FIRE1);
 
 #ifdef CLIENT
+	View_AddEvent(w_chaingun_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 40, [0.008, 0.008], WEAPON_SNIPER);
@@ -220,10 +223,18 @@ w_sniper_crosshair(void)
 	vector aicon_pos;
 
 	if (pl.viewzoom < 1.0f) {
+		vector col;
+
+		// although no accurate, gives the second sniper more character
+		if (pl.activeweapon == WEAPON_SNIPER)
+			col = [0,0.2,0];
+		else
+			col = [0.2,0,0];
+
 		drawfill(
-			g_hudmins,
-			g_hudres,
-			[0,0.2,0],
+			video_mins,
+			video_res,
+			col,
 			1.0f,
 			DRAWFLAG_ADDITIVE
 		);
@@ -314,12 +325,30 @@ w_sniper_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_sniper_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.sniper_mag <= 0 && pl.ammo_sniper <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_sniper_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_sniper =
 {
 	.name		= "sniper",
-	.id		= ITEM_SNIPER,
+	.id			= ITEM_SNIPER,
 	.slot		= 2,
 	.slot_pos	= 3,
+	.weight		= WEIGHT_SNIPER,
 	.draw		= w_sniper_draw,
 	.holster	= w_sniper_holster,
 	.primary	= w_sniper_primary,
@@ -334,6 +363,8 @@ weapon_t w_sniper =
 	.pmodel		= w_sniper_pmodel,
 	.deathmsg	= w_sniper_deathmsg,
 	.aimanim	= w_sniper_aimanim,
+	.isempty	= w_sniper_isempty,
+	.type		= w_sniper_type,
 	.hudpic		= w_sniper_hudpic
 };
 

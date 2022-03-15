@@ -71,10 +71,12 @@ w_flame_pickup(int new, int startammo)
 {
 #ifdef SERVER
 	player pl = (player)self;
+
 	if (pl.ammo_gas < MAX_A_GAS) {
 		pl.ammo_gas = bound(0, pl.ammo_gas + 20, MAX_A_GAS);
 	} else {
-		return (0);
+		if (!new)
+			return (0);
 	}
 #endif
 	return (1);
@@ -91,23 +93,6 @@ w_flame_holster(void)
 {
 	w_egon_holster();
 }
-
-
-#ifdef SERVER
-void
-Flame_Touch(void)
-{
-	if (other.takedamage != DAMAGE_YES) {
-		remove(self);
-		return;
-	}
-
-	/* anything else that can take damage */
-	Damage_Apply(other, self.owner, 40, WEAPON_EGON, DMG_BURN);
-	remove(self);
-}
-#endif
-
 
 void
 w_flame_primary(void)
@@ -129,23 +114,38 @@ w_flame_primary(void)
 		Weapons_ViewAnimation(EGON_ALTFIRECYCLE);
 #else
 
+	static void w_flame_die(void) {
+		remove(self);
+		}
+
+	static void w_flame_touch(entity target, entity source) {
+		if (target.takedamage == DAMAGE_YES) {
+			NSSurfacePropEntity m = (NSSurfacePropEntity)target;
+			m.Ignite(source, 5.0f, WEAPON_EGON);
+		}
+// To be added to spec
+//		Damage_Apply(target, source.owner, Skill_GetValue("sk_flame", 13), WEAPON_EGON, DMG_BURN);
+	}
+
 	Sound_Play(pl, CHAN_WEAPON, "weapon_flame.fire");
+	NSProjectile ball = spawn(NSProjectile);
+	ball.SetModel("sprites/fthrow.spr");
+	ball.SetRenderMode(RM_ADDITIVE);
+	ball.SetOwner(pl);
+	ball.SetImpact(w_flame_touch);
+	ball.think = w_flame_die;
+	ball.nextthink = time + 1.75f;
+// To be added to spec
+//	ball.Animate(0,15);
+//	ball.effects |= EF_BRIGHTLIGHT;
+
+// Also will need check for water contents (so projectile will die underwater)
+
 	Weapons_MakeVectors();
-	entity flame = spawn();
-	setmodel(flame, "sprites/fthrow.spr");
-	setorigin(flame, Weapons_GetCameraPos() + (v_forward * 16));
-	flame.owner = self;
-	flame.velocity = v_forward * 300;
-	flame.movetype = MOVETYPE_FLYMISSILE;
-	flame.solid = SOLID_BBOX;
-	//flame.flags |= FL_LAGGEDMOVE;
-	flame.angles = vectoangles(flame.velocity);
-	flame.avelocity[2] = 10;
-	flame.touch = Flame_Touch;
-	/*frame.think = Flame_Touch;
-	flame.nextthink = time + 2.0f;*/
-	flame.effects |= EF_BRIGHTLIGHT;
-	setsize(flame, [0,0,0], [0,0,0]);
+	ball.SetOrigin(Weapons_GetCameraPos() + (v_forward * 16));
+	ball.SetVelocity(v_forward * 300);
+	setsize(ball, [0,0,0], [0,0,0]);
+
 #endif
 
 	pl.w_attack_next = 0.2f;
@@ -222,12 +222,30 @@ w_flame_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_flame_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ammo_gas <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_flame_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_flame =
 {
 	.name		= "flame",
-	.id		= ITEM_EGON,
+	.id			= ITEM_EGON,
 	.slot		= 3,
 	.slot_pos	= 2,
+	.weight		= WEIGHT_EGON,
 	.draw		= w_flame_draw,
 	.holster	= w_egon_holster,
 	.primary	= w_flame_primary,
@@ -242,5 +260,7 @@ weapon_t w_flame =
 	.pmodel		= w_flame_pmodel,
 	.deathmsg	= w_flame_deathmsg,
 	.aimanim	= w_flame_aimanim,
+	.isempty	= w_flame_isempty,
+	.type		= w_flame_type,
 	.hudpic		= w_flame_hudpic
 };

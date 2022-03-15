@@ -67,17 +67,18 @@ w_medkit_pickup(int new, int startammo)
 	player pl = (player)self;
 
 	if (new) {
-		if (cvar("th_medkitstyle") == 1) {
+		if (cvar("th_medkitstyle") == 1)
 			pl.ammo_medkit = 1;
-		} else {
+		else
 			pl.ammo_medkit = 8;
-		}
+		return (1);
+	}
+
+	if (pl.ammo_medkit < MAX_A_MEDKIT) {
+		pl.ammo_medkit = bound(0, pl.ammo_medkit + 8, MAX_A_MEDKIT);
 	} else {
-		if (pl.ammo_medkit < MAX_A_MEDKIT) {
-			pl.ammo_medkit = bound(0, pl.ammo_medkit + 8, MAX_A_MEDKIT);
-		} else {
+		if (!new)
 			return (0);
-		}
 	}
 #endif
 	return (1);
@@ -213,12 +214,30 @@ w_medkit_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_medkit_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ammo_medkit <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_medkit_type(void)
+{
+	return WPNTYPE_CLOSE;
+}
+
 weapon_t w_medkit =
 {
 	.name		= "medkit",
-	.id		= ITEM_MEDKIT2,
+	.id			= ITEM_MEDKIT2,
 	.slot		= 4,
 	.slot_pos	= 4,
+	.weight		= WEIGHT_MEDKIT,
 	.draw		= w_medkit_draw,
 	.holster	= __NULL__,
 	.primary	= w_medkit_primary,
@@ -233,6 +252,8 @@ weapon_t w_medkit =
 	.pmodel		= w_medkit_pmodel,
 	.deathmsg	= w_medkit_deathmsg,
 	.aimanim	= w_medkit_aimanim,
+	.isempty	= w_medkit_isempty,
+	.type		= w_medkit_type,
 	.hudpic		= w_medkit_hudpic
 };
 

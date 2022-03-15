@@ -25,6 +25,38 @@ enum
 	AP9_SHOOT3
 };
 
+#ifdef CLIENT
+void w_pistol_ejectshell(void)
+{
+	static void w_pistol_ejectshell_death(void) {
+		remove(self);
+	}
+	static void w_pistol_ejectshell_touch(void) {
+		if (other == world)
+			Sound_Play(self, CHAN_BODY, "modelevent_shell.land");
+	}
+	entity eShell = spawn();
+	setmodel(eShell, "models/shell.mdl");
+	eShell.solid = SOLID_BBOX;
+	eShell.movetype = MOVETYPE_BOUNCE;
+	eShell.drawmask = MASK_ENGINE;
+	eShell.angles = [pSeat->m_eViewModel.angles[0], pSeat->m_eViewModel.angles[1], 0];
+	eShell.velocity = pSeat->m_vecPredictedVelocity;
+
+	makevectors(pSeat->m_eViewModel.angles);
+	eShell.velocity += (v_forward * 0);
+	eShell.velocity += (v_right * -60);
+	eShell.velocity += (v_up * 120);
+	eShell.touch = w_pistol_ejectshell_touch;
+
+	eShell.avelocity = [0,45,900];
+	eShell.think = w_pistol_ejectshell_death;
+	eShell.nextthink = time + 2.5f;
+	setsize(eShell, [0,0,0], [0,0,0]);
+	setorigin(eShell, pSeat->m_eViewModel.origin + (v_forward * 26) + (v_right * 10) + (v_up * -10));
+}
+#endif
+
 void
 w_ap9_precache(void)
 {
@@ -70,12 +102,14 @@ w_ap9_pickup(int new, int startammo)
 
 	if (new) {
 		pl.ap9_mag = 40;
+		return (1);
+	}
+
+	if (pl.ammo_ap9 < MAX_A_AP9) {
+		pl.ammo_ap9 = bound(0, pl.ammo_ap9 + 40, MAX_A_AP9);
 	} else {
-		if (pl.ammo_ap9 < MAX_A_AP9) {
-			pl.ammo_ap9 = bound(0, pl.ammo_ap9 + 40, MAX_A_AP9);
-		} else {
+		if (!new)
 			return (0);
-		}
 	}
 #endif
 	return (1);
@@ -126,6 +160,7 @@ w_ap9_primary(void)
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 
 #ifdef CLIENT
+	View_AddEvent(w_pistol_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(1, pl.origin + pl.view_ofs, 8, [0.1,0.1], WEAPON_AP9);
@@ -169,6 +204,7 @@ w_ap9_secondary(void)
 		Animation_PlayerTop(pl, ANIM_CR_SHOOT1HAND, 0.45f);
 
 #ifdef CLIENT
+	View_AddEvent(w_glock_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_SMALL);
 #else
 	TraceAttack_FireBullets(3, pl.origin + pl.view_ofs, 8, [0.02,0.02], WEAPON_AP9);
@@ -271,12 +307,30 @@ w_ap9_hudpic(int selected, vector pos, float a)
 #endif
 }
 
+int
+w_ap9_isempty(void)
+{
+	player pl = (player)self;
+
+	if (pl.ap9_mag <= 0 && pl.ammo_ap9 <= 0)
+		return 1;
+
+	return 0;
+}
+
+weapontype_t
+w_ap9_type(void)
+{
+	return WPNTYPE_RANGED;
+}
+
 weapon_t w_ap9 =
 {
 	.name		= "ap9",
-	.id		= ITEM_AP9,
+	.id			= ITEM_AP9,
 	.slot		= 1,
 	.slot_pos	= 2,
+	.weight		= WEIGHT_AP9,
 	.draw		= w_ap9_draw,
 	.holster	= w_ap9_holster,
 	.primary	= w_ap9_primary,
@@ -291,6 +345,8 @@ weapon_t w_ap9 =
 	.pmodel		= w_ap9_pmodel,
 	.deathmsg	= w_ap9_deathmsg,
 	.aimanim	= w_ap9_aimanim,
+	.isempty	= w_ap9_isempty,
+	.type		= w_ap9_type,
 	.hudpic		= w_ap9_hudpic
 };
 

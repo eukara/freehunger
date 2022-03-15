@@ -29,7 +29,7 @@ weapon_t g_weapons[] = {
 	w_crossbow,
 	w_sniper,
 	w_sniper2,
-	w_rpg,
+	w_rpg2,
 	w_gauss,
 	w_flame,
 	w_chaingun,
