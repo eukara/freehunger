@@ -83,7 +83,7 @@ w_ap9_wmodel(void)
 }
 
 string
-w_ap9_pmodel(void)
+w_ap9_pmodel(player pl)
 {
 	return "models/p_ap9.mdl";
 }
@@ -95,10 +95,9 @@ w_ap9_deathmsg(void)
 }
 
 int
-w_ap9_pickup(int new, int startammo)
+w_ap9_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.ap9_mag = 40;
@@ -116,22 +115,21 @@ w_ap9_pickup(int new, int startammo)
 }
 
 void
-w_ap9_draw(void)
+w_ap9_draw(player pl)
 {
 	Weapons_SetModel("models/v_ap9.mdl");
-	Weapons_ViewAnimation(AP9_DRAW);
+	Weapons_ViewAnimation(pl, AP9_DRAW);
 }
 
 void
-w_ap9_holster(void)
+w_ap9_holster(player pl)
 {
 
 }
 
 void
-w_ap9_primary(void)
+w_ap9_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -139,18 +137,18 @@ w_ap9_primary(void)
 		return;
 
 	pl.ap9_mag--;
-	Weapons_ViewPunchAngle([-2,0,0]);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
 
 	int r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(AP9_SHOOT1);
+		Weapons_ViewAnimation(pl, AP9_SHOOT1);
 		break;
 	case 1:
-		Weapons_ViewAnimation(AP9_SHOOT2);
+		Weapons_ViewAnimation(pl, AP9_SHOOT2);
 		break;
 	case 2:
-		Weapons_ViewAnimation(AP9_SHOOT3);
+		Weapons_ViewAnimation(pl, AP9_SHOOT3);
 		break;
 	}
 
@@ -172,9 +170,8 @@ w_ap9_primary(void)
 }
 
 void
-w_ap9_secondary(void)
+w_ap9_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0)
 		return;
@@ -183,18 +180,18 @@ w_ap9_secondary(void)
 
 	pl.ap9_mag -= 3;
 
-	Weapons_ViewPunchAngle([-2,0,0]);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
 
 	int r = floor(random(0,2));
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(AP9_SHOOT1);
+		Weapons_ViewAnimation(pl, AP9_SHOOT1);
 		break;
 	case 1:
-		Weapons_ViewAnimation(AP9_SHOOT2);
+		Weapons_ViewAnimation(pl, AP9_SHOOT2);
 		break;
 	case 2:
-		Weapons_ViewAnimation(AP9_SHOOT3);
+		Weapons_ViewAnimation(pl, AP9_SHOOT3);
 		break;
 	}
 
@@ -216,9 +213,8 @@ w_ap9_secondary(void)
 }
 
 void
-w_ap9_reload(void)
+w_ap9_reload(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -228,7 +224,7 @@ w_ap9_reload(void)
 		return;
 
 #ifdef CLIENT
-	Weapons_ViewAnimation(AP9_RELOAD);
+	Weapons_ViewAnimation(pl, AP9_RELOAD);
 #else
 	Weapons_ReloadWeapon(pl, player::ap9_mag, player::ammo_ap9, 40);
 #endif
@@ -238,40 +234,38 @@ w_ap9_reload(void)
 }
 
 void
-w_ap9_release(void)
+w_ap9_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.ap9_mag == 0 && pl.ammo_ap9 > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
 	if (pl.w_idle_next > 0.0)
 		return;
 
-	Weapons_ViewAnimation(AP9_IDLE);
+	Weapons_ViewAnimation(pl, AP9_IDLE);
 }
 
 float
-w_ap9_aimanim(void)
+w_ap9_aimanim(player pl)
 {
-	return w_glock_aimanim();
+	return w_glock_aimanim(pl);
 }
 
 void
-w_ap9_hud(void)
+w_ap9_hud(player pl)
 {
-	w_glock_hud();
+	w_glock_hud(pl);
 }
 
 void
-w_ap9_hudpic(int selected, vector pos, float a)
+w_ap9_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.ap9_mag == 0 && pl.ammo_ap9 == 0)
@@ -308,9 +302,8 @@ w_ap9_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_ap9_isempty(void)
+w_ap9_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ap9_mag <= 0 && pl.ammo_ap9 <= 0)
 		return 1;
@@ -319,7 +312,7 @@ w_ap9_isempty(void)
 }
 
 weapontype_t
-w_ap9_type(void)
+w_ap9_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -337,7 +330,7 @@ weapon_t w_ap9 =
 	.secondary	= w_ap9_secondary,
 	.reload		= w_ap9_reload,
 	.release	= w_ap9_release,
-	.crosshair	= w_ap9_hud,
+	.postdraw	= w_ap9_hud,
 	.precache	= w_ap9_precache,
 	.pickup		= w_ap9_pickup,
 	.updateammo	= w_ap9_updateammo,

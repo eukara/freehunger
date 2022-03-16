@@ -50,7 +50,7 @@ w_spanner_wmodel(void)
 	return "models/backpack.mdl";
 }
 string
-w_spanner_pmodel(void)
+w_spanner_pmodel(player pl)
 {
 	return "models/p_spanner.mdl";
 }
@@ -62,29 +62,28 @@ w_spanner_deathmsg(void)
 }
 
 void
-w_spanner_draw(void)
+w_spanner_draw(player pl)
 {
 	Weapons_SetModel("models/v_tfc_spanner.mdl");
-	Weapons_ViewAnimation(CBAR_DRAW);
+	Weapons_ViewAnimation(pl, CBAR_DRAW);
 }
 
 void
-w_spanner_holster(void)
+w_spanner_holster(player pl)
 {
-	w_crowbar_holster();
+	w_crowbar_holster(pl);
 }
 
 void
-w_spanner_primary(void)
+w_spanner_primary(player pl)
 {
 	int anim = 0;
 	vector src;
-	player pl = (player)self;
 
 	if (pl.w_attack_next)
 		return;
 
-	Weapons_MakeVectors();
+	Weapons_MakeVectors(pl);
 	src = pl.origin + pl.view_ofs;
 	traceline(src, src + (v_forward * 32), FALSE, pl);
 
@@ -96,9 +95,9 @@ w_spanner_primary(void)
 	pl.w_idle_next = 2.5f;
 
 	if (random() < 0.5) {
-		Weapons_ViewAnimation(CBAR_ATTACK1);
+		Weapons_ViewAnimation(pl, CBAR_ATTACK1);
 	} else {
-		Weapons_ViewAnimation(CBAR_ATTACK2);
+		Weapons_ViewAnimation(pl, CBAR_ATTACK2);
 	}
 
 	if (pl.flags & FL_CROUCHING) {
@@ -135,19 +134,19 @@ w_spanner_primary(void)
 }
 
 void
-w_spanner_release(void)
+w_spanner_release(player pl)
 {
-	w_crowbar_release();
+	w_crowbar_release(pl);
 }
 
 float
-w_spanner_aimanim(void)
+w_spanner_aimanim(player pl)
 {
-	return w_crowbar_aimanim();
+	return w_crowbar_aimanim(pl);
 }
 
 void
-w_spanner_hudpic(int selected, vector pos, float a)
+w_spanner_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
 	if (selected) {
@@ -177,13 +176,13 @@ w_spanner_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_spanner_isempty(void)
+w_spanner_isempty(player pl)
 {
 	return 0;
 }
 
 weapontype_t
-w_spanner_type(void)
+w_spanner_type(player pl)
 {
 	return WPNTYPE_CLOSE;
 }
@@ -201,7 +200,7 @@ weapon_t w_spanner =
 	.secondary	= __NULL__,
 	.reload		= __NULL__,
 	.release	= w_spanner_release,
-	.crosshair	= __NULL__,
+	.postdraw	= __NULL__,
 	.precache	= w_spanner_precache,
 	.pickup		= __NULL__,
 	.updateammo	= w_spanner_updateammo,

@@ -38,10 +38,9 @@ w_sniper_precache(void)
 }
 
 int
-w_sniper_pickup(int new, int startammo)
+w_sniper_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.sniper_mag = 5;
@@ -71,7 +70,7 @@ w_sniper_wmodel(void)
 }
 
 string
-w_sniper_pmodel(void)
+w_sniper_pmodel(player pl)
 {
 	return "models/p_sniper.mdl";
 }
@@ -83,30 +82,28 @@ w_sniper_deathmsg(void)
 }
 
 void
-w_sniper_draw(void)
+w_sniper_draw(player pl)
 {
-	player pl = (player)self;
 	pl.mode_tempstate = 0;
 
 	Weapons_SetModel("models/v_tfc_sniper.mdl");
-	Weapons_ViewAnimation(SNIPER_DRAW);
+	Weapons_ViewAnimation(pl, SNIPER_DRAW);
 }
 
 void
-w_sniper_holster(void)
+w_sniper_holster(player pl)
 {
-	Weapons_ViewAnimation(SNIPER_HOLSTER);
+	Weapons_ViewAnimation(pl, SNIPER_HOLSTER);
 }
 
 void
-w_sniper_release(void)
+w_sniper_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.sniper_mag == 0 && pl.ammo_sniper > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -114,7 +111,7 @@ w_sniper_release(void)
 		return;
 
 	if (pl.mode_tempstate == 1) {
-		Weapons_ViewAnimation(SNIPER_DRAW);
+		Weapons_ViewAnimation(pl, SNIPER_DRAW);
 		pl.mode_tempstate = 0;
 		pl.w_attack_next = 0.0f;
 		pl.w_idle_next = 15.0f;
@@ -124,11 +121,11 @@ w_sniper_release(void)
 	int r = floor(random(0,2));
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(SNIPER_IDLE1);
+		Weapons_ViewAnimation(pl, SNIPER_IDLE1);
 		pl.w_idle_next = 3.0f;
 		break;
 	case 1:
-		Weapons_ViewAnimation(SNIPER_IDLE2);
+		Weapons_ViewAnimation(pl, SNIPER_IDLE2);
 		pl.w_idle_next = 2.0f;
 		break;
 	}
@@ -137,9 +134,8 @@ w_sniper_release(void)
 }
 
 void
-w_sniper_primary(void)
+w_sniper_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -150,8 +146,8 @@ w_sniper_primary(void)
 
 	pl.sniper_mag--;
 
-	Weapons_ViewPunchAngle([-20,0,0]);
-	Weapons_ViewAnimation(SNIPER_FIRE1);
+	Weapons_ViewPunchAngle(pl, [-20,0,0]);
+	Weapons_ViewAnimation(pl, SNIPER_FIRE1);
 
 #ifdef CLIENT
 	View_AddEvent(w_chaingun_ejectshell, 0.0f);
@@ -172,9 +168,8 @@ w_sniper_primary(void)
 }
 
 void
-w_sniper_secondary(void)
+w_sniper_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -190,11 +185,10 @@ w_sniper_secondary(void)
 }
 
 void
-w_sniper_reload(void)
+w_sniper_reload(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next) {
-		w_sniper_release();
+		w_sniper_release(pl);
 		return;
 	}
 	if (pl.sniper_mag >= 5)
@@ -202,7 +196,7 @@ w_sniper_reload(void)
 	if (pl.ammo_sniper <= 0)
 		return;
 
-	Weapons_ViewAnimation(SNIPER_HOLSTER);
+	Weapons_ViewAnimation(pl, SNIPER_HOLSTER);
 
 #ifdef SERVER
 	Sound_Play(pl, CHAN_WEAPON, "weapon_sniper.reload");
@@ -215,10 +209,9 @@ w_sniper_reload(void)
 }
 
 void
-w_sniper_crosshair(void)
+w_sniper_crosshair(player pl)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	static vector cross_pos;
 	vector aicon_pos;
 
@@ -280,16 +273,15 @@ w_sniper_crosshair(void)
 }
 
 float
-w_sniper_aimanim(void)
+w_sniper_aimanim(player pl)
 {
-	return w_crossbow_aimanim();
+	return w_crossbow_aimanim(pl);
 }
 
 void
-w_sniper_hudpic(int selected, vector pos, float a)
+w_sniper_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.sniper_mag == 0 && pl.ammo_sniper == 0)
@@ -326,9 +318,8 @@ w_sniper_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_sniper_isempty(void)
+w_sniper_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.sniper_mag <= 0 && pl.ammo_sniper <= 0)
 		return 1;
@@ -337,7 +328,7 @@ w_sniper_isempty(void)
 }
 
 weapontype_t
-w_sniper_type(void)
+w_sniper_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -355,7 +346,7 @@ weapon_t w_sniper =
 	.secondary	= w_sniper_secondary,
 	.reload		= w_sniper_reload,
 	.release	= w_sniper_release,
-	.crosshair	= w_sniper_crosshair,
+	.postdraw	= w_sniper_crosshair,
 	.precache	= w_sniper_precache,
 	.pickup		= w_sniper_pickup,
 	.updateammo	= w_sniper_updateammo,

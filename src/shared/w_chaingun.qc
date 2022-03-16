@@ -74,10 +74,9 @@ w_chaingun_precache(void)
 }
 
 int
-w_chaingun_pickup(int new, int startammo)
+w_chaingun_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.chaingun_mag = 100;
@@ -107,7 +106,7 @@ w_chaingun_wmodel(void)
 }
 
 string
-w_chaingun_pmodel(void)
+w_chaingun_pmodel(player pl)
 {
 	return "models/p_tfac.mdl";
 }
@@ -119,29 +118,27 @@ w_chaingun_deathmsg(void)
 }
 
 void
-w_chaingun_draw(void)
+w_chaingun_draw(player pl)
 {
-	player pl = (player)self;
 	pl.mode_tempstate = 0;
 	Weapons_SetModel("models/v_tfac.mdl");
-	Weapons_ViewAnimation(CHAINGUN_DRAW);
+	Weapons_ViewAnimation(pl, CHAINGUN_DRAW);
 }
 
 void
-w_chaingun_holster(void)
+w_chaingun_holster(player pl)
 {
-	Weapons_ViewAnimation(CHAINGUN_HOLSTER);
+	Weapons_ViewAnimation(pl, CHAINGUN_HOLSTER);
 }
 
 void
-w_chaingun_release(void)
+w_chaingun_release(player pl)
 {
-	player pl = (player)self;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.chaingun_mag == 0 && pl.ammo_9mm > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -154,7 +151,7 @@ w_chaingun_release(void)
 #ifdef SERVER
 		Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.spindown");
 #endif
-		Weapons_ViewAnimation(CHAINGUN_SPINDOWN);
+		Weapons_ViewAnimation(pl, CHAINGUN_SPINDOWN);
 		pl.w_attack_next = 1.0f;
 		pl.w_idle_next = pl.w_attack_next;
 		return;
@@ -163,7 +160,7 @@ w_chaingun_release(void)
 	/* end reload */
 	if (pl.mode_tempstate == 2) {
 		pl.mode_tempstate = 0;
-		Weapons_ViewAnimation(CHAINGUN_DRAW);
+		Weapons_ViewAnimation(pl, CHAINGUN_DRAW);
 		pl.w_attack_next = 1.0f;
 		pl.w_idle_next = pl.w_attack_next;
 		return;
@@ -171,22 +168,21 @@ w_chaingun_release(void)
 
 	int r = (float)input_sequence % 2;
 	if (r) {
-		Weapons_ViewAnimation(CHAINGUN_IDLE1);
+		Weapons_ViewAnimation(pl, CHAINGUN_IDLE1);
 	} else {
-		Weapons_ViewAnimation(CHAINGUN_IDLE2);
+		Weapons_ViewAnimation(pl, CHAINGUN_IDLE2);
 	}
 
 	pl.w_idle_next = 15.0f;
 }
 
 void
-w_chaingun_primary(void)
+w_chaingun_primary(player pl)
 {
-	player pl = (player)self;
 
 	/* in case we're spamming primary while reloading */
 	if (pl.mode_tempstate == 2) {
-		w_chaingun_release();
+		w_chaingun_release(pl);
 		return;
 	}
 
@@ -200,7 +196,7 @@ w_chaingun_primary(void)
 	/* spin up first */
 	if (pl.mode_tempstate == 0) {
 		pl.mode_tempstate = 1;
-		Weapons_ViewAnimation(CHAINGUN_SPINUP);
+		Weapons_ViewAnimation(pl, CHAINGUN_SPINUP);
 #ifdef SERVER
 		Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.spinup");
 #endif
@@ -210,14 +206,14 @@ w_chaingun_primary(void)
 	}
 	pl.chaingun_mag--;
 
-	Weapons_ViewAnimation(CHAINGUN_FIRE);
-	Weapons_ViewPunchAngle([random(-2, 2),0,0]);
+	Weapons_ViewAnimation(pl, CHAINGUN_FIRE);
+	Weapons_ViewPunchAngle(pl, [random(-2, 2),0,0]);
 
 #ifdef CLIENT
 	View_AddEvent(w_chaingun_ejectshell, 0.0f);
 	View_SetMuzzleflash(MUZZLE_RIFLE);
 #else
-	TraceAttack_FireBullets(1, Weapons_GetCameraPos(), 8, [0.15,0.15], WEAPON_CHAINGUN);
+	TraceAttack_FireBullets(1, Weapons_GetCameraPos(pl), 8, [0.15,0.15], WEAPON_CHAINGUN);
 	Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.fire");
 #endif
 
@@ -226,11 +222,10 @@ w_chaingun_primary(void)
 }
 
 void
-w_chaingun_reload(void)
+w_chaingun_reload(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next) {
-		w_chaingun_release();
+		w_chaingun_release(pl);
 		return;
 	}
 
@@ -240,7 +235,7 @@ w_chaingun_reload(void)
 	if (pl.ammo_9mm <= 0)
 		return;
 
-	Weapons_ViewAnimation(CHAINGUN_HOLSTER);
+	Weapons_ViewAnimation(pl, CHAINGUN_HOLSTER);
 
 #ifdef SERVER
 	Sound_Play(pl, CHAN_WEAPON, "weapon_chaingun.reload");
@@ -253,22 +248,21 @@ w_chaingun_reload(void)
 }
 
 void
-w_chaingun_hud(void)
+w_chaingun_hud(player pl)
 {
-	w_glock_hud();
+	w_glock_hud(pl);
 }
 
 float
-w_chaingun_aimanim(void)
+w_chaingun_aimanim(player pl)
 {
-	return w_mp5_aimanim();
+	return w_mp5_aimanim(pl);
 }
 
 void
-w_chaingun_hudpic(int selected, vector pos, float a)
+w_chaingun_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.chaingun_mag == 0 && pl.ammo_9mm == 0)
@@ -305,9 +299,8 @@ w_chaingun_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_chaingun_isempty(void)
+w_chaingun_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.chaingun_mag <= 0 && pl.ammo_9mm <= 0)
 		return 1;
@@ -316,7 +309,7 @@ w_chaingun_isempty(void)
 }
 
 weapontype_t
-w_chaingun_type(void)
+w_chaingun_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -334,7 +327,7 @@ weapon_t w_chaingun =
 	.secondary	= w_chaingun_release,
 	.reload		= w_chaingun_reload,
 	.release	= w_chaingun_release,
-	.crosshair	= w_chaingun_hud,
+	.postdraw	= w_chaingun_hud,
 	.precache	= w_chaingun_precache,
 	.pickup		= w_chaingun_pickup,
 	.updateammo	= w_chaingun_updateammo,

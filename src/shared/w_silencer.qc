@@ -55,9 +55,9 @@ w_silencer_wmodel(void)
 }
 
 string
-w_silencer_pmodel(void)
+w_silencer_pmodel(player pl)
 {
-	return w_glock_pmodel();
+	return w_glock_pmodel(pl);
 }
 
 string
@@ -67,18 +67,17 @@ w_silencer_deathmsg(void)
 }
 
 int
-w_silencer_pickup(int new, int startammo)
+w_silencer_pickup(player pl, int new, int startammo)
 {
-	return w_glock_pickup(new, startammo);
+	return w_glock_pickup(pl, new, startammo);
 }
 
 void
-w_silencer_draw(void)
+w_silencer_draw(player pl)
 {
-	w_glock_draw();
+	w_glock_draw(pl);
 
 #ifdef CLIENT
-	player pl = (player)self;
 	if (pl.mode_silencer) {
 		Weapons_SetGeomset("geomset 2 2\n");
 	} else {
@@ -87,15 +86,14 @@ w_silencer_draw(void)
 #endif
 }
 void
-w_silencer_holster(void)
+w_silencer_holster(player pl)
 {
-	w_glock_holster();
+	w_glock_holster(pl);
 }
 
 void
-w_silencer_primary(void)
+w_silencer_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -107,12 +105,12 @@ w_silencer_primary(void)
 	pl.glock_mag--;
 
 	/* actual firing */
-	Weapons_ViewPunchAngle([-2,0,0]);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
 
 	if (pl.glock_mag) {
-		Weapons_ViewAnimation(GLOCK_SHOOT);
+		Weapons_ViewAnimation(pl, GLOCK_SHOOT);
 	} else {
-		Weapons_ViewAnimation(GLOCK_SHOOT_EMPTY);
+		Weapons_ViewAnimation(pl, GLOCK_SHOOT_EMPTY);
 	}
 
 	if (self.flags & FL_CROUCHING)
@@ -167,9 +165,8 @@ w_silencer_remove(void)
 
 
 void
-w_silencer_secondary(void)
+w_silencer_secondary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0)
 		return;
@@ -180,14 +177,14 @@ w_silencer_secondary(void)
 	if (pl.mode_silencer) {
 		pl.w_attack_next = 3.3f;
 		pl.w_idle_next = pl.w_attack_next;
-		Weapons_ViewAnimation(GLOCK_SILENCER);
+		Weapons_ViewAnimation(pl, GLOCK_SILENCER);
 		#ifdef CLIENT
 		View_AddEvent(w_silencer_add, 1.0f);
 		#endif
 	} else {
 		pl.w_attack_next = 2.0f;
 		pl.w_idle_next = 1.0f;
-		Weapons_ViewAnimation(GLOCK_HOLSTER);
+		Weapons_ViewAnimation(pl, GLOCK_HOLSTER);
 		pl.mode_tempstate = 1;
 		#ifdef CLIENT
 		View_AddEvent(w_silencer_remove, 0.9f);
@@ -196,21 +193,20 @@ w_silencer_secondary(void)
 }
 
 void
-w_silencer_reload(void)
+w_silencer_reload(player pl)
 {
-	w_glock_reload();
+	w_glock_reload(pl);
 }
 
 void
-w_silencer_release(void)
+w_silencer_release(player pl)
 {
-	player pl = (player)self;
 	int r;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.glock_mag == 0 && pl.ammo_9mm > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -220,7 +216,7 @@ w_silencer_release(void)
 
 	if (pl.mode_tempstate == 1)
 	{
-		Weapons_ViewAnimation(GLOCK_DRAW);
+		Weapons_ViewAnimation(pl, GLOCK_DRAW);
 		pl.w_idle_next = 1.0f;
 		pl.w_attack_next = pl.w_idle_next;
 		pl.mode_tempstate = 0;
@@ -230,37 +226,36 @@ w_silencer_release(void)
 	r = floor(pseudorandom() * 3.0f);
 	switch (r) {
 	case 1:
-		Weapons_ViewAnimation(GLOCK_IDLE2);
+		Weapons_ViewAnimation(pl, GLOCK_IDLE2);
 		pl.w_idle_next = 2.5f;
 		break;
 	case 2:
-		Weapons_ViewAnimation(GLOCK_IDLE3);
+		Weapons_ViewAnimation(pl, GLOCK_IDLE3);
 		pl.w_idle_next = 3.5f;
 		break;
 	default:
-		Weapons_ViewAnimation(GLOCK_IDLE1);
+		Weapons_ViewAnimation(pl, GLOCK_IDLE1);
 		pl.w_idle_next = 3.75f;
 		break;
 	}
 }
 
 float
-w_silencer_aimanim(void)
+w_silencer_aimanim(player pl)
 {
-	return w_glock_aimanim();
+	return w_glock_aimanim(pl);
 }
 
 void
-w_silencer_hud(void)
+w_silencer_hud(player pl)
 {
-	w_glock_hud();
+	w_glock_hud(pl);
 }
 
 void
-w_silencer_hudpic(int selected, vector pos, float a)
+w_silencer_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.glock_mag == 0 && pl.ammo_9mm == 0)
@@ -297,9 +292,8 @@ w_silencer_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_silencer_isempty(void)
+w_silencer_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.glock_mag <= 0 && pl.ammo_9mm <= 0)
 		return 1;
@@ -308,7 +302,7 @@ w_silencer_isempty(void)
 }
 
 weapontype_t
-w_silencer_type(void)
+w_silencer_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -326,7 +320,7 @@ weapon_t w_silencer =
 	.secondary	= w_silencer_secondary,
 	.reload		= w_silencer_reload,
 	.release	= w_silencer_release,
-	.crosshair	= w_silencer_hud,
+	.postdraw	= w_silencer_hud,
 	.precache	= w_silencer_precache,
 	.pickup		= w_silencer_pickup,
 	.updateammo	= w_silencer_updateammo,

@@ -49,7 +49,7 @@ w_medkit_wmodel(void)
 }
 
 string
-w_medkit_pmodel(void)
+w_medkit_pmodel(player pl)
 {
 	return "models/p_tfc_medkit.mdl";
 }
@@ -61,10 +61,9 @@ w_medkit_deathmsg(void)
 }
 
 int
-w_medkit_pickup(int new, int startammo)
+w_medkit_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		if (cvar("th_medkitstyle") == 1)
@@ -86,16 +85,15 @@ w_medkit_pickup(int new, int startammo)
 
 
 void
-w_medkit_draw(void)
+w_medkit_draw(player pl)
 {
 	Weapons_SetModel("models/v_tfc_medkit.mdl");
-	Weapons_ViewAnimation(MEDKIT_DRAW);
+	Weapons_ViewAnimation(pl, MEDKIT_DRAW);
 }
 
 void
-w_medkit_primary(void)
+w_medkit_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -106,7 +104,7 @@ w_medkit_primary(void)
 	if (pl.health >= 100)
 		return;
 	else
-		Weapons_ViewAnimation(MEDKIT_USE);
+		Weapons_ViewAnimation(pl, MEDKIT_USE);
 
 	pl.ammo_medkit--;
 
@@ -126,9 +124,8 @@ w_medkit_primary(void)
 }
 
 void
-w_medkit_release(void)
+w_medkit_release(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_idle_next > 0.0)
 		return;
@@ -136,24 +133,24 @@ w_medkit_release(void)
 	int r = (float)input_sequence % 2;
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(MEDKIT_IDLE1);
+		Weapons_ViewAnimation(pl, MEDKIT_IDLE1);
 		pl.w_idle_next = 1.16f;
 		break;
 	default:
-		Weapons_ViewAnimation(MEDKIT_IDLE2);
+		Weapons_ViewAnimation(pl, MEDKIT_IDLE2);
 		pl.w_idle_next = 2.36f;
 		break;
 	}
 }
 
 float
-w_medkit_aimanim(void)
+w_medkit_aimanim(player pl)
 {
-	return w_snark_aimanim();
+	return w_snark_aimanim(pl);
 }
 
 void
-w_medkit_crosshair(void)
+w_medkit_crosshair(player pl)
 {
 #ifdef CLIENT
 	vector aicon_pos;
@@ -175,10 +172,9 @@ w_medkit_crosshair(void)
 }
 
 void
-w_medkit_hudpic(int selected, vector pos, float a)
+w_medkit_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.ammo_medkit == 0)
@@ -215,9 +211,8 @@ w_medkit_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_medkit_isempty(void)
+w_medkit_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ammo_medkit <= 0)
 		return 1;
@@ -226,7 +221,7 @@ w_medkit_isempty(void)
 }
 
 weapontype_t
-w_medkit_type(void)
+w_medkit_type(player pl)
 {
 	return WPNTYPE_CLOSE;
 }
@@ -244,7 +239,7 @@ weapon_t w_medkit =
 	.secondary	= __NULL__,
 	.reload		= __NULL__,
 	.release	= w_medkit_release,
-	.crosshair	= w_medkit_crosshair,
+	.postdraw	= w_medkit_crosshair,
 	.precache	= w_medkit_precache,
 	.pickup		= w_medkit_pickup,
 	.updateammo	= w_medkit_updateammo,

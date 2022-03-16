@@ -51,7 +51,7 @@ w_tnt_wmodel(void)
 }
 
 string
-w_tnt_pmodel(void)
+w_tnt_pmodel(player pl)
 {
 	return "models/p_tnt.mdl";
 }
@@ -63,14 +63,14 @@ w_tnt_deathmsg(void)
 }
 
 int
-w_tnt_pickup(int new, int startammo)
+w_tnt_pickup(player pl, int new, int startammo)
 {
-	return w_handgrenade_pickup(new, startammo);
+	return w_handgrenade_pickup(pl, new, startammo);
 }
 
 #ifdef SERVER
 void
-w_tnt_throw(void)
+w_tnt_throw(player pl)
 {
 	static void WeaponFrag_Throw_Explode(void) {
 		float dmg = Skill_GetValue("plr_hand_grenade", 100);
@@ -89,7 +89,6 @@ w_tnt_throw(void)
 		self.frame = 0;
 	}
 
-	player pl = (player)self;
 	vector vPLAngle = pl.v_angle;
 
 	if (vPLAngle[0] < 0)
@@ -122,28 +121,27 @@ w_tnt_throw(void)
 #endif
 
 void
-w_tnt_draw(void)
+w_tnt_draw(player pl)
 {
-	player pl = (player)self;
 	pl.mode_tempstate = 0;
 
 	Weapons_SetModel("models/v_tnt.mdl");
-	Weapons_ViewAnimation(HANDGRENADE_DRAW);
+	Weapons_ViewAnimation(pl, HANDGRENADE_DRAW);
 }
 
 void
-w_tnt_holster(void)
+w_tnt_holster(player pl)
 {
 	
 }
 void
-w_tnt_primary(void)
+w_tnt_primary(player pl)
 {
-	w_handgrenade_primary();
+	w_handgrenade_primary(pl);
 }
 
 void
-w_tnt_hud(void)
+w_tnt_hud(player pl)
 {
 #ifdef CLIENT
 	HUD_DrawAmmo2();
@@ -154,18 +152,17 @@ w_tnt_hud(void)
 
 
 void
-w_tnt_release(void)
+w_tnt_release(player pl)
 {
-	player pl = (player)self;
 	
 	if (pl.w_idle_next > 0.0)
 		return;
 
 	if (pl.mode_tempstate == 1) {
 #ifdef SERVER
-		w_tnt_throw();
+		w_tnt_throw(pl);
 #endif
-		Weapons_ViewAnimation(HANDGRENADE_THROW1);
+		Weapons_ViewAnimation(pl, HANDGRENADE_THROW1);
 		pl.ammo_handgrenade--;
 		pl.mode_tempstate = 2;
 		pl.w_attack_next = 1.0f;
@@ -175,38 +172,37 @@ w_tnt_release(void)
 		if (!pl.ammo_handgrenade)
 			Weapons_RemoveItem(pl, WEAPON_HANDGRENADE);
 #endif
-		Weapons_ViewAnimation(HANDGRENADE_DRAW);
+		Weapons_ViewAnimation(pl, HANDGRENADE_DRAW);
 		pl.w_attack_next = 0.5f;
 		pl.w_idle_next = 0.5f;
 		pl.mode_tempstate = 0;
 	} else {
 		int r = (float)input_sequence % 8;
 		if (r == 1) {
-			Weapons_ViewAnimation(HANDGRENADE_FIDGET);
+			Weapons_ViewAnimation(pl, HANDGRENADE_FIDGET);
 			pl.w_idle_next = 2.5f;
 		} else {
-			Weapons_ViewAnimation(HANDGRENADE_IDLE);
+			Weapons_ViewAnimation(pl, HANDGRENADE_IDLE);
 			pl.w_idle_next = 3.0f;
 		}
 	}
 }
 
 float
-w_tnt_aimanim(void)
+w_tnt_aimanim(player pl)
 {
-	return w_handgrenade_aimanim();
+	return w_handgrenade_aimanim(pl);
 }
 
 void
-w_tnt_hudpic(int selected, vector pos, float a)
+w_tnt_hudpic(player pl, int selected, vector pos, float a)
 {
-	w_handgrenade_hudpic(selected, pos, a);
+	w_handgrenade_hudpic(pl, selected, pos, a);
 }
 
 int
-w_tnt_isempty(void)
+w_tnt_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ammo_handgrenade <= 0)
 		return 1;
@@ -215,7 +211,7 @@ w_tnt_isempty(void)
 }
 
 weapontype_t
-w_tnt_type(void)
+w_tnt_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -233,7 +229,7 @@ weapon_t w_tnt =
 	.secondary	= w_tnt_release,
 	.reload		= w_tnt_release,
 	.release	= w_tnt_release,
-	.crosshair	= w_tnt_hud,
+	.postdraw	= w_tnt_hud,
 	.precache	= w_tnt_precache,
 	.pickup		= w_tnt_pickup,
 	.updateammo	= w_tnt_updateammo,

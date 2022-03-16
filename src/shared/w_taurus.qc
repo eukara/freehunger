@@ -54,7 +54,7 @@ w_taurus_wmodel(void)
 }
 
 string
-w_taurus_pmodel(void)
+w_taurus_pmodel(player pl)
 {
 	return "models/p_taurus.mdl";
 }
@@ -66,10 +66,9 @@ w_taurus_deathmsg(void)
 }
 
 int
-w_taurus_pickup(int new, int startammo)
+w_taurus_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (new) {
 		pl.taurus_mag = 10;
@@ -87,22 +86,21 @@ w_taurus_pickup(int new, int startammo)
 }
 
 void
-w_taurus_draw(void)
+w_taurus_draw(player pl)
 {
 	Weapons_SetModel("models/v_taurus.mdl");
-	Weapons_ViewAnimation(TAURUS_DRAW);
+	Weapons_ViewAnimation(pl, TAURUS_DRAW);
 }
 
 void
-w_taurus_holster(void)
+w_taurus_holster(player pl)
 {
-	Weapons_ViewAnimation(TAURUS_HOLSTER);
+	Weapons_ViewAnimation(pl, TAURUS_HOLSTER);
 }
 
 void
-w_taurus_primary(void)
+w_taurus_primary(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -113,12 +111,12 @@ w_taurus_primary(void)
 
 	pl.taurus_mag--;
 
-	Weapons_ViewPunchAngle([-2,0,0]);
+	Weapons_ViewPunchAngle(pl, [-2,0,0]);
 
 	if (pl.taurus_mag) {
-		Weapons_ViewAnimation(TAURUS_SHOOT);
+		Weapons_ViewAnimation(pl, TAURUS_SHOOT);
 	} else {
-		Weapons_ViewAnimation(TAURUS_SHOOT_EMPTY);
+		Weapons_ViewAnimation(pl, TAURUS_SHOOT_EMPTY);
 	}
 
 	if (self.flags & FL_CROUCHING)
@@ -140,15 +138,14 @@ w_taurus_primary(void)
 }
 
 void
-w_taurus_secondary(void)
+w_taurus_secondary(player pl)
 {
 
 }
 
 void
-w_taurus_reload(void)
+w_taurus_reload(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.w_attack_next > 0.0)
 		return;
@@ -158,9 +155,9 @@ w_taurus_reload(void)
 		return;
 
 	if (pl.taurus_mag) {
-		Weapons_ViewAnimation(TAURUS_RELOAD);
+		Weapons_ViewAnimation(pl, TAURUS_RELOAD);
 	} else {
-		Weapons_ViewAnimation(TAURUS_RELOAD2);
+		Weapons_ViewAnimation(pl, TAURUS_RELOAD2);
 	}
 
 #ifdef SERVER
@@ -172,15 +169,14 @@ w_taurus_reload(void)
 }
 
 void
-w_taurus_release(void)
+w_taurus_release(player pl)
 {
-	player pl = (player)self;
 	int r;
 
 	/* auto-reload if need be */
 	if (pl.w_attack_next <= 0.0)
 	if (pl.taurus_mag == 0 && pl.ammo_taurus > 0) {
-		Weapons_Reload();
+		Weapons_Reload(pl);
 		return;
 	}
 
@@ -190,42 +186,41 @@ w_taurus_release(void)
 	r = floor(random(0,3));
 	switch (r) {
 	case 1:
-		Weapons_ViewAnimation(TAURUS_IDLE2);
+		Weapons_ViewAnimation(pl, TAURUS_IDLE2);
 		pl.w_idle_next = 2.25f;
 		break;
 	case 2:
-		Weapons_ViewAnimation(TAURUS_IDLE3);
+		Weapons_ViewAnimation(pl, TAURUS_IDLE3);
 		pl.w_idle_next = 2.5f;
 		break;
 	default:
-		Weapons_ViewAnimation(TAURUS_IDLE1);
+		Weapons_ViewAnimation(pl, TAURUS_IDLE1);
 		pl.w_idle_next = 2.81f;
 		break;
 	}
 }
 
 float
-w_taurus_aimanim(void)
+w_taurus_aimanim(player pl)
 {
-	return w_glock_aimanim();
+	return w_glock_aimanim(pl);
 }
 
 void
-w_taurus_hud(void)
+w_taurus_hud(player pl)
 {
-	w_glock_hud();
+	w_glock_hud(pl);
 }
 
 void
-w_taurus_hudpic(int selected, vector pos, float a)
+w_taurus_hudpic(player pl, int selected, vector pos, float a)
 {
-	w_glock_hudpic(selected, pos, a);
+	w_glock_hudpic(pl, selected, pos, a);
 }
 
 int
-w_taurus_isempty(void)
+w_taurus_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.taurus_mag <= 0 && pl.ammo_taurus <= 0)
 		return 1;
@@ -234,7 +229,7 @@ w_taurus_isempty(void)
 }
 
 weapontype_t
-w_taurus_type(void)
+w_taurus_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -252,7 +247,7 @@ weapon_t w_taurus =
 	.secondary	= w_taurus_secondary,
 	.reload		= w_taurus_reload,
 	.release	= w_taurus_release,
-	.crosshair	= w_taurus_hud,
+	.postdraw	= w_taurus_hud,
 	.precache	= w_taurus_precache,
 	.pickup		= w_taurus_pickup,
 	.updateammo	= w_taurus_updateammo,

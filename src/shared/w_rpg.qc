@@ -64,9 +64,9 @@ w_rpg2_wmodel(void)
 }
 
 string
-w_rpg2_pmodel(void)
+w_rpg2_pmodel(player pl)
 {
-	return w_rpg_pmodel();
+	return w_rpg_pmodel(pl);
 }
 
 string
@@ -76,48 +76,47 @@ w_rpg2_deathmsg(void)
 }
 
 int
-w_rpg2_pickup(int new, int startammo)
+w_rpg2_pickup(player pl, int new, int startammo)
 {
-	return w_rpg_pickup(new, startammo);
+	return w_rpg_pickup(pl, new, startammo);
 }
 
 void
-w_rpg2_draw(void)
+w_rpg2_draw(player pl)
 {
-	w_rpg_draw();
+	w_rpg_draw(pl);
 }
 
 void
-w_rpg2_holster(void)
+w_rpg2_holster(player pl)
 {
 	
 }
 
 void
-w_rpg2_primary(void)
+w_rpg2_primary(player pl)
 {
-	w_rpg_primary();
+	w_rpg_primary(pl);
 }
 
 void
-w_rpg2_reload(void)
+w_rpg2_reload(player pl)
 {
-	w_rpg_reload();
+	w_rpg_reload(pl);
 }
 
 void
-w_rpg2_release(void)
+w_rpg2_release(player pl)
 {
-	w_rpg_release();
+	w_rpg_release(pl);
 }
 
 void
-w_rpg2_secondary(void)
+w_rpg2_secondary(player pl)
 {
 
 	/* Another change to spice things up */
 	if (serverkeyfloat("th_rpgstyle") != 1) {
-		player pl = (player)self;
 
 		if (pl.w_attack_next > 0.0) {
 			return;
@@ -127,38 +126,38 @@ w_rpg2_secondary(void)
 		pl.ammo_rpg_state = 1 - pl.ammo_rpg_state;
 
 		pl.w_attack_next = 0.25f;
-		w_rpg2_release();
+		w_rpg2_release(pl);
 	}
 }
 
 float
-w_rpg2_aimanim(void)
+w_rpg2_aimanim(player pl)
 {
-	return w_rpg_aimanim();
+	return w_rpg_aimanim(pl);
 }
 
 void
-w_rpg2_hudpic(int selected, vector pos, float a)
+w_rpg2_hudpic(player pl, int selected, vector pos, float a)
 {
-	w_rpg_hudpic(selected, pos, a);
+	w_rpg_hudpic(pl, selected, pos, a);
 }
 
 void
-w_rpg2_hud(void)
+w_rpg2_hud(player pl)
 {
-	w_rpg_hud();
+	w_rpg_hud(pl);
 }
 
 int
-w_rpg2_isempty(void)
+w_rpg2_isempty(player pl)
 {
-	return w_rpg_isempty();
+	return w_rpg_isempty(pl);
 }
 
 weapontype_t
-w_rpg2_type(void)
+w_rpg2_type(player pl)
 {
-	return w_rpg_type();
+	return w_rpg_type(pl);
 }
 
 weapon_t w_rpg2 =
@@ -174,7 +173,7 @@ weapon_t w_rpg2 =
 	.secondary	= w_rpg2_secondary,
 	.reload		= w_rpg2_reload,
 	.release	= w_rpg2_release,
-	.crosshair	= w_rpg2_hud,
+	.postdraw	= w_rpg2_hud,
 	.precache	= w_rpg2_precache,
 	.pickup		= w_rpg2_pickup,
 	.updateammo	= w_rpg2_updateammo,

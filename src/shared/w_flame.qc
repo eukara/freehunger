@@ -55,9 +55,9 @@ w_flame_wmodel(void)
 }
 
 string
-w_flame_pmodel(void)
+w_flame_pmodel(player pl)
 {
-	return w_egon_pmodel();
+	return w_egon_pmodel(pl);
 }
 
 string
@@ -67,10 +67,9 @@ w_flame_deathmsg(void)
 }
 
 int
-w_flame_pickup(int new, int startammo)
+w_flame_pickup(player pl, int new, int startammo)
 {
 #ifdef SERVER
-	player pl = (player)self;
 
 	if (pl.ammo_gas < MAX_A_GAS) {
 		pl.ammo_gas = bound(0, pl.ammo_gas + 20, MAX_A_GAS);
@@ -83,21 +82,20 @@ w_flame_pickup(int new, int startammo)
 }
 
 void
-w_flame_draw(void)
+w_flame_draw(player pl)
 {
-	w_egon_draw();
+	w_egon_draw(pl);
 }
 
 void
-w_flame_holster(void)
+w_flame_holster(player pl)
 {
-	w_egon_holster();
+	w_egon_holster(pl);
 }
 
 void
-w_flame_primary(void)
+w_flame_primary(player pl)
 {
-	player pl = (player)self;
 	if (pl.w_attack_next > 0.0)
 		return;
 
@@ -108,10 +106,10 @@ w_flame_primary(void)
 	pl.ammo_gas--;
 
 #ifdef CLIENT
-	if (Weapons_GetAnimation() == EGON_IDLE1)
-		Weapons_ViewAnimation(EGON_ALTFIREON);
-	else if (Weapons_GetAnimation() == EGON_ALTFIREON)
-		Weapons_ViewAnimation(EGON_ALTFIRECYCLE);
+	if (Weapons_GetAnimation(pl) == EGON_IDLE1)
+		Weapons_ViewAnimation(pl, EGON_ALTFIREON);
+	else if (Weapons_GetAnimation(pl) == EGON_ALTFIREON)
+		Weapons_ViewAnimation(pl, EGON_ALTFIRECYCLE);
 #else
 
 	static void w_flame_die(void) {
@@ -141,8 +139,8 @@ w_flame_primary(void)
 
 // Also will need check for water contents (so projectile will die underwater)
 
-	Weapons_MakeVectors();
-	ball.SetOrigin(Weapons_GetCameraPos() + (v_forward * 16));
+	Weapons_MakeVectors(pl);
+	ball.SetOrigin(Weapons_GetCameraPos(pl) + (v_forward * 16));
 	ball.SetVelocity(v_forward * 300);
 	setsize(ball, [0,0,0], [0,0,0]);
 
@@ -153,18 +151,18 @@ w_flame_primary(void)
 }
 
 void
-w_flame_reload(void)
+w_flame_reload(player pl)
 {
 }
 
 void
-w_flame_release(void)
+w_flame_release(player pl)
 {
-	w_egon_release();
+	w_egon_release(pl);
 }
 
 void
-w_flame_crosshair(void)
+w_flame_crosshair(player pl)
 {
 #ifdef CLIENT
 	static vector cross_pos;
@@ -177,16 +175,15 @@ w_flame_crosshair(void)
 }
 
 float
-w_flame_aimanim(void)
+w_flame_aimanim(player pl)
 {
-	return w_egon_aimanim();
+	return w_egon_aimanim(pl);
 }
 
 void
-w_flame_hudpic(int selected, vector pos, float a)
+w_flame_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
-	player pl = (player)self;
 	vector hud_col;
 
 	if (pl.ammo_gas == 0)
@@ -223,9 +220,8 @@ w_flame_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_flame_isempty(void)
+w_flame_isempty(player pl)
 {
-	player pl = (player)self;
 
 	if (pl.ammo_gas <= 0)
 		return 1;
@@ -234,7 +230,7 @@ w_flame_isempty(void)
 }
 
 weapontype_t
-w_flame_type(void)
+w_flame_type(player pl)
 {
 	return WPNTYPE_RANGED;
 }
@@ -252,7 +248,7 @@ weapon_t w_flame =
 	.secondary	= w_flame_release,
 	.reload		= __NULL__,
 	.release	= w_flame_release,
-	.crosshair	= w_flame_crosshair,
+	.postdraw	= w_flame_crosshair,
 	.precache	= w_flame_precache,
 	.pickup		= w_flame_pickup,
 	.updateammo	= w_flame_updateammo,

@@ -53,7 +53,7 @@ w_shovel_wmodel(void)
 	return "models/w_shovel.mdl";
 }
 string
-w_shovel_pmodel(void)
+w_shovel_pmodel(player pl)
 {
 	return "models/p_shovel.mdl";
 }
@@ -65,29 +65,28 @@ w_shovel_deathmsg(void)
 }
 
 void
-w_shovel_draw(void)
+w_shovel_draw(player pl)
 {
 	Weapons_SetModel("models/v_shovel.mdl");
-	Weapons_ViewAnimation(CBAR_DRAW);
+	Weapons_ViewAnimation(pl, CBAR_DRAW);
 }
 
 void
-w_shovel_holster(void)
+w_shovel_holster(player pl)
 {
-	w_crowbar_holster();
+	w_crowbar_holster(pl);
 }
 
 void
-w_shovel_primary(void)
+w_shovel_primary(player pl)
 {
 	int anim = 0;
 	vector src;
-	player pl = (player)self;
 
 	if (pl.w_attack_next)
 		return;
 
-	Weapons_MakeVectors();
+	Weapons_MakeVectors(pl);
 	src = pl.origin + pl.view_ofs;
 
 	/* make sure we can gib corpses */
@@ -101,10 +100,10 @@ w_shovel_primary(void)
 	if (serverkeyfloat("th_shovelstyle") == 1) {
 	
 		if (trace_fraction >= 1.0) {
-			Weapons_ViewPunchAngle([5,0,0]);
+			Weapons_ViewPunchAngle(pl, [5,0,0]);
 			pl.w_attack_next = 0.85f;
 		} else {
-			Weapons_ViewPunchAngle([-20,0,0]);
+			Weapons_ViewPunchAngle(pl, [-20,0,0]);
 			pl.w_attack_next = 1.2f;
 		}
 	} else {
@@ -119,13 +118,13 @@ w_shovel_primary(void)
 	int r = (float)input_sequence % 3;
 	switch (r) {
 	case 0:
-		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK1MISS:CBAR_ATTACK1HIT);
+		Weapons_ViewAnimation(pl, trace_fraction >= 1 ? CBAR_ATTACK1MISS:CBAR_ATTACK1HIT);
 		break;
 	case 1:
-		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK2MISS:CBAR_ATTACK2HIT);
+		Weapons_ViewAnimation(pl, trace_fraction >= 1 ? CBAR_ATTACK2MISS:CBAR_ATTACK2HIT);
 		break;
 	default:
-		Weapons_ViewAnimation(trace_fraction >= 1 ? CBAR_ATTACK3MISS:CBAR_ATTACK3HIT);
+		Weapons_ViewAnimation(pl, trace_fraction >= 1 ? CBAR_ATTACK3MISS:CBAR_ATTACK3HIT);
 	}
 
 	if (pl.flags & FL_CROUCHING) {
@@ -163,19 +162,19 @@ w_shovel_primary(void)
 }
 
 void
-w_shovel_release(void)
+w_shovel_release(player pl)
 {
-	w_crowbar_release();
+	w_crowbar_release(pl);
 }
 
 float
-w_shovel_aimanim(void)
+w_shovel_aimanim(player pl)
 {
-	return w_crowbar_aimanim();
+	return w_crowbar_aimanim(pl);
 }
 
 void
-w_shovel_hudpic(int selected, vector pos, float a)
+w_shovel_hudpic(player pl, int selected, vector pos, float a)
 {
 #ifdef CLIENT
 	if (selected) {
@@ -205,13 +204,13 @@ w_shovel_hudpic(int selected, vector pos, float a)
 }
 
 int
-w_shovel_isempty(void)
+w_shovel_isempty(player pl)
 {
 	return 0;
 }
 
 weapontype_t
-w_shovel_type(void)
+w_shovel_type(player pl)
 {
 	return WPNTYPE_CLOSE;
 }
@@ -229,7 +228,7 @@ weapon_t w_shovel =
 	.secondary	= __NULL__,
 	.reload		= __NULL__,
 	.release	= w_shovel_release,
-	.crosshair	= __NULL__,
+	.postdraw	= __NULL__,
 	.precache	= w_shovel_precache,
 	.pickup		= __NULL__,
 	.updateammo	= w_shovel_updateammo,
