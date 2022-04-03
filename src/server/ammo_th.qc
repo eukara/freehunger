@@ -26,7 +26,7 @@ A single ammo_egonclip will provide 25, er, gas.
 class ammo_egonclip:item_ammo
 {
 	void(void) ammo_egonclip;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -37,7 +37,7 @@ ammo_egonclip::ammo_egonclip(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_egonclip::touch(void)
+ammo_egonclip::Touch(entity eToucher)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -46,7 +46,7 @@ ammo_egonclip::touch(void)
 		player pl = (player)other;
 		if (pl.ammo_gas < MAX_A_GAS) {
 			pl.ammo_gas = bound(0, pl.ammo_gas + 25, MAX_A_GAS);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 			Sound_Play(other, CHAN_ITEM, "ammo_gas.pickup");
 		}
 	}
@@ -63,7 +63,7 @@ A single ammo_th_ap9 will provide 40 bullets.
 class ammo_th_ap9:item_ammo
 {
 	void(void) ammo_th_ap9;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -73,7 +73,7 @@ ammo_th_ap9::ammo_th_ap9(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_th_ap9::touch(void)
+ammo_th_ap9::Touch(entity eToucher)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -82,7 +82,7 @@ ammo_th_ap9::touch(void)
 		player pl = (player)other;
 		if (pl.ammo_ap9 < MAX_A_AP9) {
 			pl.ammo_ap9 = bound(0, pl.ammo_ap9 + 40, MAX_A_AP9);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 		}
 	}
 }
@@ -98,7 +98,7 @@ A single ammo_th_taurus will provide 10 bullets.
 class ammo_th_taurus:item_ammo
 {
 	void(void) ammo_th_taurus;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -108,7 +108,7 @@ ammo_th_taurus::ammo_th_taurus(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_th_taurus::touch(void)
+ammo_th_taurus::Touch(entity eToucher)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -117,7 +117,7 @@ ammo_th_taurus::touch(void)
 		player pl = (player)other;
 		if (pl.ammo_taurus < MAX_A_TAURUS) {
 			pl.ammo_taurus = bound(0, pl.ammo_taurus + 10, MAX_A_TAURUS);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 		}
 	}
 }
@@ -146,7 +146,7 @@ Same as ammo_einar1
 class ammo_th_sniper:item_ammo
 {
 	void(void) ammo_th_sniper;
-	virtual void(void) touch;
+	virtual void(entity) Touch;
 };
 
 void
@@ -156,7 +156,7 @@ ammo_th_sniper::ammo_th_sniper(void)
 	item_ammo::item_ammo();
 }
 void
-ammo_th_sniper::touch(void)
+ammo_th_sniper::Touch(entity eToucher)
 {
 	if not (other.flags & FL_CLIENT) {
 		return;
@@ -165,7 +165,7 @@ ammo_th_sniper::touch(void)
 		player pl = (player)other;
 		if (pl.ammo_sniper < MAX_A_SNIPER) {
 			pl.ammo_sniper = bound(0, pl.ammo_sniper + 5, MAX_A_SNIPER);
-			item_ammo::touch();
+			item_ammo::Touch(eToucher);
 		}
 	}
 }
