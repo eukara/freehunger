@@ -25,7 +25,7 @@ then it becomes ammo for the Medkit weapon which provides 15 health
 per shot.
 
 */
-class item_healthkit:CBaseEntity
+class item_healthkit:NSRenderableEntity
 {
 	void(void) item_healthkit;
 	virtual void(void) Respawn;
@@ -92,7 +92,7 @@ item_healthkit::Respawn(void)
 	if (!real_owner)
 		Sound_Play(this, CHAN_ITEM, "item.respawn");
 
-	droptofloor();
+	DropToFloor();
 }
 
 void
@@ -103,6 +103,5 @@ item_healthkit::item_healthkit(void)
 	Sound_Precache("item.respawn");
 	Sound_Precache("weapon.pickup");
 	model = "models/w_medkit.mdl";
-	CBaseEntity::CBaseEntity();
-	item_healthkit::Respawn();
+	super::NSRenderableEntity();
 }
