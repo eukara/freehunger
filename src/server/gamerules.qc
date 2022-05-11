@@ -19,7 +19,7 @@ var int autocvar_th_shovelstyle = 0;
 var int autocvar_th_rpgstyle = 0;
 
 void
-HLGameRules::LevelDecodeParms(base_player pp)
+HLGameRules::LevelDecodeParms(NSClientPlayer pp)
 {
 	player pl = (player)pp;
 	g_landmarkpos[0] = parm1;
@@ -64,7 +64,7 @@ HLGameRules::LevelDecodeParms(base_player pp)
 }
 
 void
-HLGameRules::LevelChangeParms(base_player pp)
+HLGameRules::LevelChangeParms(NSClientPlayer pp)
 {
 	player pl = (player)pp;
 	parm1 = g_landmarkpos[0];
@@ -114,19 +114,19 @@ HLGameRules::LevelNewParms(void)
 /* we check what fields have changed over the course of the frame and network
  * only the ones that have actually changed */
 void
-HLGameRules::PlayerPostFrame(base_player pl)
+HLGameRules::PlayerPostFrame(NSClientPlayer pl)
 {
 }
 
 void
-HLGameRules::PlayerConnect(base_player pl)
+HLGameRules::PlayerConnect(NSClientPlayer pl)
 {
 	if (Plugin_PlayerConnect(pl) == FALSE)
 		bprint(PRINT_HIGH, sprintf("%s connected\n", pl.netname));
 }
 
 void
-HLGameRules::PlayerDisconnect(base_player pl)
+HLGameRules::PlayerDisconnect(NSClientPlayer pl)
 {
 	if (Plugin_PlayerDisconnect(pl) == FALSE)
 		bprint(PRINT_HIGH, sprintf("%s disconnected\n", pl.netname));
@@ -141,7 +141,7 @@ HLGameRules::PlayerDisconnect(base_player pl)
 }
 
 void
-HLGameRules::PlayerKill(base_player pl)
+HLGameRules::PlayerKill(NSClientPlayer pl)
 {
 	Damage_Apply(pl, pl, pl.health, WEAPON_NONE, DMG_SKIP_ARMOR);
 } 
