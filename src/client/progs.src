@@ -6,7 +6,6 @@
 #define VALVE
 #define HUNGER
 #define CLASSIC_VGUI
-#define GS_RENDERFX
 
 #includelist
 ../../../src/shared/fteextensions.qc
