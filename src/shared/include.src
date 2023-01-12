@@ -46,5 +46,4 @@ w_taurus.qc
 w_tnt.qc
 weapons.qc
 ../../../base/src/shared/weapon_common.qc
-input.qc
 #endlist
