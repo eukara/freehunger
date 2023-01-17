@@ -70,7 +70,7 @@ item_healthkit::Touch(entity eToucher)
 	if (real_owner || cvar("sv_playerslots") == 1) {
 		remove(self);
 	} else {
-		Hide();
+		Disappear();
 		think = Respawn;
 		nextthink = time + 20.0f;
 	}
