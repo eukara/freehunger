@@ -29,7 +29,6 @@ init.qc
 ../../../valve/src/client/game_event.qc
 ../../../valve/src/client/camera.qc
 ../../../valve/src/client/viewmodel.qc
-../../../valve/src/client/view.qc
 ../../../valve/src/client/obituary.qc
 hud_ammonotify.qc
 ../../../valve/src/client/hud_dmgnotify.qc
@@ -38,7 +37,6 @@ hud_itemnotify.qc
 ../../../valve/src/client/hud.qc
 ../../../valve/src/client/hud_weaponselect.qc
 ../../../valve/src/client/scoreboard.qc
-../../../valve/src/client/modelevent.qc
 
 ../../../src/client/include.src
 ../../../src/shared/include.src
