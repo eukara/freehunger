@@ -113,26 +113,38 @@ w_flame_primary(player pl)
 #else
 
 	static void w_flame_die(void) {
-		remove(self);
-		}
+		NSEntity meSelf = (NSEntity)self;
+		meSelf.Destroy();
+	}
 
 	static void w_flame_touch(entity target, entity source) {
 		if (target.takedamage == DAMAGE_YES) {
 			NSSurfacePropEntity m = (NSSurfacePropEntity)target;
 			m.Ignite(source, 5.0f, WEAPON_EGON);
+		} else {
+			NSEntity meSelf = (NSEntity)self;
+			meSelf.Destroy();
 		}
 // To be added to spec
 //		Damage_Apply(target, source.owner, Skill_GetValue("sk_flame", 13), WEAPON_EGON, DMG_BURN);
 	}
 
 	Sound_Play(pl, CHAN_WEAPON, "weapon_flame.fire");
+
+#ifdef SERVER
 	NSProjectile ball = spawn(NSProjectile);
 	ball.SetModel("sprites/fthrow.spr");
 	ball.SetRenderMode(RM_ADDITIVE);
+	ball.SetRenderColor([1,1,1]);
+	ball.SetRenderAmt(1.0);
 	ball.SetOwner(pl);
+	ball.SetFrame(2);
 	ball.SetImpact(w_flame_touch);
-	ball.think = w_flame_die;
-	ball.nextthink = time + 1.75f;
+	ball.SetLightColor([1, 0.75, 0]);
+	ball.SetLightRadius(256.0f);
+	ball.AnimateOnce(0, 15, 0.1f);
+#endif
+
 // To be added to spec
 //	ball.Animate(0,15);
 //	ball.effects |= EF_BRIGHTLIGHT;
