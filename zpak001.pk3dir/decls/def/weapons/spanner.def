@@ -1,0 +1,48 @@
+entityDef weapon_th_spanner
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Wrench"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/backpack.mdl"
+	"model_view"		"models/v_tfc_spanner.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_melee"			"damage_spanner"
+	"melee_distance"	"32"
+	"inv_name"			"Wrench"
+	"ammoRequired" 		"0"
+	"ammoPerShot"		"0"
+	"punchAngle"		"0 0 0"
+	"silent_fire"		"1"
+
+	"meleeRateMiss"		"0.375"
+	"meleeRateHit"		"0.2"
+
+	"actIdle"			"0"
+	"actDraw"			"4"
+	"actHolster"		"5"
+	"actMeleeMiss"		"1,2"
+	"actMeleeHit"		"1,2"
+
+	// HLWeapon specific
+	"hudSlot"		"0"
+	"hudSlotPos"	"2"
+	"weight"		"0"
+	"crosshair"		"none"
+	"ammoIcon"		"none"
+}
+
+entityDef damage_spanner
+{
+	"damage"			"skill:plr_spanner"
+
+	"snd_hit"			"weapon_spanner.hit"
+	"snd_hitFlesh"		"weapon_spanner.hitbody"
+	"snd_miss"			"weapon_spanner.miss"
+}

@@ -1,0 +1,89 @@
+entityDef weapon_egon
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Flamethrower"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_egon.mdl"
+	"model_view"		"models/v_egon.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_flamethrower"
+	"inv_name"			"Flamethrower"
+	"inv_ammo_gas"		"20"
+	"ammoType"			"ammo_gas"
+	"ammoRequired"		"1"
+
+	"actFire"			"5,6,7,8"
+	"actHolster"		"10"
+	"actDraw"			"9"
+	"actIdle"			"0,1"
+
+	"snd_fire"		"weapon_egon.fire"
+	"snd_empty"		"weapon.empty"
+
+	// HLWeapon specific
+	"hudSlot"		"3"
+	"hudSlotPos"	"2"
+	"weight"		"30"
+}
+
+entityDef fireInfo_flamethrower
+{
+	"def_onFire"		"projectile_fire"
+	"ammoPerShot" 		"1"
+	"fireRate" 			"0.2"
+	"punchAngle"		"-2 0 0"
+	"actFire"			"5,6"
+	"model_flash"		"sprites/muzzleflash2.spr"
+}
+
+// TODO sprite animation and ignite
+
+entityDef projectile_fire
+{
+	"spawnclass"			"NSProjectile"
+	"model"					"sprites/fthrow.spr"
+	"offset"				"30 8 0"
+	"def_damage"			"fireDirect"
+
+	"velocity"				"300"
+	"angular_velocity"		"0 0 0"
+	"fuse"					"1"
+	"detonate_on_fuse"		"0"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"			"1"
+
+	"thrust"				"2000"
+	"thrust_start"			"0.1"
+	"thrust_end"			"2"
+
+	"light_color"			"1 0.8 0.4"
+	"light_radius"			"160"
+	"light_offset"			"0 0 0"
+
+}
+
+entityDef damage_fireDirect
+{
+	"damage"	"skill:plr_egon"
+}
+
+entityDef damage_fireAfterburn
+{
+	"damage"	"skill:plr_egon_afterburn"
+}
+
+entityDef fireInfo_flamethrower
+{
+	"def_onFire"	"projectile_fire"
+	"punchAngle"	"-10 0 0"
+}

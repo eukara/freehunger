@@ -1,0 +1,105 @@
+entityDef weapon_rpg
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Rocket Launcher"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_rpg.mdl"
+	"model_view"		"models/v_rpg.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	"def_fireInfo"		"fireInfo_rpg"
+//	"def_altFireInfo"	"fireInfo_rpg_homing"
+	"ammoType"			"ammo_rocket"
+	"clipSize"			"1"
+	"ammoRequired" 		"1"
+	"ammoPerShot" 		"1"
+	"inv_ammo_rocket"	"1"
+	"fireRate"			"2.5"
+
+	"actIdle"			"0,1"
+	"actIdleEmpty"		"8,9"
+	"actHolster"		"4"
+	"actHolsterEmpty"	"6"
+	"actDraw"		"5"
+	"actDrawEmpty"	"7"
+	"actFire"		"3"
+	"actReload"		"2"
+
+	// HLWeapon specific
+	"hudSlot"		"3"
+	"hudSlotPos"	"0"
+	"weight"		"20"
+//	"altLaser"		"1"
+}
+
+entityDef projectile_rocket
+{
+	"spawnclass"		"NSProjectile"
+	"model"				"models/rpgrocket.mdl"
+
+	"def_damage"		"damage_rocketDirect"
+	"def_splash_damage"	"damage_rocketSplash"
+
+	"health"				"0"
+	"velocity"				"250"
+	"angular_velocity"		"0 0 200"
+	"fuse"					"10"
+	"detonate_on_fuse"		"0"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"			"1"
+
+	"thrust"			"2000"
+	"thrust_start"		"0.1"
+	"thrust_end"		"2"
+
+	"smoke_fly"			"weapon_rpg.trail"
+	"decal_detonate"	"ExplosionScorch"
+	"model_detonate"	"fx_explosion.main"
+	"light_color"		"1 0.8 0.4"
+	"light_radius"		"160"
+	"light_offset"		"0 0 0"
+
+	"explode_light_color"		"2 1.6 0.8"
+	"explode_light_radius"		"320"
+	"explode_light_fadetime"	"0.5"
+
+	"snd_explode"	"fx.explosion"
+}
+
+entityDef projectile_rocket_homing
+{
+	"inherit"		"projectile_rocket"
+	"thrust_homing"	"1"
+}
+
+entityDef damage_rocketDirect
+{
+	"damage"		"skill:plr_rocketlauncher_impact"
+	"damage_random"	"skill:plr_rocketlauncher_impact_rand"
+}
+
+entityDef damage_rocketSplash
+{
+	"damage"	"skill:plr_rpg"
+	"radius"	"250"
+}
+
+entityDef fireInfo_rpg
+{
+	"def_onFire"	"projectile_rocket"
+	"punchAngle"	"-10 0 0"
+}
+
+entityDef fireInfo_rpg_homing
+{
+	"def_onFire"	"projectile_rocket_homing"
+	"punchAngle"	"-10 0 0"
+}

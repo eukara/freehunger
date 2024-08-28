@@ -1,0 +1,81 @@
+entityDef weapon_th_chainsaw
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Chainsaw"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_weaponbox.mdl"
+	"model_view"		"models/v_chainsaw.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+	"snd_idle"			"weapon_chainsaw.idle"
+	"snd_draw"			"weapon_chainsaw.draw"
+
+	// weapon specific
+	"def_melee"			"damage_chainsaw"
+	"def_meleeAlt"		"damage_chainsawAlt"
+	"melee_distance"	"48"
+	"inv_name"			"Chainsaw"
+	"ammoType"			""
+	"ammoRequired"		"0"
+
+	"actIdle"			"0"
+	"actDraw"			"5+1"
+	"actHolster"		"6"
+
+	// TODO Remove when acts and
+	// melee keys in fireInfo work
+	"meleeRateMiss"		"0.5"
+	"meleeRateHit"		"0.25"
+	"actMeleeMiss"		"3,4"
+	"actMeleeHit"		"3,4"
+
+	// HLWeapon specific
+	"hudSlot"		"0"
+	"hudSlotPos"	"3"
+	"weight"		"1"
+	"crosshair"		"none"
+	"ammoIcon"		"none"
+}
+
+// TODO fx_spark.main
+
+entityDef damage_chainsaw
+{
+	"damage"			"skill:plr_chainsaw"
+//	"kickDir"			"-1 0 0"
+//	"knockback"			"20"
+//	"push"				"20000"
+	"gib"				"1"
+
+	"meleeRateMiss"		"0.5"
+	"meleeRateHit"		"0.25"
+
+	"actMeleeMiss"		"3,4"
+	"actMeleeHit"		"3,4"
+
+	"snd_hit"			"weapon_chainsaw.hit"
+	"snd_miss"			"weapon_chainsaw.miss"
+}
+
+
+entityDef damage_chainsawSwing
+{
+	"damage"			"skill:plr_chainsaw_swing"
+//	"kickDir"			"-1 0 0"
+//	"knockback"			"20"
+//	"push"				"20000"
+	"gib"				"1"
+
+	"meleeRateMiss"		"1.2"
+	"meleeRateHit"		"0.75"
+
+	"actMeleeMiss"		"2"
+	"actMeleeHit"		"2"
+
+	"snd_hit"			"weapon_chainsaw.hit"
+	"snd_miss"			"weapon_chainsaw.miss"
+}

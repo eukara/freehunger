@@ -1,0 +1,62 @@
+entityDef weapon_einar1
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Sniper Rifle"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_isotopebox.mdl"
+	"model_view"		"models/v_tfc_sniper.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_sniper"
+	"inv_name"			"Sniper Rifle"
+	"clipSize"			"5"
+	"ammoType" 			"ammo_sniper"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+
+	"actFire"			"2"
+	"actHolster"		"4"
+	"actDraw"			"3"
+	"actIdle"			"0,5"
+	"actReload"			"4+3"
+
+	"snd_fire"		"weapon_sniper.fire"
+	"snd_reload"	"weapon_sniper.reload"
+	"snd_empty"		"weapon.empty"
+
+	// HLWeapon specific
+	"hudSlot"				"2"
+	"hudSlotPos"			"3"
+	"weight"				"20"
+
+	"zoomDuration"			"0"
+	"zoomFov"				"20"
+	"zoomFovStep"			"5"
+	"zoomFovMin"			"5"
+	"zoomFovMax"			"40"
+//	"zoomColor"				"0 0.2 0" TODO
+}
+
+entityDef projectile_sniperBullet
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_sniper_bullet"
+	"spread"		"0.008 0.008"
+}
+
+entityDef fireInfo_sniper
+{
+	"def_onFire"		"projectile_sniperBullet"
+	"ammoType"			"ammo_sniper"
+	"fireRate"			"0.1"
+//		"fireRate"			"0.5" TODO when zoomed in
+	"punchAngle"		"-20 0 0"
+	"model_flash"		"sprites/muzzleflash1.spr"
+}
+

@@ -1,0 +1,7 @@
+entityDef monster_th_dog
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_houndeye"
+	"netname"		"Zombie Dog"
+	"propdata"		"actor_human"
+}

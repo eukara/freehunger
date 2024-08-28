@@ -1,0 +1,58 @@
+entityDef weapon_th_chaingun
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Chain Gun"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_tfac.mdl"
+	"model_view"		"models/v_tfac.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_chaingun"
+	"inv_name"			"Chain Gun"
+	"clipSize"			"100"
+	"ammoType" 			"ammo_9mm"
+	"ammoRequired" 		"1"
+	"ammoPerShot"		"2"
+	"punchAngle"		"-2 0 0"
+
+	"actLoop"			"4"
+	"actHolster"		"6"
+	"actDraw"			"5"
+	"actFireStart"		"2"
+	"actFireStop"		"3"
+	"actIdle"			"0,1"
+	"actReload"			"6+5"
+
+	"snd_fireStart"	"weapon_chaingun.start"
+	"snd_fireLoop"	"weapon_chaingun.loop"
+	"snd_fireEnd"	"weapon_chaingun.stop"
+	"snd_reload"	"weapon_chaingun.reload"
+	"snd_empty"		"weapon.empty"
+
+	// HLWeapon specific
+	"hudSlot"		"3"
+	"hudSlotPos"	"3"
+	"weight"		"30"
+}
+
+entityDef projectile_chaingun
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_chaingun"
+	"hitscans"		"12"
+	"spread"		"0.08716 0.08716"
+}
+
+entityDef fireInfo_chaingun
+{
+	"def_onFire"	"projectile_chaingun"
+	"fireRate"		"0.1"
+	"punchAngle"	"-2 0 0"
+	"model_flash"	"sprites/muzzleflash2.spr"
+}

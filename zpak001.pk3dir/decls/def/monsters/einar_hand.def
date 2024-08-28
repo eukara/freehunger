@@ -1,0 +1,7 @@
+entityDef einar_hand
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_headcrab"
+	"netname"		"Zombie Hand"
+	"model"			"models/thehand.mdl"
+}

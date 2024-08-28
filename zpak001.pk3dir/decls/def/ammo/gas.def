@@ -1,0 +1,11 @@
+entityDef ammo_egonclip
+{
+	"editor_usage"		"THEY HUNGER (1999) ENTITY"
+	"editor_usage2"		""
+	"editor_usage3"		"Ammo for the Flamethrower, provides 25 Gas."
+
+	"inherit"			"ammo_base"
+	"model"				"models/w_gas.mdl"
+	"snd_acquire"		"ammo_gas.pickup"
+	"inv_ammo_gas"		"25"
+}

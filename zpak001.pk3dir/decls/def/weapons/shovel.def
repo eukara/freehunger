@@ -1,0 +1,52 @@
+entityDef weapon_th_shovel
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Shovel"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_shovel.mdl"
+	"model_view"		"models/v_shovel.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_melee"			"damage_shovel"
+	"melee_distance"	"48"
+	"inv_name"			"Shovel"
+	"ammoType"			""
+	"ammoRequired"		"0"
+	"silent_fire"		"1"
+	"punchAngle"		"5 0 0"
+
+	"meleeRateMiss"		"0.85"
+	"meleeRateHit"		"0.85"
+
+	"actIdle"			"0"
+	"actDraw"			"1"
+	"actHolster"		"2"
+	"actMeleeMiss"		"4,5,7"
+	"actMeleeHit"		"3,6,8"
+
+	// HLWeapon specific
+	"hudSlot"		"0"
+	"hudSlotPos"	"1"
+	"weight"		"0"
+	"crosshair"		"none"
+	"ammoIcon"		"none"
+}
+
+entityDef damage_crowbar
+{
+	"damage"			"skill:plr_shovel"
+//	"kickDir"			"-1 0 0"
+//	"knockback"			"20"
+//	"push"				"20000"
+	"gib"				"1"
+
+	"snd_hit"			"weapon_shovel.hit"
+	"snd_hitFlesh"		"weapon_shovel.hitbody"
+	"snd_miss"			"weapon_shovel.miss"
+}

@@ -1,0 +1,9 @@
+entityDef einar_civ_sit
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_sitting_scientist"
+	"netname"		"Civilian (Sitting)"
+	"model"			"models/civ.mdl"
+}
+
+

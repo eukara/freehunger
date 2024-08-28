@@ -1,0 +1,9 @@
+entityDef einar_civ_dead
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_scientist_dead"
+	"netname"		"Civilian (Dead)"
+	"model"			"models/civ.mdl"
+}
+
+

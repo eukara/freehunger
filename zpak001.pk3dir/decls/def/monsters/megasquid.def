@@ -1,0 +1,8 @@
+entityDef monster_th_megasquid
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_bullsquid"
+	"netname"		"Mega Bullsquid"
+	"model"			"models/megasquid.mdl"
+	"propdata"		"actor_human"
+}

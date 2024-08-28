@@ -1,0 +1,7 @@
+entityDef monster_th_bullchicken
+{
+	"spawnclass"	"NSMonster"
+	"inherit"		"monster_bullchicken"
+	"netname"		"Zombie Bullchicken"
+	"propdata"		"actor_human"
+}

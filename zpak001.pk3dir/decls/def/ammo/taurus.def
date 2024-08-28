@@ -1,0 +1,12 @@
+entityDef ammo_th_taurus
+{
+	"editor_usage"		"THEY HUNGER (1999) ENTITY"
+	"editor_usage2"		""
+	"editor_usage3"		"Ammo for the Taurus PT145, provides 10 Bullets."
+
+	"inherit"			"ammo_base"
+	"model"				"models/w_taurusclip.mdl"
+	"inv_ammo_taurus"	"10"
+}
+
+// TODO ammo icon not working?

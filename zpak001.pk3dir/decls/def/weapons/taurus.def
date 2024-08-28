@@ -1,0 +1,53 @@
+entityDef weapon_th_taurus
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Taurus PT145"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_taurus.mdl"
+	"model_view"		"models/v_taurus.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_taurus"
+	"inv_name"			"Taurus PT145"
+	"clipSize"			"10"
+	"ammoType" 			"ammo_taurus"
+	"ammoRequired" 		"1"
+	"ammoPerShot"		"1"
+	"punchAngle"		"-2 0 0"
+
+	"actFire"			"3,4,5"
+	"actFireLast"		"6"
+	"actHolster"		"10"
+	"actReload"			"7,8"
+	"actDraw"			"9"
+	"actIdle"			"0,1,2"
+
+	"snd_fire"			"weapon_taurus.fire"
+	"snd_empty"			"weapon.empty"
+
+	// HLWeapon specific
+	"hudSlot"			"1"
+	"hudSlotPos"		"3"
+	"weight"			"10"
+}
+
+entityDef projectile_taurus
+{
+	"inherit"			"projectile_bullet_base"
+	"damage"			"skill:plr_taurus_bullet"
+	"spread"			"0.01 0.01"
+}
+
+entityDef fireInfo_taurus
+{
+	"snd_fire"			"weapon_taurus.fire"
+	"def_onFire"		"projectile_taurus"
+	"fireRate" 			"0.25"
+	"model_flash"		"sprites/muzzleflash2.spr"
+}

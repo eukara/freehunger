@@ -1,0 +1,46 @@
+entityDef weapon_th_medkit
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Medkit"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/p_tfc_medkit.mdl"
+	"model_view"		"models/v_tfc_medkit.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_melee"			"damage_medkit"
+	"melee_distance"	"0"
+	"inv_name"			"Medikit"
+	"ammoType"			"ammo_medkit"
+	"ammoRequired"		"1"
+	"silent_fire"		"1"
+
+	"meleeRateMiss"		"0.35"
+	"meleeRateHit"		"0.35"
+
+	"actIdle"			"0,1"
+	"actDraw"			"5"
+	"actHolster"		"4"
+	"actMeleeMiss"		"3"
+	"actMeleeHit"		"2"
+
+	// HLWeapon specific
+	"hudSlot"		"4"
+	"hudSlotPos"	"4"
+	"weight"		"30"
+	"crosshair"		"none"
+}
+
+// TODO healing
+
+entityDef damage_medkit
+{
+	"snd_hitFlesh"		"weapon_medkit.heal"
+	"inv_health"		"skill:healthkit"
+}
+

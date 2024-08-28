@@ -1,0 +1,71 @@
+entityDef weapon_th_ap9
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"TEC-9 (AutoPistol)"
+	"editor_rotatable"	"1"
+
+	"spawnclass"		"HLWeapon"
+	"model"				"models/w_ap9.mdl"
+	"model_view"		"models/v_ap9.mdl"
+	"snd_acquire"		"weapon.pickup"
+	"snd_respawn"		"item.respawn"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_ap9"
+	"def_altFireInfo"	"fireInfo_altAP9"
+	"inv_name"			"TEC-9 (AutoPistol)"
+	"clipSize"			"40"
+	"ammoType" 			"ammo_ap9"
+	"punchAngle"		"-2 0 0"
+
+	"actFire"			"3,4,5"
+	"actAltFire"		"3,4,5"
+//	"actHolster"		""
+	"actReload"			"1"
+	"actDraw"			"2"
+	"actIdle"			"0"
+
+	"snd_fire"			"weapon_ap9.fire"
+	"snd_altfire"		"weapon_ap9.fire"
+	"snd_empty"			"weapon.empty"
+
+	// HLWeapon specific
+	"hudSlot"		"1"
+	"hudSlotPos"	"2"
+	"weight"		"10"
+}
+
+entityDef projectile_ap9
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_ap9_bullet"
+	"spread"		"0.01 0.01"
+}
+
+entityDef projectile_ap9_burst
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_ap9_bullet"
+	"spread"		"0.02 0.02"
+}
+
+entityDef fireInfo_ap9
+{
+	"def_onFire"	"projectile_ap9"
+	"fireRate" 		"0.15"
+	"model_flash"	"sprites/muzzleflash2.spr"
+	"ammoRequired" 	"1"
+	"ammoPerShot"	"1"
+}
+
+entityDef fireInfo_altAP9
+{
+	"def_onFire"	"projectile_ap9_burst"
+	"fireRate"		"1.0"
+	"model_flash"	"sprites/muzzleflash2.spr"
+	"ammoRequired" 	"3"
+	"ammoPerShot"	"3"
+	"hitscans"		"3"	
+}

@@ -1,0 +1,143 @@
+weapon_ap9.fire
+{
+	alerts
+	sample weapons/ap9_fire.wav
+}
+
+weapon_chaingun.loop
+{
+	alerts
+	sample weapons/asscan2.wav
+}
+
+weapon_chaingun.reload
+{
+	sample weapons/reload3.wav
+}
+
+weapon_chaingun.stop
+{
+	sample weapons/asscan3.wav
+}
+
+weapon_chaingun.start
+{
+	sample weapons/asscan1.wav
+}
+
+weapon_chainsaw.draw
+{
+	alerts
+	sample weapons/chainsaw_pullout.wav
+}
+
+weapon_chainsaw.hit
+{
+	alerts
+	sample weapons/chainsaw_cutinto.wav
+}
+
+weapon_chainsaw.hitbody
+{
+	alerts
+	sample weapons/chainsaw_cutintoflesh.wav
+}
+
+weapon_chainsaw.idle
+{
+	alerts
+	sample weapons/chainsaw_idle.wav
+}
+
+weapon_chainsaw.miss
+{
+	sample sh/chainsaw_idle2.wav
+}
+
+weapon_chainsaw.start
+{
+	alerts
+	sample weapons/chainsaw_startup.wav
+}
+
+weapon_egon.fire
+{
+	alerts
+	sample weapons/flmfire2.wav
+}
+
+weapon_glock.silencer
+{
+	sample weapons/pl_gun1.wav
+	sample weapons/pl_gun2.wav
+}
+
+weapon_medkit.heal
+{
+	sample items/smallmedkit1.wav
+}
+
+weapon_shovel.hit
+{
+	alerts
+	shakes 0.2
+	pitch 0.5
+	sample weapons/cbar_hit1.wav
+	sample weapons/cbar_hit2.wav
+}
+
+weapon_shovel.hitbody
+{
+	alerts
+	shakes 0.2
+	pitch 0.5
+	sample weapons/cbar_hitbod1.wav
+	sample weapons/cbar_hitbod2.wav
+	sample weapons/cbar_hitbod3.wav
+}
+
+weapon_shovel.miss
+{
+	pitch 0.5
+	sample weapons/cbar_miss1.wav
+}
+
+weapon_sniper.fire
+{
+	alerts
+	sample weapons/sniper.wav
+}
+
+weapon_sniper.reload
+{
+	sample weapons/reload3.wav
+}
+
+weapon_spanner.hit
+{
+	alerts
+	pitch 1.2
+	sample weapons/cbar_hit1.wav
+	sample weapons/cbar_hit2.wav
+}
+
+weapon_spanner.hitbody
+{
+	alerts
+	pitch 1.2
+	sample weapons/cbar_hitbod1.wav
+	sample weapons/cbar_hitbod2.wav
+	sample weapons/cbar_hitbod3.wav
+}
+
+weapon_spanner.miss
+{
+	pitch 1.2
+	sample weapons/cbar_miss1.wav
+}
+
+weapon_taurus.fire
+{
+	alerts
+	sample weapons/tau_fire.wav
+}
