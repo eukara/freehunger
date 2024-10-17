@@ -1,29 +1,66 @@
 entityDef monster_zombie
 {
-	"spawnclass"		"NSMonster"
-	"model"		"models/zombie.mdl"
-	"netname"		"Zombie"
-	"health"		"skill:zombie_health"
-	"mins"		"-16 -16 0"
-	"maxs"		"16 16 72"
-	"eye_height"		"64"
-	"team"		"2"
-	"propdata"		"actor_alien"
-	"speed_walk"		"72"
-	"speed_run"		"72"
+	"spawnclass"			"NSMonster"
+	"model"					"models/zombie.mdl"
+	"netname"				"Zombie"
+	"health"				"skill:zombie_health"
+	"mins"					"-16 -16 0"
+	"maxs"					"16 16 72"
+	"eye_height"			"64"
+	"team"					"2"
+	"propdata"				"actor_human"
+	"speed_walk"			"72"
+	"speed_run"				"72"
 
-	"def_attack_melee"	"melee_zombie_stab"
-	"melee_range"		"96"
+	"def_attack_melee"		"melee_zombie_stab"
+	"melee_range"			"96"
 
-
-	"snd_sight"		"monster_zombie.alert"
-	"snd_idle"		"monster_zombie.idle"
-	"snd_pain"		"monster_zombie.pain"
-	"snd_death"		""
-	"snd_melee_attack"	"monster_zombie.attack"
+	"snd_melee_attack"		"monster_zombie.attack"
 	"snd_melee_attack_hit"	"monster_zombie.attackhit"
 	"snd_melee_attack_miss"	"monster_zombie.attackmiss"
-	"snd_thud"		"monster_generic.thud"
+	"snd_thud"				"monster_generic.thud"
+
+	when "message" equals "zombie" {
+		"snd_melee_attack"	"monster_zombie.attack"
+		"snd_sight"			"monster_zombie.alert"
+		"snd_idle"			"monster_zombie.idle"
+		"snd_pain"			"monster_zombie.pain"
+		"snd_death"			""
+	}
+
+	when "message" equals "zombiecop" {
+		"snd_melee_attack"	"monster_zombie_zombiecop.attack"
+		"snd_sight"			"monster_zombie_zombiecop.alert"
+		"snd_idle"			"monster_zombie_zombiecop.idle"
+		"snd_pain"			"monster_zombie_zombiecop.pain"
+		"snd_death"			""
+	}
+
+	when "message" equals "zombienew" {
+		"snd_melee_attack"	"monster_zombie_zombienew.attack"
+		"snd_sight"			"monster_zombie_zombienew.alert"
+		"snd_idle"			"monster_zombie_zombienew.idle"
+		"snd_pain"			"monster_zombie_zombienew.pain"
+		"snd_death"			""
+
+	}
+
+	when "message" equals "zfemale" {
+		"snd_melee_attack"	"monster_zombie_zfemale.attack"
+		"snd_sight"			"monster_zombie_zfemale.alert"
+		"snd_idle"			"monster_zombie_zfemale.idle"
+		"snd_pain"			"monster_zombie_zfemale.pain"
+		"snd_death"			""
+	}
+
+	when "message" equals "znusre" {
+		"snd_melee_attack"	"monster_zombie_znurse.attack"
+		"snd_sight"			"monster_zombie_znurse.alert"
+		"snd_idle"			"monster_zombie_znurse.idle"
+		"snd_pain"			"monster_zombie_znurse.pain"
+		"snd_death"			""
+	}
+
 }
 
 entityDef melee_zombie_stab
@@ -33,3 +70,4 @@ entityDef melee_zombie_stab
 	"wait"	"0.5"
 	"attempts"	"2"
 }
+

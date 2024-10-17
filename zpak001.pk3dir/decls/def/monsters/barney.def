@@ -7,7 +7,7 @@ entityDef monster_barney
 	"mins"		"-16 -16 0"
 	"maxs"		"16 16 72"
 	"eye_height"		"64"
-	"team"		"2"
+	"team"			"0"
 	"propdata"		"actor_human"
 
 	"def_attack_ranged"	"ranged_barney_shot"
@@ -50,6 +50,7 @@ entityDef monster_barney
 		"follow_on_use"		"0"
 	}
 
+	// Zombie Cop
 	when "spawnflags" contains "64" {
 		"team"				"2"
 		"follow_on_use"		"0"
