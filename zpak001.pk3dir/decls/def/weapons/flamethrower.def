@@ -19,10 +19,10 @@ entityDef weapon_egon
 	"ammoType"			"ammo_gas"
 	"ammoRequired"		"1"
 
-	"actFire"			"5,6,7,8"
-	"actHolster"		"10"
-	"actDraw"			"9"
-	"actIdle"			"0,1"
+	"act_fire"			"5,6,7,8"
+	"act_holster"		"10"
+	"act_draw"			"9"
+	"act_idle"			"0,1"
 
 	"snd_fire"		"weapon_egon.fire"
 	"snd_empty"		"weapon.empty"
@@ -33,29 +33,25 @@ entityDef weapon_egon
 	"weight"		"30"
 }
 
-entityDef fireInfo_flamethrower
-{
-	"def_onFire"		"projectile_fire"
-	"ammoPerShot" 		"1"
-	"fireRate" 			"0.2"
-	"punchAngle"		"-2 0 0"
-	"actFire"			"5,6"
-	"model_flash"		"sprites/muzzleflash2.spr"
-}
-
 // TODO sprite animation and ignite
 
 entityDef projectile_fire
 {
 	"spawnclass"			"NSProjectile"
 	"model"					"sprites/fthrow.spr"
+	"rendermode"			"$RM_ADDITIVE"
+	"renderamt"				"255"
+	"rendercolor"			"255 255 255"
+	"animStartFrame"		"0"
+	"animEndFrame"			"15"
+	"animEndRemoves"		"1"
+	"animFrameRate"			"10"
 	"offset"				"30 8 0"
 	"def_damage"			"fireDirect"
 
-	"velocity"				"300"
+	"velocity"				"200"
 	"angular_velocity"		"0 0 0"
-	"fuse"					"1"
-	"detonate_on_fuse"		"0"
+	"detonate_on_fuse"		"1"
 	"detonate_on_death"		"1"
 	"detonate_on_world"		"1"
 	"detonate_on_actor"		"1"
@@ -84,6 +80,9 @@ entityDef damage_fireAfterburn
 
 entityDef fireInfo_flamethrower
 {
-	"def_onFire"	"projectile_fire"
-	"punchAngle"	"-10 0 0"
+	"def_onFire"		"projectile_fire"
+	"ammoPerShot" 		"1"
+	"fireRate" 			"0.2"
+	"act_fire"			"5,6"
+	"model_flash"		"sprites/muzzleflash2.spr"
 }

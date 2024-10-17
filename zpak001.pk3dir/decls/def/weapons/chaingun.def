@@ -17,17 +17,17 @@ entityDef weapon_th_chaingun
 	"inv_name"			"Chain Gun"
 	"clipSize"			"100"
 	"ammoType" 			"ammo_9mm"
-	"ammoRequired" 		"1"
+	"ammoRequired" 		"2"
 	"ammoPerShot"		"2"
-	"punchAngle"		"-2 0 0"
 
 	"actLoop"			"4"
-	"actHolster"		"6"
-	"actDraw"			"5"
-	"actFireStart"		"2"
-	"actFireStop"		"3"
-	"actIdle"			"0,1"
-	"actReload"			"6+5"
+	"act_holster"		"6"
+	"act_draw"			"5"
+	"act_fireStart"		"2"
+	"act_fireStop"		"3"
+	"act_idle"			"0,1"
+	"act_reload			"6"
+	"act_reload2"		"5"
 
 	"snd_fireStart"	"weapon_chaingun.start"
 	"snd_fireLoop"	"weapon_chaingun.loop"
@@ -45,8 +45,8 @@ entityDef projectile_chaingun
 {
 	"inherit"		"projectile_bullet_base"
 	"damage"		"skill:plr_chaingun"
-	"hitscans"		"12"
-	"spread"		"0.08716 0.08716"
+	"hitscans"		"4"
+	"spread"		"0.095 0.085"
 }
 
 entityDef fireInfo_chaingun

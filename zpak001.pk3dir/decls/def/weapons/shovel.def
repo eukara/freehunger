@@ -13,22 +13,24 @@ entityDef weapon_th_shovel
 	"snd_respawn"		"item.respawn"
 
 	// weapon specific
-	"def_melee"			"damage_shovel"
-	"melee_distance"	"48"
+	"def_onFire"		"projectile_shovel"
+	"testDistance"		"-48"
 	"inv_name"			"Shovel"
-	"ammoType"			""
 	"ammoRequired"		"0"
 	"silent_fire"		"1"
-	"punchAngle"		"5 0 0"
+	"punchAngle"		"-3 0 0"
 
-	"meleeRateMiss"		"0.85"
-	"meleeRateHit"		"0.85"
+	"failRate"			"0.85"
+	"fireRate"			"0.85"
+	"snd_hit"			"weapon_shovel.hit"
+	"snd_hitFlesh"		"weapon_shovel.hitbody"
+	"snd_failed"		"weapon_shovel.miss"
 
-	"actIdle"			"0"
-	"actDraw"			"1"
-	"actHolster"		"2"
-	"actMeleeMiss"		"4,5,7"
-	"actMeleeHit"		"3,6,8"
+	"act_idle"			"0"
+	"act_draw"			"1"
+	"act_holster"		"2"
+	"act_fireFailed"	"4,5,7"
+	"act_fire"			"3,6,8"
 
 	// HLWeapon specific
 	"hudSlot"		"0"
@@ -38,15 +40,11 @@ entityDef weapon_th_shovel
 	"ammoIcon"		"none"
 }
 
-entityDef damage_crowbar
+entityDef projectile_shovel
 {
-	"damage"			"skill:plr_shovel"
-//	"kickDir"			"-1 0 0"
-//	"knockback"			"20"
-//	"push"				"20000"
-	"gib"				"1"
-
-	"snd_hit"			"weapon_shovel.hit"
-	"snd_hitFlesh"		"weapon_shovel.hitbody"
-	"snd_miss"			"weapon_shovel.miss"
+	"spawnclass"			"NSProjectile"
+	"damage"				"skill:plr_shovel"
+	"is_bullet"				"1"
+	"decal_impact"			"Impact.Shot"
+	"detonate_on_world" 	"1"
 }

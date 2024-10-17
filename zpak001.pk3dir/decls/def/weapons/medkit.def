@@ -23,11 +23,11 @@ entityDef weapon_th_medkit
 	"meleeRateMiss"		"0.35"
 	"meleeRateHit"		"0.35"
 
-	"actIdle"			"0,1"
-	"actDraw"			"5"
-	"actHolster"		"4"
-	"actMeleeMiss"		"3"
-	"actMeleeHit"		"2"
+	"act_idle"			"0,1"
+	"act_draw"			"5"
+	"act_holster"		"4"
+	"act_fireFailed"		"3"
+	"act_fire"		"2"
 
 	// HLWeapon specific
 	"hudSlot"		"4"

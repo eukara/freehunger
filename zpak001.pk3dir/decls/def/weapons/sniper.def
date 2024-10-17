@@ -14,17 +14,20 @@ entityDef weapon_einar1
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_sniper"
+	"def_altFireInfo"	"fireInfo_altSniper"
 	"inv_name"			"Sniper Rifle"
 	"clipSize"			"5"
 	"ammoType" 			"ammo_sniper"
 	"ammoRequired"		"1"
 	"ammoPerShot"		"1"
 
-	"actFire"			"2"
-	"actHolster"		"4"
-	"actDraw"			"3"
-	"actIdle"			"0,5"
-	"actReload"			"4+3"
+	"altMode"			"1"
+	"act_fire"			"2"
+	"act_holster"		"4"
+	"act_draw"			"3"
+	"act_idle"			"0,5"
+	"act_reload"			"4"
+	"act_reload2"		"3"
 
 	"snd_fire"		"weapon_sniper.fire"
 	"snd_reload"	"weapon_sniper.reload"
@@ -34,13 +37,6 @@ entityDef weapon_einar1
 	"hudSlot"				"2"
 	"hudSlotPos"			"3"
 	"weight"				"20"
-
-	"zoomDuration"			"0"
-	"zoomFov"				"20"
-	"zoomFovStep"			"5"
-	"zoomFovMin"			"5"
-	"zoomFovMax"			"40"
-//	"zoomColor"				"0 0.2 0" TODO
 }
 
 entityDef projectile_sniperBullet
@@ -55,8 +51,20 @@ entityDef fireInfo_sniper
 	"def_onFire"		"projectile_sniperBullet"
 	"ammoType"			"ammo_sniper"
 	"fireRate"			"0.1"
-//		"fireRate"			"0.5" TODO when zoomed in
 	"punchAngle"		"-20 0 0"
 	"model_flash"		"sprites/muzzleflash1.spr"
+}
+
+entityDef fireInfo_altSniper
+{
+	"def_onFire"		"projectile_sniperBullet"
+	"ammoType"			"ammo_sniper"
+	"fireRate"			"0.8"
+	"punchAngle"		"-5 0 0"
+	"model_flash"		"sprites/muzzleflash1.spr"
+
+	"zoomFov"			"20"
+//	"zoomColor"			"0 0.2 0" TODO
+//	"zoomCrosshair"		"weapon_th_sniper.zoom" TODO
 }
 

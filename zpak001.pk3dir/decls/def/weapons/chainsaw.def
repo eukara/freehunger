@@ -15,23 +15,20 @@ entityDef weapon_th_chainsaw
 	"snd_draw"			"weapon_chainsaw.draw"
 
 	// weapon specific
-	"def_melee"			"damage_chainsaw"
-	"def_meleeAlt"		"damage_chainsawAlt"
-	"melee_distance"	"48"
+	"def_fireInfo"		"fireInfo_chainsaw"
+	"def_altFireInfo"	"fireInfo_altChainsaw"
+	"testDistance"		"48"
 	"inv_name"			"Chainsaw"
 	"ammoType"			""
 	"ammoRequired"		"0"
 
-	"actIdle"			"0"
-	"actDraw"			"5+1"
-	"actHolster"		"6"
+	"act_idle"			"0"
+	"act_draw"			"5"
+	"act_draw1"			"1"
+	"act_holster"		"6"
 
-	// TODO Remove when acts and
-	// melee keys in fireInfo work
-	"meleeRateMiss"		"0.5"
-	"meleeRateHit"		"0.25"
-	"actMeleeMiss"		"3,4"
-	"actMeleeHit"		"3,4"
+	"snd_hit"			"weapon_chainsaw.hit"
+	"snd_failed"		"weapon_chainsaw.miss"
 
 	// HLWeapon specific
 	"hudSlot"		"0"
@@ -43,39 +40,40 @@ entityDef weapon_th_chainsaw
 
 // TODO fx_spark.main
 
-entityDef damage_chainsaw
+entityDef projectile_chainsaw
 {
-	"damage"			"skill:plr_chainsaw"
-//	"kickDir"			"-1 0 0"
-//	"knockback"			"20"
-//	"push"				"20000"
-	"gib"				"1"
-
-	"meleeRateMiss"		"0.5"
-	"meleeRateHit"		"0.25"
-
-	"actMeleeMiss"		"3,4"
-	"actMeleeHit"		"3,4"
-
-	"snd_hit"			"weapon_chainsaw.hit"
-	"snd_miss"			"weapon_chainsaw.miss"
+	"spawnclass"			"NSProjectile"
+	"damage"				"skill:plr_chainsaw"
+	"is_bullet"				"1"
+	"decal_impact"			"Impact.Shot"
+	"detonate_on_world" 	"1"
 }
 
-
-entityDef damage_chainsawSwing
+entityDef projectile_chainsawSwing
 {
-	"damage"			"skill:plr_chainsaw_swing"
-//	"kickDir"			"-1 0 0"
-//	"knockback"			"20"
-//	"push"				"20000"
-	"gib"				"1"
+	"spawnclass"			"NSProjectile"
+	"damage"				"skill:plr_chainsaw_swing"
+	"is_bullet"				"1"
+	"decal_impact"			"Impact.Shot"
+	"detonate_on_world" 	"1"
+}
 
-	"meleeRateMiss"		"1.2"
-	"meleeRateHit"		"0.75"
+entityDef fireInfo_chainsaw
+{
+	"def_onFire"		"projectile_chainsaw"
 
-	"actMeleeMiss"		"2"
-	"actMeleeHit"		"2"
+	"failRate"			"0.8"
+	"fireRate"			"0.1"
 
-	"snd_hit"			"weapon_chainsaw.hit"
-	"snd_miss"			"weapon_chainsaw.miss"
+	"act_fire"			"3,4"
+}
+
+entityDef fireInfo_altChainsaw
+{
+	"def_onFire"		"projectile_chainsawSwing"
+
+	"failRate"			"1.2"
+	"fireRate"			"0.1"
+
+	"act_fire"			"2"
 }

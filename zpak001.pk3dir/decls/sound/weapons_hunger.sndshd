@@ -51,7 +51,7 @@ weapon_chainsaw.idle
 
 weapon_chainsaw.miss
 {
-	sample sh/chainsaw_idle2.wav
+	sample weapons/chainsaw_attack.wav
 }
 
 weapon_chainsaw.start
@@ -81,16 +81,15 @@ weapon_shovel.hit
 {
 	alerts
 	shakes 0.2
-	pitch 0.5
-	sample weapons/cbar_hit1.wav
-	sample weapons/cbar_hit2.wav
+	pitch 0.7
+	sample debris/metal6.wav
 }
 
 weapon_shovel.hitbody
 {
 	alerts
 	shakes 0.2
-	pitch 0.5
+	pitch 0.8
 	sample weapons/cbar_hitbod1.wav
 	sample weapons/cbar_hitbod2.wav
 	sample weapons/cbar_hitbod3.wav

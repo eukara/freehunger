@@ -20,12 +20,12 @@ entityDef weapon_th_ap9
 	"ammoType" 			"ammo_ap9"
 	"punchAngle"		"-2 0 0"
 
-	"actFire"			"3,4,5"
+	"act_fire"			"3,4,5"
 	"actAltFire"		"3,4,5"
-//	"actHolster"		""
-	"actReload"			"1"
-	"actDraw"			"2"
-	"actIdle"			"0"
+//	"act_holster"		""
+	"act_reload"			"1"
+	"act_draw"			"2"
+	"act_idle"			"0"
 
 	"snd_fire"			"weapon_ap9.fire"
 	"snd_altfire"		"weapon_ap9.fire"

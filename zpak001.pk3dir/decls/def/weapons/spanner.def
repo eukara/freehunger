@@ -13,22 +13,23 @@ entityDef weapon_th_spanner
 	"snd_respawn"		"item.respawn"
 
 	// weapon specific
-	"def_melee"			"damage_spanner"
-	"melee_distance"	"32"
+	"def_onFire"		"projectile_spanner"
+	"testDistance"		"-32"
 	"inv_name"			"Wrench"
-	"ammoRequired" 		"0"
-	"ammoPerShot"		"0"
-	"punchAngle"		"0 0 0"
+	"ammoRequired"		"0"
 	"silent_fire"		"1"
 
-	"meleeRateMiss"		"0.375"
-	"meleeRateHit"		"0.2"
+	"failRate"			"0.375"
+	"fireRate"			"0.2"
+	"snd_hit"			"weapon_spanner.hit"
+	"snd_hitFlesh"		"weapon_spanner.hitbody"
+	"snd_failed"		"weapon_spanner.miss"
 
-	"actIdle"			"0"
-	"actDraw"			"4"
-	"actHolster"		"5"
-	"actMeleeMiss"		"1,2"
-	"actMeleeHit"		"1,2"
+	"act_idle"			"0"
+	"act_draw"			"4"
+	"act_holster"		"5"
+	"act_fireFailed"	"1,2"
+	"act_fire"			"1,2"
 
 	// HLWeapon specific
 	"hudSlot"		"0"
@@ -38,11 +39,11 @@ entityDef weapon_th_spanner
 	"ammoIcon"		"none"
 }
 
-entityDef damage_spanner
+entityDef projectile_spanner
 {
-	"damage"			"skill:plr_spanner"
-
-	"snd_hit"			"weapon_spanner.hit"
-	"snd_hitFlesh"		"weapon_spanner.hitbody"
-	"snd_miss"			"weapon_spanner.miss"
+	"spawnclass"			"NSProjectile"
+	"damage"				"skill:plr_spanner"
+	"is_bullet"				"1"
+	"decal_impact"			"Impact.Shot"
+	"detonate_on_world" 	"1"
 }

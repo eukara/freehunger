@@ -6,6 +6,7 @@
 #include "weapons/crossbow.def"
 #include "weapons/crowbar.def"
 #include "weapons/flamethrower.def"
+#include "weapons/handgrenade.def"
 #include "weapons/medkit.def"
 #include "weapons/rpg.def"
 #include "weapons/satchel.def"
