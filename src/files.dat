@@ -1,0 +1,25 @@
+24
+1 data/th_abfact.way
+1 data/thdm1.way
+1 data/thdm2.way
+1 data/thdm3.way
+1 data/thdm4.way
+1 data/thdm5.way
+1 maps/th_abfact.ent
+1 maps/th_abfact.jpg
+1 maps/thdm1.ent
+1 maps/thdm1.jpg
+1 maps/thdm2.ent
+1 maps/thdm2.jpg
+1 maps/thdm3.ent
+1 maps/thdm3.jpg
+1 maps/thdm4.ent
+1 maps/thdm4.jpg
+1 maps/thdm5.ent
+1 maps/thdm5.jpg
+1 particles/weapon_tripmine.cfg
+1 quake.rc
+1 scripts/constants.txt
+1 scripts/map_blacklist
+1 sound/items_hunger.sndshd
+1 sound/weapons_hunger.sndshd

@@ -1,4 +1,4 @@
-# FreeHunger (AKA Still Hungry)
+# Still Hungry (FreeHunger)
 Clean-room reimplementation of They Hunger in QuakeC.
 
 ![Preview 1](img/preview1.jpg)
