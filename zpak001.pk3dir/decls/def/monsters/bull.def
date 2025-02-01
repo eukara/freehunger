@@ -1,6 +1,6 @@
 entityDef monster_th_zombiebull
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_houndeye"
 	"netname"		"Zombie Bull"
 	"health"		"skill:zombiebull_health"

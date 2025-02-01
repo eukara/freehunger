@@ -1,6 +1,6 @@
 entityDef einar_civ
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_scientist"
 	"netname"		"Civilian"
 	"model"			"models/civ.mdl"

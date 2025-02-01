@@ -66,7 +66,7 @@ entityDef fireInfo_glock
 
 entityDef fireInfo_altGlock
 {
-	"snd_fire"			"weapon_glock.fire"
+	"snd_fire"			"Weapon_Glock.Single"
 	"def_onFire"		"projectile_glock_fast"
 	"fireRate"			"0.2"
 	"model_flash"		"sprites/muzzleflash2.spr"

@@ -1,6 +1,6 @@
 entityDef monster_th_chicken
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_headcrab"
 	"netname"		"Zombie Chicken"
 	"model"			"models/chicken.mdl"

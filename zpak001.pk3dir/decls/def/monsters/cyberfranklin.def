@@ -1,6 +1,6 @@
 entityDef monster_th_cyberfranklin
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_alien_grunt"
 	"model"			"models/franklin2.mdl"
 	"netname"		"Cyber Dr. Franklin"

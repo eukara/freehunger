@@ -1,6 +1,6 @@
 entityDef item_battery
 {
-	"spawnclass"	"NSItem"
+	"spawnclass"	"ncItem"
 	"model"			"models/w_battery.mdl"
 	"mins"			"-16 -16 0"
 	"maxs"			"16 16 16"
@@ -12,7 +12,7 @@ entityDef item_battery
 
 entityDef item_healthkit
 {
-	"spawnclass"	"NSItem"
+	"spawnclass"	"ncItem"
 	"model"			"models/w_medkit.mdl"
 	"mins"			"-16 -16 0"
 	"maxs"			"16 16 16"
@@ -23,7 +23,7 @@ entityDef item_healthkit
 
 entityDef item_suit
 {
-	"spawnclass"	"NSItem"
+	"spawnclass"	"ncItem"
 	"model"			"models/w_suit.mdl"
 	"mins"			"-16 -16 0"
 	"maxs"			"16 16 16"

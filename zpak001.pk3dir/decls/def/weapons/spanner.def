@@ -19,12 +19,6 @@ entityDef weapon_th_spanner
 	"ammoRequired"		"0"
 	"silent_fire"		"1"
 
-	"failRate"			"0.375"
-	"fireRate"			"0.2"
-	"snd_hit"			"weapon_spanner.hit"
-	"snd_hitFlesh"		"weapon_spanner.hitbody"
-	"snd_failed"		"weapon_spanner.miss"
-
 	"act_idle"			"0"
 	"act_draw"			"4"
 	"act_holster"		"5"
@@ -41,9 +35,15 @@ entityDef weapon_th_spanner
 
 entityDef projectile_spanner
 {
-	"spawnclass"			"NSProjectile"
+	"spawnclass"			"ncProjectile"
 	"damage"				"skill:plr_spanner"
 	"is_bullet"				"1"
+	"range"					"32"
 	"decal_impact"			"Impact.Shot"
 	"detonate_on_world" 	"1"
+	"failRate"				"0.375"
+	"fireRate"				"0.2"
+	"snd_hitWorld"			"weapon_spanner.hit"
+	"snd_hitBody"			"weapon_spanner.hitbody"
+	"snd_fireFailed"		"weapon_spanner.miss"
 }

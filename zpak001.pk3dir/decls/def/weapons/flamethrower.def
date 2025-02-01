@@ -37,7 +37,7 @@ entityDef weapon_egon
 
 entityDef projectile_fire
 {
-	"spawnclass"			"NSProjectile"
+	"spawnclass"			"ncProjectile"
 	"model"					"sprites/fthrow.spr"
 	"rendermode"			"$RM_ADDITIVE"
 	"renderamt"				"255"

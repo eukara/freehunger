@@ -1,6 +1,6 @@
 entityDef monster_th_babykelly
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_alien_slave"
 	"netname"		"Small Skeleton"
 	"model"			"models/babykelly.mdl"

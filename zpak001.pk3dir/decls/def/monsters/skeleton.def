@@ -1,6 +1,6 @@
 entityDef monster_th_skeleton
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_alien_slave"
 	"netname"		"Skeleton"
 }

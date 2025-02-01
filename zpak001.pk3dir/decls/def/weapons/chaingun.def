@@ -1,3 +1,11 @@
+#define THAC_IDLE 0
+#define THAC_IDLE2 1
+#define THAC_SPIN_START 2
+#define THAC_SPIN_STOP 3
+#define THAC_SPIN_FIRE 4
+#define THAC_DRAW 5
+#define THAC_HOLSTER 6
+
 entityDef weapon_th_chaingun
 {
 	"editor_color"		".3 .3 1"
@@ -20,14 +28,13 @@ entityDef weapon_th_chaingun
 	"ammoRequired" 		"2"
 	"ammoPerShot"		"2"
 
-	"actLoop"			"4"
-	"act_holster"		"6"
-	"act_draw"			"5"
 	"act_fireStart"		"2"
+	"act_loop"			"4"
 	"act_fireStop"		"3"
-	"act_idle"			"0,1"
 	"act_reload			"6"
-	"act_reload2"		"5"
+	"act_reloadEnd"		"5"
+	"act_idle"			"0,1"
+	"act_draw"			"5"
 
 	"snd_fireStart"	"weapon_chaingun.start"
 	"snd_fireLoop"	"weapon_chaingun.loop"

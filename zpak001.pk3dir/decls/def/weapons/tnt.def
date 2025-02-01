@@ -3,8 +3,6 @@ entityDef weapon_tnt
 	"inherit"			"weapon_handgrenade"
 	"model"				"models/w_tnt.mdl"
 	"model_view"		"models/v_tnt.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
 
 	"inv_name"			"TNT"
 	"inv_weapon"		"weapon_tnt"

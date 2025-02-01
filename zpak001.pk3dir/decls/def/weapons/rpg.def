@@ -39,7 +39,7 @@ entityDef weapon_rpg
 
 entityDef projectile_rocket
 {
-	"spawnclass"		"NSProjectile"
+	"spawnclass"		"ncProjectile"
 	"model"				"models/rpgrocket.mdl"
 
 	"def_damage"		"damage_rocketDirect"

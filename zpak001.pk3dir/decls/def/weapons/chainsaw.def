@@ -42,7 +42,7 @@ entityDef weapon_th_chainsaw
 
 entityDef projectile_chainsaw
 {
-	"spawnclass"			"NSProjectile"
+	"spawnclass"			"ncProjectile"
 	"damage"				"skill:plr_chainsaw"
 	"is_bullet"				"1"
 	"decal_impact"			"Impact.Shot"
@@ -51,7 +51,7 @@ entityDef projectile_chainsaw
 
 entityDef projectile_chainsawSwing
 {
-	"spawnclass"			"NSProjectile"
+	"spawnclass"			"ncProjectile"
 	"damage"				"skill:plr_chainsaw_swing"
 	"is_bullet"				"1"
 	"decal_impact"			"Impact.Shot"

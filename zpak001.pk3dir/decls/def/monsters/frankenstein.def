@@ -1,6 +1,6 @@
 entityDef monster_th_frankenstein
 {
-	"spawnclass"	"NSMonster"
+	"spawnclass"	"ncMonster"
 	"inherit"		"monster_alien_grunt"
 	"netname"		"Frankenstein's Monster"
 	"propdata"		"actor_human"
