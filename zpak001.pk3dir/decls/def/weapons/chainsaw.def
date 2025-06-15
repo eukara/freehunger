@@ -6,11 +6,9 @@ entityDef weapon_th_chainsaw
 	"editor_usage"		"Chainsaw"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_weaponbox.mdl"
 	"model_view"		"models/v_chainsaw.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
 	"snd_idle"			"weapon_chainsaw.idle"
 	"snd_draw"			"weapon_chainsaw.draw"
 

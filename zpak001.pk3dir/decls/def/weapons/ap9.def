@@ -1,3 +1,10 @@
+#define AP9_IDLE 0
+#define AP9_RELOAD 1
+#define AP9_DRAW 2
+#define AP9_FIRE1 3
+#define AP9_FIRE2 4
+#define AP9_FIRE3 5
+
 entityDef weapon_th_ap9
 {
 	"editor_color"		".3 .3 1"
@@ -6,11 +13,11 @@ entityDef weapon_th_ap9
 	"editor_usage"		"TEC-9 (AutoPistol)"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_ap9.mdl"
+	"model_player"		"models/p_ap9.mdl"
 	"model_view"		"models/v_ap9.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
+	"animPrefix"		"onehand"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_ap9"
@@ -20,15 +27,12 @@ entityDef weapon_th_ap9
 	"ammoType" 			"ammo_ap9"
 	"punchAngle"		"-2 0 0"
 
-	"act_fire"			"3,4,5"
-	"actAltFire"		"3,4,5"
-//	"act_holster"		""
-	"act_reload"			"1"
-	"act_draw"			"2"
-	"act_idle"			"0"
+	"act_fire"			"$AP9_FIRE1,$AP9_FIRE2,$AP9_FIRE3"
+	"act_reload"		"$AP9_RELOAD"
+	"act_draw"			"$AP9_DRAW"
+	"act_idle"			"$AP9_IDLE"
 
 	"snd_fire"			"weapon_ap9.fire"
-	"snd_altfire"		"weapon_ap9.fire"
 	"snd_empty"			"weapon.empty"
 
 	// HLWeapon specific
@@ -66,6 +70,7 @@ entityDef fireInfo_altAP9
 	"fireRate"		"1.0"
 	"model_flash"	"sprites/muzzleflash2.spr"
 	"ammoRequired" 	"3"
-	"ammoPerShot"	"3"
-	"hitscans"		"3"	
+	"ammoPerShot"	"1"
+	"burstCount"	"3"
+	"burstTime"		"0.35"
 }

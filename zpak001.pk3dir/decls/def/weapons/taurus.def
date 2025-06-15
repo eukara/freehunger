@@ -6,7 +6,7 @@ entityDef weapon_th_taurus
 	"editor_usage"		"Taurus PT145"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"spawnclass"		"hlWeapon"
 	"model"				"models/w_taurus.mdl"
 	"model_view"		"models/v_taurus.mdl"
 	"snd_acquire"		"weapon.pickup"

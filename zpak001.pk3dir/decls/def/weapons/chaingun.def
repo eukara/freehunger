@@ -14,11 +14,9 @@ entityDef weapon_th_chaingun
 	"editor_usage"		"Chain Gun"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_tfac.mdl"
 	"model_view"		"models/v_tfac.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_chaingun"
