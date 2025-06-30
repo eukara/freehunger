@@ -39,10 +39,10 @@ entityDef weapon_th_chaingun
 	"act_idle"			"$THAC_IDLE1,$THAC_IDLE2"
 	"act_draw"			"$THAC_DRAW"
 
-	"snd_fireStart"	"Weapon_Chaingun.WindUp"
-	"snd_fireLoop"	"Weapon_Chaingun.Loop"
-	"snd_fireEnd"	"Weapon_Chaingun.WindDown"
-	"snd_reload"	"Weapon_Chaingun.Reload"
+	"snd_fireStart"		"Weapon_Chaingun.WindUp"
+	"snd_fireLoop"		"Weapon_Chaingun.Loop"
+	"snd_fireEnd"		"Weapon_Chaingun.WindDown"
+	"snd_reload"		"Weapon_Chaingun.Reload"
 
 	// HLWeapon specific
 	"hudSlot"		"3"

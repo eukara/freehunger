@@ -20,17 +20,14 @@ entityDef weapon_th_medkit
 	"animPrefix"		"tripmine"
 
 	// weapon specific
-	"def_onFire"		"projectile_medkitSelf"
-	"def_altFireInfo"	"projectile_medkit"
+	"def_fireInfo"		"fireInfo_medkitSelf"
+	"def_altFireInfo"	"fireInfo_medkit"
 	"inv_name"			"Medikit"
 	"inv_ammo_medkit"	"1"
 	"ammoType"			"ammo_medkit"
 	"ammoRequired"		"1"
 	"removeOnEmpty"		"1"
-
-	"fireRate"			"1.0"
-
-	"snd_fire"			"Weapon_Medkit.Single"
+	"silent_fire"		"1"
 
 	"act_idle"			"$MEDKIT_IDLE1,$MEDKIT_IDLE2"
 	"act_draw"			"$MEDKIT_DRAW"
@@ -42,6 +39,18 @@ entityDef weapon_th_medkit
 	"hudSlotPos"		"4"
 	"weight"			"30"
 	"crosshair"			"none"
+}
+
+entityDef fireInfo_medkit
+{
+	"def_onFire"	"projectile_medkit"
+	"fireRate" 		"0.75"
+}
+
+entityDef fireInfo_medkitSelf
+{
+	"def_onFire"	"projectile_medkitSelf"
+	"fireRate" 		"1.0"
 }
 
 entityDef projectile_medkit
