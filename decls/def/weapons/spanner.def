@@ -24,7 +24,6 @@ entityDef weapon_th_spanner
 	"testDistance"		"-32"
 	"inv_name"			"Wrench"
 	"ammoRequired"		"0"
-	"silent_fire"		"1"
 
 	"failRate"			"0.3"
 	"fireRate"			"0.2"

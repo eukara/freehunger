@@ -27,9 +27,9 @@ entityDef weapon_th_ap9
 	"ammoType" 			"ammo_ap9"
 	"punchAngle"		"-2 0 0"
 
-	"def_ejectBrass"	"debris_brass_fast"
-	"ejectBrassDelay"	"0"
-	"ejectBrassOffset"	"17 6 -8"
+	"def_ejectBrass"	"debris_brass"
+	"ejectBrassDelay"	"10"
+	"ejectBrassOffset"	"18 6 -6"
 
 	"act_fire"			"$AP9_FIRE1,$AP9_FIRE2,$AP9_FIRE3"
 	"act_reload"		"$AP9_RELOAD"

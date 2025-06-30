@@ -61,6 +61,7 @@ Weapon_Chainsaw.Special
 }
 
 Weapon_Egon.Single
+{
 	alerts
 	sample weapons/flmfire2.wav
 }
