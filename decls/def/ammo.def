@@ -13,7 +13,6 @@
 #include "ammo/sniper.def"
 #include "ammo/taurus.def"
 
-
 // these have to be defined by the game.
 entityDef ammo_types {
 	"ammo_none"				"0"
