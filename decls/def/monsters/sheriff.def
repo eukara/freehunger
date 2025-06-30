@@ -1,0 +1,8 @@
+entityDef monster_th_sheriff
+{
+	"spawnclass"	"ncMonster"
+	"inherit"		"monster_gman"
+	"netname"		"Sheriff Chester Rockwood"
+	"team"			"2"
+	"propdata"		"actor_human"
+}

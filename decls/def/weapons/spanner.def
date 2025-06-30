@@ -1,0 +1,57 @@
+#define SPANNER_IDLE 0
+#define SPANNER_FIRE1 1
+#define SPANNER_FIRE2 2
+#define SPANNER_USE 3
+#define SPANNER_DRAW 4
+#define SPANNER_HOLSTER 5
+
+entityDef weapon_th_spanner
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Wrench"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/backpack.mdl"
+	"model_player"		"models/p_spanner.mdl"
+	"model_view"		"models/v_tfc_spanner.mdl"
+	"animPrefix"		"crowbar"
+
+	// weapon specific
+	"def_onFire"		"projectile_spanner"
+	"testDistance"		"-32"
+	"inv_name"			"Wrench"
+	"ammoRequired"		"0"
+	"silent_fire"		"1"
+
+	"failRate"			"0.3"
+	"fireRate"			"0.2"
+	"snd_fireFailed"	"Weapon_Spanner.Single"
+
+	"act_idle"			"$SPANNER_IDLE"
+	"act_draw"			"$SPANNER_DRAW"
+	"act_holster"		"$SPANNER_HOLSTER"
+	"act_fireFailed"	"$SPANNER_FIRE1,$SPANNER_FIRE2"
+	"act_fire"			"$SPANNER_FIRE1,$SPANNER_FIRE2"
+
+	// HLWeapon specific
+	"hudSlot"			"0"
+	"hudSlotPos"		"2"
+	"weight"			"0"
+	"crosshair"			"none"
+	"ammoIcon"			"none"
+}
+
+entityDef projectile_spanner
+{
+	"spawnclass"		"ncProjectile"
+	"damage"			"skill:plr_spanner"
+	"is_bullet"			"1"
+	"range"				"64"
+	"decal_detonate"	"Impact.Shot"
+	"detonate_on_world" "0"
+	"snd_hitBody"		"Weapon_Spanner.Melee_Hit"
+	"snd_hitWorld"		"Weapon_Spanner.Melee_HitWorld"
+}

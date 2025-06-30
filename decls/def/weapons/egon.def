@@ -1,0 +1,98 @@
+#define EGON_IDLE 0
+#define EGON_FIDGET 1
+#define EGON_SECONDARY_MODE_START 2
+#define EGON_SECONDARY_FIRE 3
+#define EGON_SECONDARY_MODE_END 4
+#define EGON_FIRE1 5
+#define EGON_FIRE2 6
+#define EGON_FIRE3 7
+#define EGON_FIRE4 8
+#define EGON_DRAW 9
+#define EGON_HOLSTER 10
+
+entityDef weapon_egon
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Flamethrower"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_egon.mdl"
+	"model_player"		"models/p_egon.mdl"
+	"model_view"		"models/v_egon.mdl"
+	"animPrefix"		"egon"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_flamethrower"
+	"inv_name"			"Flamethrower"
+	"inv_ammo_gas"		"20"
+	"ammoType"			"ammo_gas"
+	"ammoRequired"		"1"
+
+	"act_fire"			"$EGON_FIRE1,$EGON_FIRE2,$EGON_FIRE3,$EGON_FIRE4"
+	"act_holster"		"$EGON_HOLSTER"
+	"act_draw"			"$EGON_DRAW"
+	"act_idle"			"$EGON_IDLE,$EGON_FIDGET"
+
+	"snd_fire"			"Weapon_Egon.Single"
+
+	// HLWeapon specific
+	"hudSlot"			"3"
+	"hudSlotPos"		"2"
+	"weight"			"30"
+}
+
+entityDef projectile_fire
+{
+	"spawnclass"			"ncProjectile"
+	"model"					"sprites/fthrow.spr"
+	"rendermode"			"$RM_ADDITIVE"
+	"renderamt"				"255"
+	"rendercolor"			"255 255 255"
+	"animStartFrame"		"0"
+	"animEndFrame"			"15"
+	"animEndRemoves"		"1"
+	"animFrameRate"			"10"
+	"offset"				"30 8 0"
+	"def_damage"			"damage_fireDirect"
+
+	"velocity"				"200"
+	"angular_velocity"		"0 0 0"
+	"detonate_on_fuse"		"1"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"			"1"
+
+	"thrust"				"2000"
+	"thrust_start"			"0.1"
+	"thrust_end"			"2"
+
+	"light_color"			"1 0.8 0.4"
+	"light_radius"			"160"
+	"light_offset"			"0 0 0"
+
+}
+
+entityDef damage_fireDirect
+{
+	"damage"	"skill:plr_egon"
+	"ignite"	"5"
+}
+
+entityDef damage_fireAfterburn
+{
+	"damage"	"skill:plr_egon_afterburn"
+}
+
+entityDef fireInfo_flamethrower
+{
+	"def_onFire"		"projectile_fire"
+	"ammoPerShot" 		"1"
+	"fireRate" 			"0.2"
+	"act_fire"			"5,6"
+	"model_flash"		"sprites/muzzleflash2.spr"
+}

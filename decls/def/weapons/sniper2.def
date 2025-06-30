@@ -1,0 +1,45 @@
+#define SNIPER2_IDLE 0
+#define SNIPER2_RELOAD 1
+#define SNIPER2_DRAW 2
+#define SNIPER2_FIRE 3
+
+entityDef weapon_th_sniper
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Heckler & Koch G36"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_hkg36.mdl"
+	"model_player"		"models/p_hkg36.mdl"
+	"model_view"		"models/v_hkg36.mdl"
+	"animPrefix"		"crossbow"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_sniper"
+	"def_altFireInfo"	"fireInfo_altSniper"
+	"inv_name"			"Heckler & Koch G36"
+	"clipSize"			"5"
+	"ammoType" 			"ammo_sniper"
+	"ammoRequired"		"1"
+	"ammoPerShot"		"1"
+
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
+
+	"altMode"			"1"
+	"act_fire"			"$SNIPER2_FIRE"
+	"act_draw"			"$SNIPER2_DRAW"
+	"act_idle"			"$SNIPER2_IDLE"
+	"act_reload"		"$SNIPER2_RELOAD"
+
+	"snd_fire"			"Weapon_Sniper.Single"
+
+	// HLWeapon specific
+	"hudSlot"			"2"
+	"hudSlotPos"		"3"
+	"weight"			"20"
+}

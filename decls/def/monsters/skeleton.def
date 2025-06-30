@@ -1,0 +1,7 @@
+entityDef monster_th_skeleton
+{
+	"spawnclass"	"ncMonster"
+	"inherit"		"monster_alien_slave"
+	"netname"		"Skeleton"
+	"model"			"models/skeleton.mdl"
+}

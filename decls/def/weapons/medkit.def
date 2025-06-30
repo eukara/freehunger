@@ -1,0 +1,76 @@
+#define MEDKIT_IDLE1 0
+#define MEDKIT_IDLE2 1
+#define MEDKIT_FIRE_LONG 2
+#define MEDKIT_FIRE 3
+#define MEDKIT_HOLSTER 4
+#define MEDKIT_DRAW 5
+
+entityDef weapon_th_medkit
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Medkit"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_medkit.mdl"
+	"model_player"		"models/p_tfc_medkit.mdl"
+	"model_view"		"models/v_tfc_medkit.mdl"
+	"animPrefix"		"tripmine"
+
+	// weapon specific
+	"def_onFire"		"projectile_medkitSelf"
+	"def_altFireInfo"	"projectile_medkit"
+	"inv_name"			"Medikit"
+	"inv_ammo_medkit"	"1"
+	"ammoType"			"ammo_medkit"
+	"ammoRequired"		"1"
+	"removeOnEmpty"		"1"
+
+	"fireRate"			"1.0"
+
+	"snd_fire"			"Weapon_Medkit.Single"
+
+	"act_idle"			"$MEDKIT_IDLE1,$MEDKIT_IDLE2"
+	"act_draw"			"$MEDKIT_DRAW"
+	"act_holster"		"$MEDKIT_HOLSTER"
+	"act_fire"			"$MEDKIT_FIRE"
+
+	// HLWeapon specific
+	"hudSlot"			"4"
+	"hudSlotPos"		"4"
+	"weight"			"30"
+	"crosshair"			"none"
+}
+
+entityDef projectile_medkit
+{
+	"spawnclass"			"ncProjectile"
+	"OnTouch"				"!self,SpawnDefAttachment,item_healthkit,0,-1"
+
+	"health"				"0"
+	"velocity"				"100"
+	"angular_velocity"		"0 0 200"
+	"fuse"					"0.5"
+	"detonate_on_fuse"		"1"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+}
+
+
+entityDef projectile_medkitSelf
+{
+	"spawnclass"			"ncProjectile"
+	"OnSpawn"				"!self,SpawnDefAttachment,item_healthkit,0,-1"
+
+	"health"				"0"
+	"velocity"				"0"
+	"angular_velocity"		"0 0 200"
+	"fuse"					"0.5"
+	"detonate_on_fuse"		"1"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+}

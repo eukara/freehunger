@@ -1,0 +1,72 @@
+#define AP9_IDLE 0
+#define AP9_RELOAD 1
+#define AP9_DRAW 2
+#define AP9_FIRE1 3
+#define AP9_FIRE2 4
+#define AP9_FIRE3 5
+
+entityDef weapon_th_ap9
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"TEC-9 (AutoPistol)"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_ap9.mdl"
+	"model_player"		"models/p_ap9.mdl"
+	"model_view"		"models/v_ap9.mdl"
+	"animPrefix"		"onehand"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_ap9"
+	"def_altFireInfo"	"fireInfo_ap9Burst"
+	"inv_name"			"TEC-9 (AutoPistol)"
+	"clipSize"			"40"
+	"ammoType" 			"ammo_ap9"
+	"punchAngle"		"-2 0 0"
+
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
+
+	"act_fire"			"$AP9_FIRE1,$AP9_FIRE2,$AP9_FIRE3"
+	"act_reload"		"$AP9_RELOAD"
+	"act_draw"			"$AP9_DRAW"
+	"act_idle"			"$AP9_IDLE"
+
+	"snd_fire"			"Weapon_AP9.Single"
+
+	// HLWeapon specific
+	"hudSlot"			"1"
+	"hudSlotPos"		"2"
+	"weight"			"10"
+}
+
+entityDef projectile_ap9
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_ap9_bullet"
+	"spread"		"0.01 0.01"
+}
+
+entityDef fireInfo_ap9
+{
+	"def_onFire"	"projectile_ap9"
+	"fireRate" 		"0.15"
+	"model_flash"	"sprites/muzzleflash2.spr"
+	"ammoRequired" 	"1"
+	"ammoPerShot"	"1"
+}
+
+entityDef fireInfo_ap9Burst
+{
+	"def_onFire"	"projectile_ap9"
+	"fireRate"		"0.1"
+	"model_flash"	"sprites/muzzleflash2.spr"
+	"ammoRequired" 	"3"
+	"ammoPerShot"	"1"
+	"burstCount"	"3"
+	"burstTime"		"0.35"
+}

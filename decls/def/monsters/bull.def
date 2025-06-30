@@ -1,0 +1,9 @@
+entityDef monster_th_zombiebull
+{
+	"spawnclass"	"ncMonster"
+	"inherit"		"monster_houndeye"
+	"netname"		"Zombie Bull"
+	"health"		"skill:zombiebull_health"
+	"model"			"models/zombiebull.mdl"
+	"propdata"		"actor_human"
+}

@@ -1,0 +1,7 @@
+entityDef monster_th_headcrab
+{
+	"spawnclass"	"ncMonster"
+	"inherit"		"monster_headcrab"
+	"netname"		"Zombie Heacrab"
+	"propdata"		"actor_human"
+}

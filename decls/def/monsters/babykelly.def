@@ -1,0 +1,8 @@
+entityDef monster_th_babykelly
+{
+	"spawnclass"	"ncMonster"
+	"inherit"		"monster_alien_slave"
+	"netname"		"Small Skeleton"
+	"model"			"models/babykelly.mdl"
+	"propdata"		"actor_human"
+}

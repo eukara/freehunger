@@ -1,0 +1,66 @@
+#define CHAINSAW_IDLE 0
+#define CHAINSAW_START 1
+#define CHAINSAW_FIRE_FAILED 2
+#define CHAINSAW_FIRE1 3
+#define CHAINSAW_FIRE2 4
+#define CHAINSAW_DRAW 5
+#define CHAINSAW_HOLSTER 6
+
+entityDef weapon_th_chainsaw
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Chainsaw"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_weaponbox.mdl"
+	"model_player"		"models/p_crowbar.mdl"
+	"model_view"		"models/v_chainsaw.mdl"
+	"animPrefix"		"egon"
+
+	// weapon specific
+	"def_onFire"		"projectile_chainsaw"
+	"testDistance"		"-96"
+	"inv_name"			"Chainsaw"
+	"inv_ammo_gas"		"50"
+	"ammoType"			"ammo_gas"
+	"ammoRequired"		"2"
+	"ammoPerShot" 		"2"
+	"depleteAmmo"		"1"
+	"depleteRate"		"0.5"
+
+	"failRate"			"0.5"
+	"fireRate"			"0.15"
+
+	"snd_fireFailed"	"Weapon_Chainsaw.Single"
+	"snd_idle"			"Weapon_Chainsaw.Idle"
+
+	"act_fireFailed"	"$CHAINSAW_FIRE_FAILED"
+	"act_fire"			"$CHAINSAW_FIRE1,$CHAINSAW_FIRE2"
+	"act_idle"			"$CHAINSAW_IDLE"
+	"act_draw"			"$CHAINSAW_DRAW"
+	"act_holster"		"$CHAINSAW_HOLSTER"
+
+	// HLWeapon specific
+	"hudSlot"			"0"
+	"hudSlotPos"		"3"
+	"weight"			"1"
+	"crosshair"			"none"
+	"ammoIcon"			"none"
+}
+
+entityDef projectile_chainsaw
+{
+	"spawnclass"		"ncProjectile"
+	"damage"			"skill:plr_chainsaw"
+	"is_bullet"			"1"
+	"range"				"96"
+	"model_detonate"	"fx_spark.main"
+	"decal_detonate"	"Impact.Shot"
+	"detonate_on_world" "0"
+	"snd_explode"		"DoSpark"
+	"snd_hitBody"		"Weapon_Chainsaw.Melee_Hit"
+	"snd_hitWorld"		"Weapon_Chainsaw.Melee_HitWorld"
+}

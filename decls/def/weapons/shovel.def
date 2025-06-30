@@ -1,0 +1,63 @@
+#define SHOVEL_IDLE1 0
+#define SHOVEL_DRAW 1
+#define SHOVEL_HOLSTER 2
+#define SHOVEL_FIRE1_HIT 3
+#define SHOVEL_FIRE1_MISS 4
+#define SHOVEL_FIRE2_MISS 5
+#define SHOVEL_FIRE2_HIT 6
+#define SHOVEL_FIRE3_MISS 7
+#define SHOVEL_FIRE3_HIT 8
+#define SHOVEL_IDLE2 9
+#define SHOVEL_IDLE3 10
+
+entityDef weapon_th_shovel
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Shovel"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_shovel.mdl"
+	"model_player"		"models/p_shovel.mdl"
+	"model_view"		"models/v_shovel.mdl"
+	"animPrefix"		"crowbar"
+
+	// weapon specific
+	"def_onFire"		"projectile_shovel"
+	"testDistance"		"-64"
+	"inv_name"			"Shovel"
+	"ammoRequired"		"0"
+	"silent_fire"		"1"
+	"punchAngle"		"-3 0 0"
+
+	"failRate"			"0.85"
+	"fireRate"			"0.85"
+	"snd_fireFailed"	"Weapon_Shovel.Single"
+
+	"act_idle"			"$SHOVEL_IDLE1,$SHOVEL_IDLE2,$SHOVEL_IDLE3"
+	"act_draw"			"$SHOVEL_DRAW"
+	"act_holster"		"$SHOVEL_HOLSTER"
+	"act_fireFailed"	"$SHOVEL_FIRE1_MISS,$SHOVEL_FIRE2_MISS,$SHOVEL_FIRE3_MISS"
+	"act_fire"			"$SHOVEL_FIRE1_HIT,$SHOVEL_FIRE2_HIT,$SHOVEL_FIRE3_HIT"
+
+	// HLWeapon specific
+	"hudSlot"		"0"
+	"hudSlotPos"	"1"
+	"weight"		"0"
+	"crosshair"		"none"
+	"ammoIcon"		"none"
+}
+
+entityDef projectile_shovel
+{
+	"spawnclass"			"ncProjectile"
+	"damage"				"skill:plr_shovel"
+	"is_bullet"				"1"
+	"range"					"64"
+	"decal_detonate"		"Impact.Shot"
+	"detonate_on_world" 	"0"
+	"snd_hitBody"			"Weapon_Shovel.Melee_Hit"
+	"snd_hitWorld"			"Weapon_Shovel.Melee_HitWorld"
+}

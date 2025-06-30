@@ -1,0 +1,20 @@
+entityDef monster_th_boss
+{
+	"spawnclass"	"ncMonster"
+	"model"			"models/boss.mdl"
+	"netname"		"Boss (Rockwood)"
+	"health"		"skill:boss_health"
+	"mins"			"-16 -16 0"
+	"maxs"			"16 16 72"
+	"eye_height"	"64"
+	"team"			"2"
+	"propdata"		"actor_alien"
+	"speed_walk"	"72"
+	"speed_run"		"72"
+
+	"snd_sight"		"monster_boss.alert"
+	"snd_idle"		"monster_boss.idle"
+	"snd_pain"		"monster_boss.pain"
+	"snd_death"		""
+}
+

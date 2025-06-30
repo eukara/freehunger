@@ -1,0 +1,67 @@
+#define THAC_IDLE1 0
+#define THAC_IDLE2 1
+#define THAC_SPIN_START 2
+#define THAC_SPIN_STOP 3
+#define THAC_SPIN_FIRE 4
+#define THAC_DRAW 5
+#define THAC_HOLSTER 6
+
+entityDef weapon_th_chaingun
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Chain Gun"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_tfac.mdl"
+	"model_player"		"models/p_tfac.mdl"
+	"model_view"		"models/v_tfac.mdl"
+
+	// weapon specific
+	"def_fireInfo"		"fireInfo_chaingun"
+	"inv_name"			"Chain Gun"
+	"clipSize"			"100"
+	"ammoType" 			"ammo_9mm"
+	"ammoRequired" 		"2"
+	"ammoPerShot"		"2"
+
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
+
+	"act_fireStart"		"$THAC_SPIN_START"
+	"act_loop"			"$THAC_SPIN_FIRE"
+	"act_fireStop"		"$THAC_SPIN_STOP"
+	"act_reload"		"$THAC_HOLSTER"
+	"act_reloadEnd"		"$THAC_DRAW"
+	"act_idle"			"$THAC_IDLE1,$THAC_IDLE2"
+	"act_draw"			"$THAC_DRAW"
+
+	"snd_fireStart"	"Weapon_Chaingun.WindUp"
+	"snd_fireLoop"	"Weapon_Chaingun.Loop"
+	"snd_fireEnd"	"Weapon_Chaingun.WindDown"
+	"snd_reload"	"Weapon_Chaingun.Reload"
+
+	// HLWeapon specific
+	"hudSlot"		"3"
+	"hudSlotPos"	"3"
+	"weight"		"30"
+}
+
+entityDef projectile_chaingun
+{
+	"inherit"		"projectile_bullet_base"
+	"damage"		"skill:plr_chaingun"
+	"hitscans"		"4"
+	"spread"		"0.095 0.085"
+}
+
+entityDef fireInfo_chaingun
+{
+	"def_onFire"	"projectile_chaingun"
+	"fireRate"		"0.1"
+	"punchAngle"	"-2 0 0"
+	"model_flash"	"sprites/muzzleflash2.spr"
+}

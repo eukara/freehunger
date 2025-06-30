@@ -1,0 +1,13 @@
+entityDef ammo_medkit
+{
+	"editor_usage"		"THEY HUNGER (1999) ENTITY"
+	"editor_usage2"		""
+	"editor_usage3"		"Ammo for the Medkit, provides one Medkit."
+
+	"inherit"				"ammo_base"
+	"model"					"models/w_medkit.mdl"
+	"inv_ammo_medkit"		"1"
+	"inv_weapon"			"weapon_th_medkit"
+}
+
+// TODO ammo icon not working?

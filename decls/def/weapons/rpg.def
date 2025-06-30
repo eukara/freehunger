@@ -1,0 +1,103 @@
+#define RPG_IDLE 0
+#define RPG_FIDGET 1
+#define RPG_RELOAD 2
+#define RPG_FIRE 3
+#define RPG_HOLSTER 4
+#define RPG_DRAW 5
+#define RPG_HOLSTER_EMPTY 6
+#define RPG_DRAW_EMPTY 7
+#define RPG_IDLE_EMPTY 8
+#define RPG_FIDGET_EMPTY 9
+
+entityDef weapon_rpg
+{
+	"editor_color"		".3 .3 1"
+	"editor_mins"		"-16 -16 -16"
+	"editor_maxs"		"16 16 16"
+	"editor_usage"		"Rocket Launcher"
+	"editor_rotatable"	"1"
+
+	"inherit"			"weapon_base"
+	"model"				"models/w_rpg.mdl"
+	"model_player"		"models/p_rpg.mdl"
+	"model_view"		"models/v_rpg.mdl"
+	"animPrefix"		"rpg"
+
+	"def_fireInfo"		"fireInfo_rpg"
+	"ammoType"			"ammo_rocket"
+	"clipSize"			"1"
+	"ammoRequired" 		"1"
+	"ammoPerShot" 		"1"
+	"inv_ammo_rocket"	"1"
+	"fireRate"			"2.5"
+
+	"act_idle"			"$RPG_IDLE,$RPG_FIDGET"
+	"act_idleEmpty"		"$RPG_IDLE_EMPTY,$RPG_FIDGET_EMPTY"
+	"act_holster"		"$RPG_HOLSTER"
+	"act_holsterEmpty"	"$RPG_HOLSTER_EMPTY"
+	"act_draw"			"$RPG_DRAW"
+	"act_drawEmpty"		"$RPG_DRAW_EMPTY"
+	"act_fire"			"$RPG_FIRE"
+	"act_reload"		"$RPG_RELOAD"
+	"act_release"		"$RPG_RELOAD"
+
+	// HLWeapon specific
+	"hudSlot"			"3"
+	"hudSlotPos"		"0"
+	"weight"			"20"
+}
+
+entityDef projectile_rocket
+{
+	"spawnclass"		"ncProjectile"
+	"model"				"models/rpgrocket.mdl"
+
+	"def_damage"		"damage_rocketDirect"
+	"def_splash_damage"	"damage_rocketSplash"
+
+	"health"				"0"
+	"velocity"				"250"
+	"angular_velocity"		"0 0 200"
+	"fuse"					"10"
+	"detonate_on_fuse"		"0"
+	"detonate_on_death"		"1"
+	"detonate_on_world"		"1"
+	"detonate_on_actor"		"1"
+	"impact_damage_effect"	"1"
+	"impact_gib"			"1"
+
+	"thrust"			"2000"
+	"thrust_start"		"0.1"
+	"thrust_end"		"2"
+
+	"smoke_fly"			"weapon_rpg.trail"
+	"decal_detonate"	"ExplosionScorch"
+	"model_detonate"	"fx_explosion.main"
+	"light_color"		"1 0.8 0.4"
+	"light_radius"		"160"
+	"light_offset"		"0 0 0"
+
+	"explode_light_color"		"2 1.6 0.8"
+	"explode_light_radius"		"320"
+	"explode_light_fadetime"	"0.5"
+
+	"snd_explode"	"fx.explosion"
+}
+
+entityDef damage_rocketDirect
+{
+	"damage"		"skill:plr_rocketlauncher_impact"
+	"damage_random"	"skill:plr_rocketlauncher_impact_rand"
+}
+
+entityDef damage_rocketSplash
+{
+	"damage"	"skill:plr_rpg"
+	"radius"	"250"
+}
+
+entityDef fireInfo_rpg
+{
+	"def_onFire"	"projectile_rocket"
+	"punchAngle"	"-10 0 0"
+}

@@ -1,0 +1,17 @@
+enhanced_overrides
+{
+	when-serverinfo *bspversion equals 30
+	replace item_healthkit weapon_th_medkit
+	replace weapon_handgrenade weapon_tnt
+}
+
+npc_overrides
+{
+	when-serverinfo *bspversion equals 30
+	replace monster_alien_grunt monster_th_frankenstein
+	replace monster_alien_slave monster_th_skeleton
+	replace monster_bullchicken monster_th_bullchicken
+	replace monster_gman monster_th_sheriff
+	replace monster_headcrab monster_th_headcrab
+	replace monster_houndeye monster_th_dog
+}

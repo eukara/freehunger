@@ -1,0 +1,12 @@
+entityDef ammo_th_ap9
+{
+	"editor_usage"		"THEY HUNGER (1999) ENTITY"
+	"editor_usage2"		""
+	"editor_usage3"		"Ammo for the TEC-9 (AutoPistol), provides 40 Bullets."
+
+	"inherit"			"ammo_base"
+	"model"				"models/w_ap9clip.mdl"
+	"inv_ammo_ap9"		"40"
+}
+
+// TODO ammo icon not working?

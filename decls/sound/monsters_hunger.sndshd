@@ -1,0 +1,148 @@
+monster_zombie.alert
+{
+	sample zombie/zo_alert10.wav
+	sample zombie/zo_alert20.wav
+	sample zombie/zo_alert30.wav
+}
+
+monster_zombie.attack
+{
+	sample zombie/zo_attack1.wav
+	sample zombie/zo_attack2.wav
+}
+
+monster_zombie.attackhit
+{
+	sample zombie/claw_strike1.wav
+	sample zombie/claw_strike2.wav
+	sample zombie/claw_strike3.wav
+}
+
+monster_zombie.attackmiss
+{
+	sample zombie/claw_miss1.wav
+	sample zombie/claw_miss2.wav
+}
+
+monster_zombie.idle
+{
+	sample zombie/zo_idle1.wav
+	sample zombie/zo_idle2.wav
+	sample zombie/zo_idle3.wav
+	sample zombie/zo_idle4.wav
+}
+
+monster_zombie.pain
+{
+	sample zombie/zo_pain1.wav
+	sample zombie/zo_pain2.wav
+}
+
+
+monster_zombie_zombiecop.alert
+{
+	sample zombiecop/zo_alert10.wav
+	sample zombiecop/zo_alert20.wav
+	sample zombiecop/zo_alert30.wav
+}
+
+monster_zombie_zombiecop.attack
+{
+	sample zombiecop/zo_attack1.wav
+	sample zombiecop/zo_attack2.wav
+}
+
+monster_zombie_zombiecop.idle
+{
+	sample zombiecop/zo_idle1.wav
+	sample zombiecop/zo_idle2.wav
+	sample zombiecop/zo_idle3.wav
+	sample zombiecop/zo_idle4.wav
+}
+
+monster_zombie_zombiecop.pain
+{
+	sample zombiecop/zo_pain1.wav
+	sample zombiecop/zo_pain2.wav
+}
+
+monster_zombie_zombienew.alert
+{
+	sample zombienew/zo_alert10.wav
+	sample zombienew/zo_alert20.wav
+	sample zombienew/zo_alert30.wav
+}
+
+monster_zombie_zombienew.attack
+{
+	sample zombienew/zo_attack1.wav
+	sample zombienew/zo_attack2.wav
+}
+
+monster_zombie_zombienew.idle
+{
+	sample zombienew/zo_idle1.wav
+	sample zombienew/zo_idle2.wav
+	sample zombienew/zo_idle3.wav
+	sample zombienew/zo_idle4.wav
+}
+
+monster_zombie_zombienew.pain
+{
+	sample zombienew/zo_pain1.wav
+	sample zombienew/zo_pain2.wav
+}
+
+monster_zombie_zfemale.alert
+{
+	sample zfemale/zo_alert10.wav
+	sample zfemale/zo_alert20.wav
+	sample zfemale/zo_alert30.wav
+}
+
+monster_zombie_zfemale.attack
+{
+	sample zfemale/zo_attack1.wav
+	sample zfemale/zo_attack2.wav
+}
+
+monster_zombie_zfemale.idle
+{
+	sample zfemale/zo_idle1.wav
+	sample zfemale/zo_idle2.wav
+	sample zfemale/zo_idle3.wav
+	sample zfemale/zo_idle4.wav
+}
+
+monster_zombie_zfemale.pain
+{
+	sample zfemale/zo_pain1.wav
+	sample zfemale/zo_pain2.wav
+}
+
+monster_zombie_znurse.alert
+{
+	sample znurse/zo_alert10.wav
+	sample znurse/zo_alert20.wav
+	sample znurse/zo_alert30.wav
+}
+
+monster_zombie_znurse.attack
+{
+	sample znurse/zo_attack1.wav
+	sample znurse/zo_attack2.wav
+}
+
+monster_zombie_znurse.idle
+{
+	sample znurse/zo_idle1.wav
+	sample znurse/zo_idle2.wav
+	sample znurse/zo_idle3.wav
+	sample znurse/zo_idle4.wav
+}
+
+monster_zombie_znurse.pain
+{
+	sample znurse/zo_pain1.wav
+	sample znurse/zo_pain2.wav
+}

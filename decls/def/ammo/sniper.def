@@ -1,0 +1,17 @@
+entityDef ammo_th_sniper
+{
+	"editor_usage"		"THEY HUNGER (1999) ENTITY"
+	"editor_usage2"		""
+	"editor_usage3"		"Ammo for the Sniper Rifles, provides 5 Bullets."
+
+	"inherit"			"ammo_base"
+	"model"				"models/w_antidote.mdl"
+	"inv_ammo_sniper"	"5"
+}
+
+entityDef ammo_einar1
+{
+	"inherit"			"ammo_th_sniper"
+}
+
+// TODO ammo icon not working?

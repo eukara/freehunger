@@ -1,0 +1,108 @@
+{
+	name Civilian
+	model civie
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name David
+	model dave
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name EinarSaukas
+	model einar
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name SuperEinar
+	model einarhev
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name DrFranklin
+	model franklin
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Mobster
+	model gangster
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Jack
+	model jack
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Magnus
+	model magnus
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name NeilManke
+	model neil
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name WheresYourHeadAt
+	model nohead
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name NYPD
+	model nypdcop
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Disorderly
+	model orderly
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Patient
+	model patient
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Paul
+	model paul
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Sheriff
+	model sheriff
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Skelly
+	model skeleton
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name HardlyWorkin
+	model worker
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}
+{
+	name Zorak
+	model zork
+	topcolor 0xeff
+	bottomcolor 0xff0020
+}

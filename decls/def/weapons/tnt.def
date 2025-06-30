@@ -1,0 +1,29 @@
+entityDef weapon_tnt
+{
+	"inherit"			"weapon_handgrenade"
+	"model"				"models/w_tnt.mdl"
+	"model_player"		"models/p_tnt.mdl"
+	"model_view"		"models/v_tnt.mdl"
+	"animPrefix"		"grenade"
+
+	"inv_name"			"TNT"
+	"inv_weapon"		"weapon_tnt"
+	"def_onRelease"		"projectile_tnt"
+
+	// HLWeapon specific
+	"hudSlot"			"4"
+	"hudSlotPos"		"0"
+	"weight"			"5"
+	"crosshair"			"none"
+	"ammoIcon"			"weapon_handgrenade.ammo"
+	"icon"				"weapon_handgrenade.weapon"
+	"iconSelected"		"weapon_handgrenade.weapon_s"
+}
+
+entityDef projectile_tnt
+{
+	"inherit"			"projectile_handgrenade"
+	"model"				"models/w_tnt.mdl"
+}
+
+

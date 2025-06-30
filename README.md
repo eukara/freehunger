@@ -1,44 +1,40 @@
-# Still Hungry (FreeHunger)
-Clean-room reimplementation of They Hunger in QuakeC.
+# FreeHunger (AKA Still Hungry)
+Clean-room reimplementation of They Hunger in entityDef / QuakeC.
 
 ![Preview 1](img/preview1.jpg)
 ![Preview 2](img/preview2.jpg)
 ![Preview 3](img/preview3.jpg)
 ![Preview 4](img/preview4.jpg)
 
-## Building
-Clone the repository into the Nuclide-SDK:
+## Building / Installation
 
-> git clone REPOURL hunger
-
-then either run Nuclide's ./build_game.sh shell script, or issue 'make' inside
-./hunger/src!
-
-Obviously make sure that Nuclide has fteqw and fteqcc set-up for building.
+Since this mod is entirely entityDef, no compiling is necessary! Just make sure
+you have FreeHL installed, and place this content into your `hunger` folder.
 
 ## Status / Changes
 
-So far all the weapons are re-implemented, but SP hasn't been worked on yet, so
-no custom NPC skins or behavior.
+So far all the weapons are re-implemented, and all custom NPCs are spawning.
 
-Multiplayer is functional, and now has some unique CVARs to give it more of a
-personality and make it fit in more with They Hunger's world:
+Currently a decent amount of unique NPC behavior/effects are missing at the moment.
+
+Some changes:
 
 - Changed weapon placement for THDM
   Included are .ent files that have changed the weapons placed in the default
   DM maps for They Hunger. Replacing most Half-Life weapons with TH counter-parts.
 
-- th_medkitstyle 0/1 (default 0)
-  All medkit pickups turn into the medkit weapon from SP, and each pickup is one
-  ammo (or shot) that needs to be administered for health.
+- All medkit pickups turn into the medkit weapon in DM, and each pickup is one
+  ammo (or shot) that needs to be administered for health. Can be turned off in
+  `scripts/maptweaks.cfg`
 
-- th_shovelstyle 0/1 (default 0)
-  Gives the shovel visual first person effects, and slows down its attack.
+- Shovel has enhanced visual first person effects, and slowed down buff'd attack.
 
-- th_rpgstyle 0/1 (default 0)
-  Removes the homing secondary toggle making it similar to a real RPG.
+- Wrench has lower hit points and slightly new sounds.
 
-You can enable these new CVARs with "exec mp_enhanced.cfg" in console.
+- Recreated the cut Chainsaw weapon.
+
+- Removes the homing secondary toggle for the RPG similar to the actual
+  historic weapon.
 
 ## Community
 
@@ -56,9 +52,9 @@ We've had people ask in the oddest of places for help, please don't do that.
 ## License
 ISC License
 
-Copyright (c) 2016-2022 Marco Cawthorne <marco@icculus.org>
+Copyright (c) 2016-2025 Marco Cawthorne <marco@icculus.org>
 
-Copyright (c) 2019-2022 Gethyn ThomasQuail <xylemon@posteo.net>
+Copyright (c) 2019-2025 Gethyn ThomasQuail <gethyn@vera-visions.com>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

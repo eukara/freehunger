@@ -1,0 +1,141 @@
+Weapon_AP9.Single
+{
+	alerts
+	sample weapons/ap9_fire.wav
+}
+
+Weapon_Chaingun.Loop
+{
+	alerts
+	sample weapons/asscan2.wav
+}
+
+Weapon_Chaingun.Reload
+{
+	sample weapons/reload3.wav
+}
+
+Weapon_Chaingun.WindDown
+{
+	sample weapons/asscan3.wav
+}
+
+Weapon_Chaingun.WindUp
+{
+	sample weapons/asscan1.wav
+}
+
+Weapon_Chainsaw.Draw
+{
+	alerts
+	sample weapons/chainsaw_pullout.wav
+}
+
+Weapon_Chainsaw.Melee_HitWorld
+{
+	alerts
+	sample weapons/chainsaw_cutinto.wav
+}
+
+Weapon_Chainsaw.Melee_Hit
+{
+	alerts
+	sample weapons/chainsaw_cutintoflesh.wav
+}
+
+Weapon_Chainsaw.Idle
+{
+	alerts
+	sample weapons/chainsaw_idle.wav
+}
+
+Weapon_Chainsaw.Single
+{
+	sample weapons/chainsaw_attack.wav
+}
+
+Weapon_Chainsaw.Special
+{
+	alerts
+	sample weapons/chainsaw_startup.wav
+}
+
+Weapon_Egon.Single
+	alerts
+	sample weapons/flmfire2.wav
+}
+
+Weapon_Glock.Special
+{
+	sample weapons/pl_gun1.wav
+	sample weapons/pl_gun2.wav
+}
+
+Weapon_Medkit.Single
+{
+	sample items/smallmedkit1.wav
+}
+
+Weapon_Shovel.Melee_HitWorld
+{
+	alerts
+	shakes 0.2
+	pitch 0.7
+	sample debris/metal6.wav
+}
+
+Weapon_Shovel.Melee_Hit
+{
+	alerts
+	shakes 0.2
+	pitch 0.8
+	sample weapons/cbar_hitbod1.wav
+	sample weapons/cbar_hitbod2.wav
+	sample weapons/cbar_hitbod3.wav
+}
+
+Weapon_Shovel.Single
+{
+	pitch 0.5
+	sample weapons/cbar_miss1.wav
+}
+
+Weapon_Sniper.Single
+{
+	alerts
+	sample weapons/sniper.wav
+}
+
+Weapon_Sniper.Reload
+{
+	sample weapons/reload3.wav
+}
+
+Weapon_Spanner.Melee_HitWorld
+{
+	alerts
+	pitch 1.2
+	sample weapons/cbar_hit1.wav
+	sample weapons/cbar_hit2.wav
+}
+
+Weapon_Spanner.Melee_Hit
+{
+	alerts
+	pitch 1.2
+	sample weapons/cbar_hitbod1.wav
+	sample weapons/cbar_hitbod2.wav
+	sample weapons/cbar_hitbod3.wav
+}
+
+Weapon_Spanner.Single
+{
+	pitch 1.2
+	sample weapons/cbar_miss1.wav
+}
+
+Weapon_Taurus.Single
+{
+	alerts
+	sample weapons/tau_fire.wav
+}
