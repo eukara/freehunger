@@ -52,9 +52,9 @@ We've had people ask in the oddest of places for help, please don't do that.
 ## License
 ISC License
 
-Copyright (c) 2016-2024 Marco Cawthorne <marco@icculus.org>
+Copyright (c) 2016-2025 Marco Cawthorne <marco@icculus.org>
 
-Copyright (c) 2019-2024 Gethyn ThomasQuail <gethyn@vera-visions.com>
+Copyright (c) 2019-2025 Gethyn ThomasQuail <gethyn@vera-visions.com>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
