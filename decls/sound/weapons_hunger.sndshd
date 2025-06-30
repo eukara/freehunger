@@ -1,83 +1,82 @@
-weapon_ap9.fire
+Weapon_AP9.Single
 {
 	alerts
 	sample weapons/ap9_fire.wav
 }
 
-weapon_chaingun.loop
+Weapon_Chaingun.Loop
 {
 	alerts
 	sample weapons/asscan2.wav
 }
 
-weapon_chaingun.reload
+Weapon_Chaingun.Reload
 {
 	sample weapons/reload3.wav
 }
 
-weapon_chaingun.stop
+Weapon_Chaingun.WindDown
 {
 	sample weapons/asscan3.wav
 }
 
-weapon_chaingun.start
+Weapon_Chaingun.WindUp
 {
 	sample weapons/asscan1.wav
 }
 
-weapon_chainsaw.draw
+Weapon_Chainsaw.Draw
 {
 	alerts
 	sample weapons/chainsaw_pullout.wav
 }
 
-weapon_chainsaw.hit
+Weapon_Chainsaw.Melee_HitWorld
 {
 	alerts
 	sample weapons/chainsaw_cutinto.wav
 }
 
-weapon_chainsaw.hitbody
+Weapon_Chainsaw.Melee_Hit
 {
 	alerts
 	sample weapons/chainsaw_cutintoflesh.wav
 }
 
-weapon_chainsaw.idle
+Weapon_Chainsaw.Idle
 {
 	alerts
 	sample weapons/chainsaw_idle.wav
 }
 
-weapon_chainsaw.miss
+Weapon_Chainsaw.Single
 {
 	sample weapons/chainsaw_attack.wav
 }
 
-weapon_chainsaw.start
+Weapon_Chainsaw.Special
 {
 	alerts
 	sample weapons/chainsaw_startup.wav
 }
 
-weapon_egon.fire
-{
+Weapon_Egon.Single
 	alerts
 	sample weapons/flmfire2.wav
 }
 
-weapon_glock.silencer
+Weapon_Glock.Special
 {
 	sample weapons/pl_gun1.wav
 	sample weapons/pl_gun2.wav
 }
 
-weapon_medkit.heal
+Weapon_Medkit.Single
 {
 	sample items/smallmedkit1.wav
 }
 
-weapon_shovel.hit
+Weapon_Shovel.Melee_HitWorld
 {
 	alerts
 	shakes 0.2
@@ -85,7 +84,7 @@ weapon_shovel.hit
 	sample debris/metal6.wav
 }
 
-weapon_shovel.hitbody
+Weapon_Shovel.Melee_Hit
 {
 	alerts
 	shakes 0.2
@@ -95,24 +94,24 @@ weapon_shovel.hitbody
 	sample weapons/cbar_hitbod3.wav
 }
 
-weapon_shovel.miss
+Weapon_Shovel.Single
 {
 	pitch 0.5
 	sample weapons/cbar_miss1.wav
 }
 
-weapon_sniper.fire
+Weapon_Sniper.Single
 {
 	alerts
 	sample weapons/sniper.wav
 }
 
-weapon_sniper.reload
+Weapon_Sniper.Reload
 {
 	sample weapons/reload3.wav
 }
 
-weapon_spanner.hit
+Weapon_Spanner.Melee_HitWorld
 {
 	alerts
 	pitch 1.2
@@ -120,7 +119,7 @@ weapon_spanner.hit
 	sample weapons/cbar_hit2.wav
 }
 
-weapon_spanner.hitbody
+Weapon_Spanner.Melee_Hit
 {
 	alerts
 	pitch 1.2
@@ -129,13 +128,13 @@ weapon_spanner.hitbody
 	sample weapons/cbar_hitbod3.wav
 }
 
-weapon_spanner.miss
+Weapon_Spanner.Single
 {
 	pitch 1.2
 	sample weapons/cbar_miss1.wav
 }
 
-weapon_taurus.fire
+Weapon_Taurus.Single
 {
 	alerts
 	sample weapons/tau_fire.wav

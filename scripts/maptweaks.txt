@@ -1,7 +1,7 @@
 enhanced_overrides
 {
 	when-serverinfo *bspversion equals 30
-	replace item_healthkit ammo_medkit
+	replace item_healthkit weapon_th_medkit
 	replace weapon_handgrenade weapon_tnt
 }
 

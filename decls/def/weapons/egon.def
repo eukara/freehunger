@@ -1,3 +1,15 @@
+#define EGON_IDLE 0
+#define EGON_FIDGET 1
+#define EGON_SECONDARY_MODE_START 2
+#define EGON_SECONDARY_FIRE 3
+#define EGON_SECONDARY_MODE_END 4
+#define EGON_FIRE1 5
+#define EGON_FIRE2 6
+#define EGON_FIRE3 7
+#define EGON_FIRE4 8
+#define EGON_DRAW 9
+#define EGON_HOLSTER 10
+
 entityDef weapon_egon
 {
 	"editor_color"		".3 .3 1"
@@ -6,11 +18,11 @@ entityDef weapon_egon
 	"editor_usage"		"Flamethrower"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_egon.mdl"
+	"model_player"		"models/p_egon.mdl"
 	"model_view"		"models/v_egon.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
+	"animPrefix"		"egon"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_flamethrower"
@@ -19,21 +31,18 @@ entityDef weapon_egon
 	"ammoType"			"ammo_gas"
 	"ammoRequired"		"1"
 
-	"act_fire"			"5,6,7,8"
-	"act_holster"		"10"
-	"act_draw"			"9"
-	"act_idle"			"0,1"
+	"act_fire"			"$EGON_FIRE1,$EGON_FIRE2,$EGON_FIRE3,$EGON_FIRE4"
+	"act_holster"		"$EGON_HOLSTER"
+	"act_draw"			"$EGON_DRAW"
+	"act_idle"			"$EGON_IDLE,$EGON_FIDGET"
 
-	"snd_fire"		"weapon_egon.fire"
-	"snd_empty"		"weapon.empty"
+	"snd_fire"			"Weapon_Egon.Single"
 
 	// HLWeapon specific
-	"hudSlot"		"3"
-	"hudSlotPos"	"2"
-	"weight"		"30"
+	"hudSlot"			"3"
+	"hudSlotPos"		"2"
+	"weight"			"30"
 }
-
-// TODO sprite animation and ignite
 
 entityDef projectile_fire
 {
@@ -47,7 +56,7 @@ entityDef projectile_fire
 	"animEndRemoves"		"1"
 	"animFrameRate"			"10"
 	"offset"				"30 8 0"
-	"def_damage"			"fireDirect"
+	"def_damage"			"damage_fireDirect"
 
 	"velocity"				"200"
 	"angular_velocity"		"0 0 0"
@@ -71,6 +80,7 @@ entityDef projectile_fire
 entityDef damage_fireDirect
 {
 	"damage"	"skill:plr_egon"
+	"ignite"	"5"
 }
 
 entityDef damage_fireAfterburn

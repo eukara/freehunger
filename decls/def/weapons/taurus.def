@@ -1,3 +1,15 @@
+#define TAURUS_IDLE1 0
+#define TAURUS_IDLE2 1
+#define TAURUS_IDLE3 2
+#define TAURUS_FIRE1 3
+#define TAURUS_FIRE2 4
+#define TAURUS_FIRE3 5
+#define TAURUS_FIRE_LAST 6
+#define TAURUS_RELOAD_EMPTY 7
+#define TAURUS_RELOAD 8
+#define TAURUS_DRAW1 9
+#define TAURUS_DRAW2 10
+
 entityDef weapon_th_taurus
 {
 	"editor_color"		".3 .3 1"
@@ -6,11 +18,11 @@ entityDef weapon_th_taurus
 	"editor_usage"		"Taurus PT145"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"hlWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_taurus.mdl"
+	"model_player"		"models/p_taurus.mdl"
 	"model_view"		"models/v_taurus.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
+	"animPrefix"		"onehand"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_taurus"
@@ -21,15 +33,19 @@ entityDef weapon_th_taurus
 	"ammoPerShot"		"1"
 	"punchAngle"		"-2 0 0"
 
-	"act_fire"			"3,4,5"
-	"act_fireLast"		"6"
-	"act_holster"		"10"
-	"act_reload"			"7,8"
-	"act_draw"			"9"
-	"act_idle"			"0,1,2"
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
 
-	"snd_fire"			"weapon_taurus.fire"
-	"snd_empty"			"weapon.empty"
+	"act_fire"			"$TAURUS_FIRE1,$TAURUS_FIRE2,$TAURUS_FIRE3"
+	"act_fireLast"		"$TAURUS_FIRE_LAST"
+//	"act_holster"		"$TAURUS_HOLSTER"
+	"act_reload"		"$TAURUS_RELOAD"
+	"act_reloadEmpty"	"$TAURUS_RELOAD_EMPTY"
+	"act_draw"			"$TAURUS_DRAW1,$TAURUS_DRAW2"
+	"act_idle"			"$TAURUS_IDLE1,$TAURUS_IDLE2,$TAURUS_IDLE3"
+
+	"snd_fire"			"Weapon_Taurus.Single"
 
 	// HLWeapon specific
 	"hudSlot"			"1"
@@ -46,7 +62,6 @@ entityDef projectile_taurus
 
 entityDef fireInfo_taurus
 {
-	"snd_fire"			"weapon_taurus.fire"
 	"def_onFire"		"projectile_taurus"
 	"fireRate" 			"0.25"
 	"model_flash"		"sprites/muzzleflash2.spr"

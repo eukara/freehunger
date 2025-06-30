@@ -1,3 +1,8 @@
+#define SNIPER2_IDLE 0
+#define SNIPER2_RELOAD 1
+#define SNIPER2_DRAW 2
+#define SNIPER2_FIRE 3
+
 entityDef weapon_th_sniper
 {
 	"editor_color"		".3 .3 1"
@@ -6,11 +11,11 @@ entityDef weapon_th_sniper
 	"editor_usage"		"Heckler & Koch G36"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_hkg36.mdl"
+	"model_player"		"models/p_hkg36.mdl"
 	"model_view"		"models/v_hkg36.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
+	"animPrefix"		"crossbow"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_sniper"
@@ -21,17 +26,20 @@ entityDef weapon_th_sniper
 	"ammoRequired"		"1"
 	"ammoPerShot"		"1"
 
-	"altMode"			"1"
-	"act_fire"			"3"
-	"act_draw"			"2"
-	"act_idle"			"0"
-	"act_reload"			"1"
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
 
-	"snd_fire"		"weapon_sniper.fire"
-	"snd_empty"		"weapon.empty"
+	"altMode"			"1"
+	"act_fire"			"$SNIPER2_FIRE"
+	"act_draw"			"$SNIPER2_DRAW"
+	"act_idle"			"$SNIPER2_IDLE"
+	"act_reload"		"$SNIPER2_RELOAD"
+
+	"snd_fire"			"Weapon_Sniper.Single"
 
 	// HLWeapon specific
-	"hudSlot"				"2"
-	"hudSlotPos"			"3"
-	"weight"				"20"
+	"hudSlot"			"2"
+	"hudSlotPos"		"3"
+	"weight"			"20"
 }

@@ -1,3 +1,13 @@
+#define SNIPER_IDLE 0
+#define SNIPER_FIRE_WINDUP 1
+#define SNIPER_FIRE 2
+#define SNIPER_DRAW 3
+#define SNIPER_HOLSTER 4
+#define SNIPER_AUTO_IDLE 5
+#define SNIPER_AUTO_FIRE 6
+#define SNIPER_AUTO_DRAW 7
+#define SNIPER_AUTO_HOLSTER 8
+
 entityDef weapon_einar1
 {
 	"editor_color"		".3 .3 1"
@@ -6,11 +16,11 @@ entityDef weapon_einar1
 	"editor_usage"		"Sniper Rifle"
 	"editor_rotatable"	"1"
 
-	"spawnclass"		"HLWeapon"
+	"inherit"			"weapon_base"
 	"model"				"models/w_isotopebox.mdl"
+	"model_player"		"models/p_sniper.mdl"
 	"model_view"		"models/v_tfc_sniper.mdl"
-	"snd_acquire"		"weapon.pickup"
-	"snd_respawn"		"item.respawn"
+	"animPrefix"		"crossbow"
 
 	// weapon specific
 	"def_fireInfo"		"fireInfo_sniper"
@@ -21,22 +31,25 @@ entityDef weapon_einar1
 	"ammoRequired"		"1"
 	"ammoPerShot"		"1"
 
-	"altMode"			"1"
-	"act_fire"			"2"
-	"act_holster"		"4"
-	"act_draw"			"3"
-	"act_idle"			"0,5"
-	"act_reload"			"4"
-	"act_reload2"		"3"
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
 
-	"snd_fire"		"weapon_sniper.fire"
-	"snd_reload"	"weapon_sniper.reload"
-	"snd_empty"		"weapon.empty"
+	"altMode"			"1"
+	"act_fire"			"$SNIPER_FIRE"
+	"act_holster"		"$SNIPER_HOLSTER"
+	"act_draw"			"$SNIPER_DRAW"
+	"act_idle"			"$SNIPER_IDLE,$SNIPER_AUTO_IDLE"
+	"act_reload"		"$SNIPER_HOLSTER"
+	"act_reloadEnd"		"$SNIPER_DRAW"
+
+	"snd_fire"			"Weapon_Sniper.Single"
+	"snd_reload"		"Weapon_Sniper.Reload"
 
 	// HLWeapon specific
-	"hudSlot"				"2"
-	"hudSlotPos"			"3"
-	"weight"				"20"
+	"hudSlot"			"2"
+	"hudSlotPos"		"3"
+	"weight"			"20"
 }
 
 entityDef projectile_sniperBullet
@@ -64,7 +77,7 @@ entityDef fireInfo_altSniper
 	"model_flash"		"sprites/muzzleflash1.spr"
 
 	"zoomFov"			"20"
-//	"zoomColor"			"0 0.2 0" TODO
-//	"zoomCrosshair"		"weapon_th_sniper.zoom" TODO
+	"zoomColor"			"0 0.2 0" TODO
+	"zoomCrosshair"		"weapon_th_sniper.zoom" TODO
 }
 

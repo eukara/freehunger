@@ -1,4 +1,4 @@
-#define THAC_IDLE 0
+#define THAC_IDLE1 0
 #define THAC_IDLE2 1
 #define THAC_SPIN_START 2
 #define THAC_SPIN_STOP 3
@@ -16,6 +16,7 @@ entityDef weapon_th_chaingun
 
 	"inherit"			"weapon_base"
 	"model"				"models/w_tfac.mdl"
+	"model_player"		"models/p_tfac.mdl"
 	"model_view"		"models/v_tfac.mdl"
 
 	// weapon specific
@@ -26,19 +27,22 @@ entityDef weapon_th_chaingun
 	"ammoRequired" 		"2"
 	"ammoPerShot"		"2"
 
-	"act_fireStart"		"2"
-	"act_loop"			"4"
-	"act_fireStop"		"3"
-	"act_reload			"6"
-	"act_reloadEnd"		"5"
-	"act_idle"			"0,1"
-	"act_draw"			"5"
+	"def_ejectBrass"	"debris_brass_fast"
+	"ejectBrassDelay"	"0"
+	"ejectBrassOffset"	"17 6 -8"
 
-	"snd_fireStart"	"weapon_chaingun.start"
-	"snd_fireLoop"	"weapon_chaingun.loop"
-	"snd_fireEnd"	"weapon_chaingun.stop"
-	"snd_reload"	"weapon_chaingun.reload"
-	"snd_empty"		"weapon.empty"
+	"act_fireStart"		"$THAC_SPIN_START"
+	"act_loop"			"$THAC_SPIN_FIRE"
+	"act_fireStop"		"$THAC_SPIN_STOP"
+	"act_reload"		"$THAC_HOLSTER"
+	"act_reloadEnd"		"$THAC_DRAW"
+	"act_idle"			"$THAC_IDLE1,$THAC_IDLE2"
+	"act_draw"			"$THAC_DRAW"
+
+	"snd_fireStart"	"Weapon_Chaingun.WindUp"
+	"snd_fireLoop"	"Weapon_Chaingun.Loop"
+	"snd_fireEnd"	"Weapon_Chaingun.WindDown"
+	"snd_reload"	"Weapon_Chaingun.Reload"
 
 	// HLWeapon specific
 	"hudSlot"		"3"

@@ -1,3 +1,11 @@
+#define CHAINSAW_IDLE 0
+#define CHAINSAW_START 1
+#define CHAINSAW_FIRE_FAILED 2
+#define CHAINSAW_FIRE1 3
+#define CHAINSAW_FIRE2 4
+#define CHAINSAW_DRAW 5
+#define CHAINSAW_HOLSTER 6
+
 entityDef weapon_th_chainsaw
 {
 	"editor_color"		".3 .3 1"
@@ -8,70 +16,51 @@ entityDef weapon_th_chainsaw
 
 	"inherit"			"weapon_base"
 	"model"				"models/w_weaponbox.mdl"
+	"model_player"		"models/p_crowbar.mdl"
 	"model_view"		"models/v_chainsaw.mdl"
-	"snd_idle"			"weapon_chainsaw.idle"
-	"snd_draw"			"weapon_chainsaw.draw"
+	"animPrefix"		"egon"
 
 	// weapon specific
-	"def_fireInfo"		"fireInfo_chainsaw"
-	"def_altFireInfo"	"fireInfo_altChainsaw"
-	"testDistance"		"48"
+	"def_onFire"		"projectile_chainsaw"
+	"testDistance"		"-96"
 	"inv_name"			"Chainsaw"
-	"ammoType"			""
-	"ammoRequired"		"0"
+	"inv_ammo_gas"		"50"
+	"ammoType"			"ammo_gas"
+	"ammoRequired"		"2"
+	"ammoPerShot" 		"2"
+	"depleteAmmo"		"1"
+	"depleteRate"		"0.5"
 
-	"act_idle"			"0"
-	"act_draw"			"5"
-	"act_draw1"			"1"
-	"act_holster"		"6"
+	"failRate"			"0.5"
+	"fireRate"			"0.15"
 
-	"snd_hit"			"weapon_chainsaw.hit"
-	"snd_failed"		"weapon_chainsaw.miss"
+	"snd_fireFailed"	"Weapon_Chainsaw.Single"
+	"snd_idle"			"Weapon_Chainsaw.Idle"
+
+	"act_fireFailed"	"$CHAINSAW_FIRE_FAILED"
+	"act_fire"			"$CHAINSAW_FIRE1,$CHAINSAW_FIRE2"
+	"act_idle"			"$CHAINSAW_IDLE"
+	"act_draw"			"$CHAINSAW_DRAW"
+	"act_holster"		"$CHAINSAW_HOLSTER"
 
 	// HLWeapon specific
-	"hudSlot"		"0"
-	"hudSlotPos"	"3"
-	"weight"		"1"
-	"crosshair"		"none"
-	"ammoIcon"		"none"
+	"hudSlot"			"0"
+	"hudSlotPos"		"3"
+	"weight"			"1"
+	"crosshair"			"none"
+	"ammoIcon"			"none"
 }
-
-// TODO fx_spark.main
 
 entityDef projectile_chainsaw
 {
-	"spawnclass"			"ncProjectile"
-	"damage"				"skill:plr_chainsaw"
-	"is_bullet"				"1"
-	"decal_impact"			"Impact.Shot"
-	"detonate_on_world" 	"1"
-}
-
-entityDef projectile_chainsawSwing
-{
-	"spawnclass"			"ncProjectile"
-	"damage"				"skill:plr_chainsaw_swing"
-	"is_bullet"				"1"
-	"decal_impact"			"Impact.Shot"
-	"detonate_on_world" 	"1"
-}
-
-entityDef fireInfo_chainsaw
-{
-	"def_onFire"		"projectile_chainsaw"
-
-	"failRate"			"0.8"
-	"fireRate"			"0.1"
-
-	"act_fire"			"3,4"
-}
-
-entityDef fireInfo_altChainsaw
-{
-	"def_onFire"		"projectile_chainsawSwing"
-
-	"failRate"			"1.2"
-	"fireRate"			"0.1"
-
-	"act_fire"			"2"
+	"spawnclass"		"ncProjectile"
+	"damage"			"skill:plr_chainsaw"
+	"is_bullet"			"1"
+	"range"				"96"
+	"model_detonate"	"fx_spark.main"
+	"decal_detonate"	"Impact.Shot"
+	"detonate_on_world" "0"
+	"snd_explode"		"DoSpark"
+	"snd_hitBody"		"Weapon_Chainsaw.Melee_Hit"
+	"snd_hitWorld"		"Weapon_Chainsaw.Melee_HitWorld"
 }
